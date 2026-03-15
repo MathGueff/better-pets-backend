@@ -1,48 +1,29 @@
-name: CI/CD Pipeline
+name: CI
 
 on:
-  push:
-    branches: [main]
   pull_request:
     branches: [main]
 
 jobs:
-  release:
-    name: Release & Versioning
+  validate:
+    name: Lint & Test
     runs-on: ubuntu-latest
 
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-
-    outputs:
-      new_release_published: ${{ steps.semantic.outputs.new_release_published }}
-      new_release_version: ${{ steps.semantic.outputs.new_release_version }}
-
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Semantic Release
-        id: semantic
-        uses: cycjimmy/semantic-release-action@v3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-  deploy:
-    name: Deploy to DigitalOcean
-    needs: release
-    runs-on: ubuntu-latest
-
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Install doctl
-        uses: digitalocean/action-doctl@v2
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
-          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          node-version: 20
 
-      - name: Deploy application
+      - name: Install backend dependencies
         run: |
-          doctl apps update ${{ secrets.DO_APP_ID }} --spec .do/app.yaml --wait
+          cd backend
+          yarn install
+
+      - name: Run backend tests
+        run: |
+          cd backend
+          yarn test
