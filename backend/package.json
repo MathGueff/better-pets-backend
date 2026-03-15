@@ -1,7 +1,7 @@
 {
   "name": "backend",
   "version": "1.0.0",
-  "main": "source/app-server.js",
+  "main": "source/app.js",
   "scripts": {
     "dev": "tsnd ./source/app.ts --transpile-only",
     "build": "tsc",

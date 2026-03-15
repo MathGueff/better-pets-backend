@@ -12,7 +12,9 @@
   ],
 
   "scripts": {
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "backend-dev": "cd backend && yarn dev",
+    "frontend-dev": "cd frontend && yarn dev"
   },
 
   "devDependencies": {
