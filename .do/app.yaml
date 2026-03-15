@@ -1,38 +1,36 @@
 name: testai-app
 region: nyc
+
 services:
-  # BACK-END (Node.js nativo, sem Docker)
   - name: backend
-    github:
-      repo: ${{ github.repository }}
-      branch: main
-      deploy_on_push: true
     source_dir: backend
-    # Dizemos à DigitalOcean como compilar e rodar:
-    build_command: yarn build
+
+    build_command: yarn install && yarn build
     run_command: yarn start
+
+    http_port: 3001
+
+    instance_count: 1
+    instance_size_slug: basic-xxs
+
     envs:
       - key: PORT
         scope: RUN_TIME
         value: "3001"
+
       - key: MONGODB_URI
         scope: RUN_TIME
-        value: ${{ secrets.MONGODB_URI }}
-    http_port: 3001
-    instance_count: 1
-    instance_size_slug: basic-xxs
+        type: SECRET
+
     routes:
       - path: /api
 
 static_sites:
-  # FRONT-END (React/Vite Estático)
   - name: frontend
-    github:
-      repo: ${{ github.repository }}
-      branch: main
-      deploy_on_push: true
     source_dir: frontend
-    build_command: yarn build
+
+    build_command: yarn install && yarn build
     output_dir: dist
+
     routes:
       - path: /
