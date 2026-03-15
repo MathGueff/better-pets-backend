@@ -4,8 +4,9 @@
     "bracketSameLine": true,
     "endOfLine": "lf",
     "singleQuote": true,
-    "useTabs": true,
+    "useTabs": false,
     "objectWrap": "collapse",
     "bracketSpacing": true,
-    "trailingComma": "none"
+    "trailingComma": "none",
+    "arrowParens": "always"
 }
