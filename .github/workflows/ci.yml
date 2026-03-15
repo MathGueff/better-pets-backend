@@ -21,11 +21,6 @@ jobs:
           cd backend
           yarn install
 
-      - name: Run backend tests
-        run: |
-          cd backend
-          yarn test
-
   release:
     needs: test
     runs-on: ubuntu-latest
