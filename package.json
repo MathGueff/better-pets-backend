@@ -6,6 +6,10 @@
   "author": "MathGueff <gueffmatheus@gmail.com>",
   "license": "MIT",
   "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
   "scripts": {
     "release": "semantic-release"
   },
