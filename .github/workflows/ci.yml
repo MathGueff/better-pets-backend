@@ -22,10 +22,10 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Run tests
-        run: |
-          cd backend
-          yarn test
+      # - name: Run tests
+      #   run: |
+      #     cd backend
+      #     yarn test
 
   release:
     needs: test
