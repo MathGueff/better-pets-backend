@@ -2,7 +2,6 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import connect from './config/database'
-import AnimalsRouter from './routers/animalsRouter'
 import animalsRouter from './routers/animalsRouter'
 
 dotenv.config()
