@@ -27,7 +27,7 @@ farmLog()
 connect().then(() =>
   app.listen(port, () => {
     console.log(
-      '🤓 Servidor iniciado com sucesso, pode fazer requisições meu nobre'
+      '🤓 Servidor iniciado com sucesso, pode fazer requisições meu querido'
     )
   })
 )
