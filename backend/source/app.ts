@@ -3,8 +3,10 @@ import cors from 'cors'
 import dotenv from 'dotenv'
 import connect from './config/database'
 import animalsRouter from './routers/animalsRouter'
+import { doSomethingMiddleware } from './middlewares/doSomethingMiddleware'
+import { farmLog } from './uteis/farmLog'
 
-dotenv.config()
+dotenv.config({ quiet: true })
 
 const app = express()
 const port = process.env.PORT || 3001
@@ -12,13 +14,18 @@ const port = process.env.PORT || 3001
 app.use(cors())
 app.use(express.json())
 
+app.use(doSomethingMiddleware)
 app.use(animalsRouter.router)
 
 app.get('/', async (req, res) => {
   res.json({ message: 'Testaí Backend API is running' })
 })
 
-app.listen(port, async () => {
-  await connect()
-  console.log(`Server is running on port ${port}`)
-})
+farmLog()
+connect().then(() =>
+  app.listen(port, () => {
+    console.log(
+      '🤓 Servidor iniciado com sucesso, pode fazer requisições meu nobre'
+    )
+  })
+)
