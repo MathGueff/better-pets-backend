@@ -15,7 +15,7 @@ export class AnimalRepository {
     return await animal.findById(id)
   }
 
-  async update(id: Types.ObjectId, updatedAnimal: IAnimal) {
+  async update(id: Types.ObjectId, updatedAnimal: Partial<IAnimal>){
     return await animal.findByIdAndUpdate(id, updatedAnimal, { new: true })
   }
 

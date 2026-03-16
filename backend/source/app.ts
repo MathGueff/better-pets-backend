@@ -6,6 +6,7 @@ import animalsRouter from './routers/animalsRouter'
 import { doSomethingMiddleware } from './middlewares/doSomethingMiddleware'
 import { farmLog } from './uteis/farmLog'
 import morgan from 'morgan'
+import { errorMiddleware } from './middlewares/errorMiddleware'
 
 dotenv.config({ quiet: true })
 
@@ -19,6 +20,8 @@ app.use(morgan('dev'))
 app.use(doSomethingMiddleware)
 app.use(animalsRouter.router)
 
+app.use(errorMiddleware)
+
 app.get('/', async (req, res) => {
   res.json({ message: 'Testaí Backend API is running' })
 })
@@ -31,3 +34,4 @@ connect().then(() =>
     )
   })
 )
+
