@@ -5,6 +5,7 @@ import connect from './config/database'
 import animalsRouter from './routers/animalsRouter'
 import { doSomethingMiddleware } from './middlewares/doSomethingMiddleware'
 import { farmLog } from './uteis/farmLog'
+import morgan from 'morgan'
 
 dotenv.config({ quiet: true })
 
@@ -13,6 +14,7 @@ const port = process.env.PORT || 3001
 
 app.use(cors())
 app.use(express.json())
+app.use(morgan('dev'))
 
 app.use(doSomethingMiddleware)
 app.use(animalsRouter.router)

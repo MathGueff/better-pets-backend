@@ -5,6 +5,6 @@ export const doSomethingMiddleware = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(`I'm doing something at ${new Date().getDate()}`)
+  console.log(`I'm doing ${req.method} at ${new Date()}`)
   next()
 }
