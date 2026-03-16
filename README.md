@@ -1,6 +1,6 @@
 ## Testaí
 
-Testaí é um projeto de iniciativa para estudo, com foco em simular e gamificar o trabalho como QA.
+Testaí é um projeto de iniciativa para estudo, com foco em criar inúmeros endpoints para testar e seguir uma estrutura criada por mim (frontend é 100% IA :D)
 
 ### Estrutura do Projeto
 
