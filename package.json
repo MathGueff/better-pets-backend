@@ -13,8 +13,8 @@
 
   "scripts": {
     "release": "semantic-release",
-    "b-dev": "yarn workspace backend dev",
-    "f-dev": "yarn workspace frontend dev",
+    "bdev": "yarn workspace backend dev",
+    "fdev": "yarn workspace frontend dev",
     "format": "yarn workspace backend format && yarn workspace frontend format"
   },
 
