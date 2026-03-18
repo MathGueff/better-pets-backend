@@ -15,7 +15,7 @@ const createAnimalSchema = z.object(rules)
 
 const updateAnimalSchema = createAnimalSchema.partial()
 
-export const animalValidations = {
+export const AnimalValidations = {
   create: createAnimalSchema,
   update: updateAnimalSchema
 }
