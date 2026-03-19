@@ -8,7 +8,8 @@ const rules = {
     .max(50, 'Nome deve ter no máximo 50 caracteres'),
   age: z
     .number('Idade deve ser um número')
-    .positive('Idade deve ser um número positivo')
+    .positive('Idade deve ser um número positivo'),
+  breed: z.string('Raça deve ser uma string').optional()
 } satisfies { [K in keyof IAnimal]: z.ZodTypeAny }
 
 const createAnimalSchema = z.object(rules)

@@ -15,8 +15,14 @@ export class AnimalsService {
     return found
   }
 
-  create(newAnimal: IAnimal) {
-    const created = this.animalRepository.create(newAnimal)
+  async create(newAnimal: IAnimal) {
+    const exists = await this.animalRepository.exists({name: newAnimal.name})
+    if(exists){
+      throw new Error('Animal já cadastrado')
+    }
+
+    const created = await this.animalRepository.create(newAnimal)
+
     return created
   }
 

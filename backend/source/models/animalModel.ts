@@ -1,24 +1,17 @@
-import mongoose from 'mongoose'
+import { Schema, model } from 'mongoose'
 
 export interface IAnimal {
   name: string
   age: number
+  breed?: string
 }
 
-export class AnimalModel {
-  private animal: IAnimal
-
-  constructor(animal: IAnimal) {
-    this.animal = animal
-  }
-}
-
-const animalSchema = new mongoose.Schema({
-  name: String,
-  age: Number,
-  breed: String
+const animalSchema = new Schema<IAnimal>({
+  name: { type: String, required: true },
+  age: { type: Number, required: true },
+  breed: { type: String, required: false }
 })
 
-const animal = mongoose.model('Animals', animalSchema)
+const animal = model<IAnimal>('Animals', animalSchema)
 
 export default animal
