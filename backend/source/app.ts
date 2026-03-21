@@ -13,13 +13,16 @@ dotenv.config({ quiet: true })
 const app = express()
 const port = process.env.PORT || 3001
 
+/* MIDDLEWARES */
 app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
-
 app.use(doSomethingMiddleware)
+
+/* ROTAS */
 app.use(animalsRouter.router)
 
+/* MIDDLEWARES DE ERRO */
 app.use(errorMiddleware)
 
 app.get('/', async (req, res) => {

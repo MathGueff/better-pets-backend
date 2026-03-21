@@ -1,5 +1,6 @@
 import type { RequestHandler } from 'express'
 import { Router } from 'express'
+import { BaseController } from './baseController'
 
 export enum HttpMethod {
   GET = 'get',
@@ -19,15 +20,23 @@ export interface IRoute {
 export type IRoutes = Array<IRoute>
 
 export class BaseRouter {
-  public router: Router
+  public readonly router: Router = Router()
+  private routes: Array<IRoute>
+  private prefix: string
+
   /**
    * @param prefix Prefixo da rota
    * @param routes Rotas
    */
   constructor(prefix: string, routes: Array<IRoute>) {
-    this.router = Router()
-    routes.forEach((route) => {
-      const fullPath = `${prefix}${route.path}`.replace(/\/+/g, '/')
+    this.prefix = prefix.startsWith('/') ? prefix : `/${prefix}`
+    this.routes = routes
+    this.handleRoutes()
+  }
+
+  private handleRoutes() {
+    this.routes.forEach((route) => {
+      const fullPath = `${this.prefix}${route.path}`.replace(/\/+/g, '/')
       this.router[route.method](
         fullPath,
         ...(route.middlewares ?? []),

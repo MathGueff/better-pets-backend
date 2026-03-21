@@ -2,7 +2,7 @@ import { BaseRouter, HttpMethod, IRoutes } from '../core/baseRouter'
 import { AnimalsController } from '../controllers/animalsController'
 
 class AnimalsRouter extends BaseRouter {
-  constructor() {
+  constructor(prefix: string) {
     const controller = new AnimalsController()
     const routes: IRoutes = [
       { method: HttpMethod.GET, path: '/', handler: controller.list },
@@ -11,9 +11,9 @@ class AnimalsRouter extends BaseRouter {
       { method: HttpMethod.DELETE, path: '/:id', handler: controller.delete },
       { method: HttpMethod.PATCH, path: '/:id', handler: controller.update }
     ]
-    super('/animals', routes)
+    super(prefix, routes)
   }
 }
 
-const animalsRouter = new AnimalsRouter()
+const animalsRouter = new AnimalsRouter('animals')
 export default animalsRouter
