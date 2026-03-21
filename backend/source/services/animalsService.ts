@@ -1,6 +1,6 @@
-import { Types } from "mongoose"
-import { IAnimal } from "../models/animalModel"
-import { AnimalRepository } from "../repositories/animalRepository"
+import { Types } from 'mongoose'
+import { IAnimal } from '../models/animalModel'
+import { AnimalRepository } from '../repositories/animalRepository'
 
 export class AnimalsService {
   private animalRepository: AnimalRepository = new AnimalRepository()
@@ -16,8 +16,8 @@ export class AnimalsService {
   }
 
   async create(newAnimal: IAnimal) {
-    const exists = await this.animalRepository.exists({name: newAnimal.name})
-    if(exists){
+    const exists = await this.animalRepository.exists({ name: newAnimal.name })
+    if (exists) {
       throw new Error('Animal já cadastrado')
     }
 
@@ -27,7 +27,10 @@ export class AnimalsService {
   }
 
   update(id: string, updateAnimal: Partial<IAnimal>) {
-    const updated = this.animalRepository.update(new Types.ObjectId(String(id)), updateAnimal)
+    const updated = this.animalRepository.update(
+      new Types.ObjectId(String(id)),
+      updateAnimal
+    )
     return updated
   }
 

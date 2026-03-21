@@ -1,5 +1,5 @@
-export function farmLog(){
-    console.log(`
+export function farmLog() {
+  console.log(`
             ^__^               /\\_/\\          ,~.           / \\__
             (oo)\\_______      ( o.o )         (o o)         (    @\\___
             (__)\\       )    \\/  > ^ <       /  V  \\        /         O

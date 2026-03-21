@@ -1,7 +1,7 @@
 import { Model, Types } from 'mongoose'
 import { IEntity } from '../interfaces/entity'
 
-export class BaseRepository<T  extends IEntity> {
+export class BaseRepository<T extends IEntity> {
   constructor(private model: Model<T>) {}
 
   async create(newEntity: T) {
