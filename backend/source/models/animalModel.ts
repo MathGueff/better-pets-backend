@@ -6,11 +6,14 @@ export interface IAnimal {
   breed?: string
 }
 
-const animalSchema = new Schema<IAnimal>({
-  name: { type: String, required: true },
-  age: { type: Number, required: true },
-  breed: { type: String, required: false }
-})
+const animalSchema = new Schema<IAnimal>(
+  {
+    name: { type: String, required: true },
+    age: { type: Number, required: true },
+    breed: { type: String, required: false }
+  },
+  { versionKey: false }
+)
 
 const animal = model<IAnimal>('Animals', animalSchema)
 
