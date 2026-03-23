@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import NatureBackground from './components/NatureBackground'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import AnimalCard from './components/AnimalCard'
@@ -85,6 +86,7 @@ function App() {
 
   return (
     <div className="app-container">
+      <NatureBackground />
       <Header />
 
       <main className="main-content">
@@ -150,7 +152,7 @@ function App() {
       />
 
       <footer className="app-footer">
-        <p className="footer-text">Forest Ranger © 2026 • Preservation Project</p>
+        <p className="footer-text">TESTAÍ 2026 • Matheus Gueff </p>
       </footer>
     </div>
   )
