@@ -1,6 +1,7 @@
 import { Schema, model } from 'mongoose'
+import { IEntity } from '../interfaces/entity'
 
-export interface IAnimal {
+export interface IAnimal extends IEntity {
   name: string
   age: number
   breed?: string
