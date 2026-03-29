@@ -2,7 +2,10 @@
   "name": "testai",
   "version": "1.0.0",
   "private": true,
-  "repository": "https://github.com/MathGueff/testai.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MathGueff/better-pets-backend.git"
+  },
   "author": "MathGueff <gueffmatheus@gmail.com>",
   "license": "MIT",
 
