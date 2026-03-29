@@ -1,27 +1,44 @@
 {
-  "name": "testai",
+  "name": "better-pets-backend",
   "version": "1.0.0",
   "private": true,
   "repository": "https://github.com/MathGueff/testai.git",
   "author": "MathGueff <gueffmatheus@gmail.com>",
   "license": "MIT",
-
-  "workspaces": [
-    "frontend",
-    "backend"
-  ],
-
+  "main": "source/app.js",
   "scripts": {
-    "release": "semantic-release",
-    "b-dev": "yarn workspace backend dev",
-    "f-dev": "yarn workspace frontend dev",
-    "format": "yarn workspace backend format && yarn workspace frontend format"
+    "dev": "ts-node-dev source/app.ts --transpile-only",
+    "build": "tsc",
+    "start": "node dist/app.js",
+    "format": "prettier --write 'source/**/*.{js,jsx,ts,tsx,css,json}' --config .prettierrc",
+    "release": "semantic-release"
   },
-
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "mongoose": "^9.3.0",
+    "morgan": "^1.10.1",
+    "multer": "^2.1.1",
+    "zod": "^4.3.6"
+  },
   "devDependencies": {
-    "semantic-release": "^23.0.0",
+    "@eslint/js": "^9.0.0",
     "@semantic-release/commit-analyzer": "^11.0.0",
+    "@semantic-release/github": "^10.0.0",
     "@semantic-release/release-notes-generator": "^12.0.0",
-    "@semantic-release/github": "^10.0.0"
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/morgan": "^1.9.10",
+    "@types/multer": "^2.1.0",
+    "@types/node": "^25.5.0",
+    "eslint": "^9.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.8.1",
+    "semantic-release": "^23.0.0",
+    "ts-node-dev": "^2.0.0",
+    "typescript-eslint": "^8.0.0",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
   }
 }
