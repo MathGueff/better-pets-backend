@@ -1,0 +1,10 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  // Garante que o ESLint valide arquivos TypeScript também
+  "eslint.validate": [
+    "javascript",
+    "typescript"
+  ]
+}
