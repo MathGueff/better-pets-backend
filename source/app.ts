@@ -39,7 +39,7 @@ const start = async () => {
 
     server = app.listen(port, () => {
       console.log(
-        '🤓 Servidor iniciado com sucesso, pode fazer requisições meu querido'
+        `🤓 Servidor iniciado com sucesso em ${port}, pode fazer requisições meu querido`
       )
     })
   } catch (error) {
