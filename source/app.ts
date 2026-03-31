@@ -12,7 +12,7 @@ import { database } from './config/database'
 dotenv.config({ quiet: true })
 
 const app = express()
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 3000
 
 /* MIDDLEWARES */
 app.use(cors())
