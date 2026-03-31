@@ -37,6 +37,8 @@ export class AnimalsController extends BaseController<IAnimal> {
   }
 
   create = async (req: Request, res: Response): Promise<void> => {
+    req.body.bornDate = new Date(req.body.bornDate)
+    req.body.adoptionDate = new Date(req.body.adoptionDate)
     const newAnimal = AnimalValidations.create.parse(req.body)
     const created = await this.service.create(newAnimal)
     this.responseHandler.created(
