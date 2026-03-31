@@ -9,8 +9,8 @@ export const errorMiddleware = async (
 ) => {
   if (error instanceof z.ZodError) {
     console.log('🐞 Some issue ocurred', error.issues)
-    return res.json({ errors: error.issues.map((err) => err.message) })
+    return res.status(400).json({ errors: error.issues.map((err) => err.message) })
   }
 
-  return res.json({ message: error?.message || 'Something went wrong' })
+  return res.status(error?.code ?? 500).json({ message: error?.message || 'Something went wrong' })
 }
