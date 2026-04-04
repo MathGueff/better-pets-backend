@@ -8,10 +8,13 @@ import { errorMiddleware } from './middlewares/errorMiddleware'
 import animalsRouter from './routers/animalsRouter'
 import healthRouter from './routers/healthRouter'
 import { database } from './config/database'
+import swaggerUi from 'swagger-ui-express'
+import { generateSwaggerDocs } from './config/swagger'
 
 dotenv.config({ quiet: true })
 
 const app = express()
+const swaggerDocument = generateSwaggerDocs()
 const port = process.env.PORT || 3000
 
 /* MIDDLEWARES */
@@ -23,6 +26,9 @@ app.use(doSomethingMiddleware)
 /* ROTAS */
 app.use(healthRouter.router)
 app.use(animalsRouter.router)
+
+/* DOCUMENTAÇÃO */
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 /* MIDDLEWARES DE ERRO */
 app.use(errorMiddleware)

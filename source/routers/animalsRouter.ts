@@ -1,5 +1,6 @@
 import type { IRoutes } from '../core/baseRouter'
 import { BaseRouter, HttpMethod } from '../core/baseRouter'
+import { Endpoints } from '../global/endpoints'
 import { AnimalsController } from '../controllers/animalsController'
 
 class AnimalsRouter extends BaseRouter {
@@ -16,5 +17,5 @@ class AnimalsRouter extends BaseRouter {
   }
 }
 
-const animalsRouter = new AnimalsRouter('animals')
+const animalsRouter = new AnimalsRouter(Endpoints.ANIMALS)
 export default animalsRouter
