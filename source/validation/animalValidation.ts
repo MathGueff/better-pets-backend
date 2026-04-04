@@ -1,5 +1,5 @@
-import z from 'zod'
 import { AnimalGender, type IAnimal } from '../models/animalModel'
+import { z } from '../config/zod'
 
 const rules = {
   name: z
@@ -32,9 +32,9 @@ const rules = {
     .optional()
 } satisfies { [K in keyof IAnimal]: z.ZodType }
 
-const createAnimalSchema = z.object(rules)
+const createAnimalSchema = z.object(rules).openapi('CreateAnimal')
 
-const updateAnimalSchema = createAnimalSchema.partial()
+const updateAnimalSchema = createAnimalSchema.partial().openapi('UpdateAnimal')
 
 export const AnimalValidations = {
   create: createAnimalSchema,

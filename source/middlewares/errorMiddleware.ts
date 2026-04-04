@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from 'express'
-import z from 'zod'
+import { z } from '../config/zod'
 import { ResponseHandler } from '../utils/responseHandler'
 
 export const errorMiddleware = (
