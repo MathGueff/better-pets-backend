@@ -3,7 +3,7 @@ name: CI
 on:
   pull_request:
   push:
-    branches: [production]
+    branches: [main, production]
 
 jobs:
   test:
@@ -25,7 +25,7 @@ jobs:
   release:
     needs: test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production')
 
     steps:
       - uses: actions/checkout@v4
