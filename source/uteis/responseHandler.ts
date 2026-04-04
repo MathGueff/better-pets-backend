@@ -31,7 +31,7 @@ export class ResponseHandler {
     message: string,
     data?: T
   ) => {
-    const content: ApiSuccess<T> = { message, code, data, status: true }
+    const content: ApiSuccess<T> = { message, code, status: true, data }
     res.status(content.code).json(content)
   }
 
@@ -41,7 +41,7 @@ export class ResponseHandler {
     message: string,
     error?: T
   ) => {
-    const content: ApiError<T> = { message, code, error, status: false }
+    const content: ApiError<T> = { message, code, status: false, error }
     res.status(content.code).json(content)
   }
 }
