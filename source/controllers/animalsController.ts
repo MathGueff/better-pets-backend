@@ -2,7 +2,7 @@ import { BaseController } from '../core/baseController'
 import { Request, Response } from 'express'
 import { AnimalRepository } from '../repositories/animalRepository'
 import { AnimalsService } from '../services/animalsService'
-import { ResponseHandler } from '../uteis/responseHandler'
+import { ResponseHandler } from '../utils/responseHandler'
 import type { IAnimal } from '../models/animalModel'
 import {
   AnimalValidations,
