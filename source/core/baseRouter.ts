@@ -1,6 +1,5 @@
-import type { RequestHandler } from 'express'
+import { RequestHandler } from 'express'
 import { Router } from 'express'
-import { BaseController } from './baseController'
 
 export enum HttpMethod {
   GET = 'get',

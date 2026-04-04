@@ -12,7 +12,7 @@ import { database } from './config/database'
 dotenv.config({ quiet: true })
 
 const app = express()
-const port = process.env.PORT || 3001
+const port = process.env.PORT || 3000
 
 /* MIDDLEWARES */
 app.use(cors())
@@ -39,7 +39,7 @@ const start = async () => {
 
     server = app.listen(port, () => {
       console.log(
-        '🤓 Servidor iniciado com sucesso, pode fazer requisições meu querido'
+        `🤓 Servidor iniciado com sucesso em ${port}, pode fazer requisições meu querido`
       )
     })
   } catch (error) {
