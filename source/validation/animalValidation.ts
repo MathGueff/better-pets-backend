@@ -18,17 +18,29 @@ const rules = {
   adoptionDate: z.coerce.date('Data de adoção deve ser uma data'),
   photo: z.string('Foto deve ser um arquivo válido'),
   schedule: z
-    .object({
-      walk: z.object({
-        timeExpected: z.coerce.date('Data de nascimento deve ser uma data')
-      }),
-      feed: z.object({
-        timeExpected: z.coerce.date('Data de nascimento deve ser uma data')
-      }),
-      water: z.object({
-        timeExpected: z.coerce.date('Data de nascimento deve ser uma data')
-      })
-    })
+    .object(
+      {
+        walk: z.object(
+          {
+            timeExpected: z.coerce.date('Data de nascimento deve ser uma data')
+          },
+          'Horário de passeio inválido'
+        ),
+        feed: z.object(
+          {
+            timeExpected: z.coerce.date('Data de nascimento deve ser uma data')
+          },
+          'Horário de alimentação inválido'
+        ),
+        water: z.object(
+          {
+            timeExpected: z.coerce.date('Data de nascimento deve ser uma data')
+          },
+          'Horário de água inválido'
+        )
+      },
+      'Horários inválidos'
+    )
     .optional()
 } satisfies { [K in keyof IAnimal]: z.ZodType }
 
