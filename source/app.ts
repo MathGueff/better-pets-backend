@@ -48,22 +48,4 @@ const start = async () => {
   }
 }
 
-const shutdown = async () => {
-  console.log('🛑 Graceful shutdown iniciado')
-
-  if (server) {
-    server.close(() => {
-      console.log('🛑 Servidor HTTP fechado')
-    })
-  }
-
-  await database.disconnect()
-  console.log('🛑 Conexão com o MongoDB fechada')
-
-  process.exit(0)
-}
-
-process.on('SIGINT', shutdown)
-process.on('SIGTERM', shutdown)
-
 start()
