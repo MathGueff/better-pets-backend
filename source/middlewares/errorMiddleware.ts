@@ -1,16 +1,27 @@
 import type { NextFunction, Request, Response } from 'express'
 import z from 'zod'
+import { ResponseHandler } from '../uteis/responseHandler'
 
-export const errorMiddleware = async (
+export const errorMiddleware = (
   error: any,
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
+  const responseHandler = new ResponseHandler()
   if (error instanceof z.ZodError) {
-    console.log('🐞 Some issue ocurred', error.issues)
-    return res.status(400).json({ errors: error.issues.map((err) => err.message) })
+    const issues = error.issues.map((issue) => {
+      return {
+        field: issue.path.join('.'),
+        message: issue.message
+      }
+    })
+    return responseHandler.badRequest(res, 'Erro de validação', issues)
   }
 
-  return res.status(error?.code ?? 500).json({ message: error?.message || 'Something went wrong' })
+  return responseHandler.internalServerError(
+    res,
+    'Erro interno do servidor',
+    error
+  )
 }

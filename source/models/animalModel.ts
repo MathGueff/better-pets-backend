@@ -14,7 +14,6 @@ export type AnimalSchedule = {
 
 export interface IAnimal extends IEntity {
   name: string
-  age: number
   breed: string
   photo?: string
   gender: AnimalGender
@@ -27,7 +26,6 @@ export interface IAnimal extends IEntity {
 
 export class Animal implements IAnimal {
   public name: IAnimal['name']
-  public age: IAnimal['age']
   public breed: IAnimal['breed']
   public photo: IAnimal['photo']
   public gender: IAnimal['gender']
@@ -39,7 +37,6 @@ export class Animal implements IAnimal {
 
   constructor(animal: IAnimal) {
     this.name = animal.name
-    this.age = animal.age
     this.breed = animal.breed
     this.photo = animal.photo
     this.gender = animal.gender
@@ -54,7 +51,6 @@ export class Animal implements IAnimal {
 const animalSchema = new Schema<Animal>(
   {
     name: { type: String, required: true },
-    age: { type: Number, required: true },
     breed: { type: String, required: true },
     gender: { type: String, enum: Object.values(AnimalGender), required: true },
     size: { type: Number, required: true },

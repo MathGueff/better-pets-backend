@@ -1,5 +1,1 @@
-import type { IEntity } from '../interfaces/entity'
-
-export abstract class BaseController<T extends IEntity> {
-  public data: T[] = []
-}
+export abstract class BaseController {}

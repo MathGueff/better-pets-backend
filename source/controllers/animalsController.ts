@@ -1,19 +1,19 @@
 import { BaseController } from '../core/baseController'
-import type { Request, Response } from 'express'
+import { Request, Response } from 'express'
 import { AnimalRepository } from '../repositories/animalRepository'
-import { AnimalValidations } from '../validation/animalValidation'
 import { AnimalsService } from '../services/animalsService'
 import { ResponseHandler } from '../uteis/responseHandler'
 import type { IAnimal } from '../models/animalModel'
+import {
+  AnimalValidations,
+  type CreateAnimalDTO,
+  type UpdateAnimalDTO
+} from '../validation/animalValidation'
 
-export class AnimalsController extends BaseController<IAnimal> {
+export class AnimalsController extends BaseController {
   public repository: AnimalRepository = new AnimalRepository()
   public service: AnimalsService = new AnimalsService()
   public responseHandler = new ResponseHandler()
-
-  constructor() {
-    super()
-  }
 
   list = async (req: Request, res: Response): Promise<void> => {
     const listed = await this.service.list()
@@ -37,9 +37,7 @@ export class AnimalsController extends BaseController<IAnimal> {
   }
 
   create = async (req: Request, res: Response): Promise<void> => {
-    req.body.bornDate = new Date(req.body.bornDate)
-    req.body.adoptionDate = new Date(req.body.adoptionDate)
-    const newAnimal = AnimalValidations.create.parse(req.body)
+    const newAnimal: CreateAnimalDTO = AnimalValidations.create.parse(req.body)
     const created = await this.service.create(newAnimal)
     this.responseHandler.created(
       res,
@@ -50,7 +48,9 @@ export class AnimalsController extends BaseController<IAnimal> {
 
   update = async (req: Request, res: Response) => {
     const { id } = req.params
-    const updateAnimal = AnimalValidations.update.parse(req.body)
+    const updateAnimal: UpdateAnimalDTO = AnimalValidations.update.parse(
+      req.body
+    )
     const updated = await this.service.update(String(id), updateAnimal)
     if (!updated) {
       return this.responseHandler.notFound(
