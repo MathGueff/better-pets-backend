@@ -3,6 +3,9 @@ import { RouteConfig } from '@asteasolutions/zod-to-openapi'
 import { Endpoints } from '../global/endpoints'
 import { z } from '../config/zod'
 import { ResponseSchema } from './responseSchema'
+import { AnimalMessages } from '../messages/animalsMessages'
+
+const messages = AnimalMessages
 
 export const animalDocs: Array<RouteConfig> = [
   {
@@ -12,7 +15,7 @@ export const animalDocs: Array<RouteConfig> = [
     summary: 'Lista todos os amiguinhos',
     responses: {
       200: {
-        description: 'Amiguinhos listados com sucesso',
+        description: messages.FOUND,
         content: {
           'application/json': {
             schema: ResponseSchema.success(z.array(AnimalValidations.create))
@@ -20,10 +23,10 @@ export const animalDocs: Array<RouteConfig> = [
         }
       },
       404: {
-        description: 'Erro ao listar amiguinhos',
+        description: messages.NOT_FOUND,
         content: {
           'application/json': {
-            schema: ResponseSchema.error('Nenhum amiguinho encontrado', 404)
+            schema: ResponseSchema.error(messages.NOT_FOUND, 404)
           }
         }
       }
@@ -41,7 +44,7 @@ export const animalDocs: Array<RouteConfig> = [
     },
     responses: {
       200: {
-        description: 'Amiguinho encontrado com sucesso',
+        description: messages.FOUND_BY_ID,
         content: {
           'application/json': {
             schema: ResponseSchema.success(AnimalValidations.create)
@@ -49,10 +52,10 @@ export const animalDocs: Array<RouteConfig> = [
         }
       },
       404: {
-        description: 'Nenhum amiguinho encontrado',
+        description: messages.NOT_FOUND,
         content: {
           'application/json': {
-            schema: ResponseSchema.error('Nenhum amiguinho encontrado', 404)
+            schema: ResponseSchema.error(messages.NOT_FOUND, 404)
           }
         }
       }
@@ -70,7 +73,7 @@ export const animalDocs: Array<RouteConfig> = [
     },
     responses: {
       201: {
-        description: 'Amiguinho cadastrado com sucesso',
+        description: messages.CREATED,
         content: {
           'application/json': {
             schema: ResponseSchema.success(AnimalValidations.create)
@@ -78,14 +81,12 @@ export const animalDocs: Array<RouteConfig> = [
         }
       },
       400: {
-        description: 'Erro ao criar amiguinho',
+        description: messages.INVALID_FIELDS,
         content: {
           'application/json': {
-            schema: ResponseSchema.error(
-              'Campos inválidos ao cadastrar amiguinho',
-              400,
+            schema: ResponseSchema.error(messages.INVALID_FIELDS, 400, [
               { field: 'name', message: 'Nome é obrigatório' }
-            )
+            ])
           }
         }
       }
@@ -103,7 +104,7 @@ export const animalDocs: Array<RouteConfig> = [
     },
     responses: {
       200: {
-        description: 'Amiguinho deletado com sucesso',
+        description: messages.DELETED,
         content: {
           'application/json': {
             schema: ResponseSchema.success(AnimalValidations.create)
@@ -111,10 +112,10 @@ export const animalDocs: Array<RouteConfig> = [
         }
       },
       404: {
-        description: 'Nenhum amiguinho encontrado',
+        description: messages.NOT_FOUND_TO_DELETE,
         content: {
           'application/json': {
-            schema: ResponseSchema.error('Nenhum amiguinho encontrado', 404)
+            schema: ResponseSchema.error(messages.NOT_FOUND_TO_DELETE, 404)
           }
         }
       }
@@ -135,7 +136,7 @@ export const animalDocs: Array<RouteConfig> = [
     },
     responses: {
       200: {
-        description: 'Amiguinho atualizado com sucesso',
+        description: messages.UPDATED,
         content: {
           'application/json': {
             schema: ResponseSchema.success(AnimalValidations.create)
@@ -143,21 +144,20 @@ export const animalDocs: Array<RouteConfig> = [
         }
       },
       400: {
-        description: 'Campos inválidos',
+        description: messages.INVALID_FIELDS,
         content: {
           'application/json': {
-            schema: ResponseSchema.error('Campos inválidos', 400, {
-              field: 'name',
-              message: 'Nome é obrigatório'
-            })
+            schema: ResponseSchema.error(messages.INVALID_FIELDS, 400, [
+              { field: 'name', message: 'Nome é obrigatório' }
+            ])
           }
         }
       },
       404: {
-        description: 'Nenhum amiguinho encontrado',
+        description: messages.NOT_FOUND_TO_UPDATE,
         content: {
           'application/json': {
-            schema: ResponseSchema.error('Nenhum amiguinho encontrado', 404)
+            schema: ResponseSchema.error(messages.NOT_FOUND_TO_UPDATE, 404)
           }
         }
       }

@@ -1,49 +1,40 @@
 import { BaseController } from '../core/baseController'
 import { Request, Response } from 'express'
-import { AnimalRepository } from '../repositories/animalRepository'
 import { AnimalsService } from '../services/animalsService'
 import { ResponseHandler } from '../utils/responseHandler'
-import type { IAnimal } from '../models/animalModel'
 import {
   AnimalValidations,
   type CreateAnimalDTO,
   type UpdateAnimalDTO
 } from '../validation/animalValidation'
+import { AnimalMessages } from '../messages/animalsMessages'
 
 export class AnimalsController extends BaseController {
-  public repository: AnimalRepository = new AnimalRepository()
   public service: AnimalsService = new AnimalsService()
   public responseHandler = new ResponseHandler()
+  public messages = AnimalMessages
 
   list = async (req: Request, res: Response): Promise<void> => {
     const listed = await this.service.list()
-    this.responseHandler.ok(res, 'Animaizinhos encontrados com sucesso', listed)
+    if (listed.length === 0) {
+      return this.responseHandler.notFound(res, this.messages.NOT_FOUND)
+    }
+    this.responseHandler.ok(res, AnimalMessages.FOUND, listed)
   }
 
   findById = async (req: Request, res: Response) => {
     const { id } = req.params
     const found = await this.service.findById(String(id))
     if (!found) {
-      return this.responseHandler.notFound(
-        res,
-        'Não foi possível encontrar o animalzinho com esse ID'
-      )
+      return this.responseHandler.notFound(res, this.messages.NOT_FOUND)
     }
-    this.responseHandler.ok(
-      res,
-      'Encontramos seu animalzinho com sucesso',
-      found
-    )
+    this.responseHandler.ok(res, this.messages.FOUND_BY_ID, found)
   }
 
   create = async (req: Request, res: Response): Promise<void> => {
     const newAnimal: CreateAnimalDTO = AnimalValidations.create.parse(req.body)
     const created = await this.service.create(newAnimal)
-    this.responseHandler.created(
-      res,
-      'Cadastramos o animal com sucesso!',
-      created
-    )
+    this.responseHandler.created(res, this.messages.CREATED, created)
   }
 
   update = async (req: Request, res: Response) => {
@@ -55,10 +46,10 @@ export class AnimalsController extends BaseController {
     if (!updated) {
       return this.responseHandler.notFound(
         res,
-        'Não foi possível encontrar o animalzinho para atualizar'
+        this.messages.NOT_FOUND_TO_UPDATE
       )
     }
-    this.responseHandler.ok(res, 'Animalzinho atualizado com sucesso', updated)
+    this.responseHandler.ok(res, this.messages.UPDATED, updated)
   }
 
   delete = async (req: Request, res: Response) => {
@@ -68,13 +59,9 @@ export class AnimalsController extends BaseController {
     if (!deleted) {
       return this.responseHandler.notFound(
         res,
-        'Não foi possível encontrar o animalzinho para excluir, UFA'
+        this.messages.NOT_FOUND_TO_DELETE
       )
     }
-    this.responseHandler.ok(
-      res,
-      'Animalzinho removido com sucesso, vai fazer falta',
-      deleted
-    )
+    this.responseHandler.ok(res, this.messages.DELETED, deleted)
   }
 }
