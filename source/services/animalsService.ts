@@ -23,20 +23,16 @@ export class AnimalsService extends BaseService {
   }
 
   async create(newAnimal: CreateAnimalDTO) {
-    const exists = await this.animalRepository.exists({ name: newAnimal.name })
-    if (exists) {
-      throw new ApiError(AnimalMessages.alreadyExistsWithName, 400, {
-        name: newAnimal.name
-      })
-    }
+    await this.exists(newAnimal.name)
 
     const created = await this.animalRepository.create(newAnimal)
 
     return created
   }
 
-  update(id: string, updateAnimal: Partial<UpdateAnimalDTO>) {
-    const updated = this.animalRepository.update(
+  async update(id: string, updateAnimal: Partial<UpdateAnimalDTO>) {
+    await this.exists(updateAnimal.name)
+    const updated = await this.animalRepository.update(
       new Types.ObjectId(String(id)),
       updateAnimal
     )
@@ -46,5 +42,13 @@ export class AnimalsService extends BaseService {
   delete(id: string) {
     const deleted = this.animalRepository.delete(new Types.ObjectId(String(id)))
     return deleted
+  }
+
+  private async exists(name?: string) {
+    if (!name) return
+    const exists = await this.animalRepository.exists({ name })
+    if (exists) {
+      throw new ApiError(AnimalMessages.alreadyExistsWithName, 400, { name })
+    }
   }
 }
