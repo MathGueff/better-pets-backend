@@ -1,8 +1,9 @@
 import { Types } from 'mongoose'
 import type { IAnimal } from '../models/animalModel'
 import { AnimalRepository } from '../repositories/animalRepository'
+import { BaseService } from '../core/baseService'
 
-export class AnimalsService {
+export class AnimalsService extends BaseService {
   private animalRepository: AnimalRepository = new AnimalRepository()
 
   list() {
