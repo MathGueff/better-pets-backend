@@ -16,24 +16,24 @@ export class AnimalsController extends BaseController {
   list = async (req: Request, res: Response): Promise<void> => {
     const listed = await this.service.list()
     if (listed.length === 0) {
-      return this.responseHandler.notFound(res, AnimalMessages.NOT_FOUND)
+      return this.responseHandler.notFound(res, AnimalMessages.notFound)
     }
-    this.responseHandler.ok(res, AnimalMessages.FOUND, listed)
+    this.responseHandler.ok(res, AnimalMessages.found, listed)
   }
 
   findById = async (req: Request, res: Response) => {
     const { id } = req.params
     const found = await this.service.findById(String(id))
     if (!found) {
-      return this.responseHandler.notFound(res, AnimalMessages.NOT_FOUND)
+      return this.responseHandler.notFound(res, AnimalMessages.notFound)
     }
-    this.responseHandler.ok(res, AnimalMessages.FOUND_BY_ID, found)
+    this.responseHandler.ok(res, AnimalMessages.foundById, found)
   }
 
   create = async (req: Request, res: Response): Promise<void> => {
     const newAnimal: CreateAnimalDTO = AnimalValidations.create.parse(req.body)
     const created = await this.service.create(newAnimal)
-    this.responseHandler.created(res, AnimalMessages.CREATED, created)
+    this.responseHandler.created(res, AnimalMessages.created, created)
   }
 
   update = async (req: Request, res: Response) => {
@@ -43,12 +43,9 @@ export class AnimalsController extends BaseController {
     )
     const updated = await this.service.update(String(id), updateAnimal)
     if (!updated) {
-      return this.responseHandler.notFound(
-        res,
-        AnimalMessages.NOT_FOUND_TO_UPDATE
-      )
+      return this.responseHandler.notFound(res, AnimalMessages.notFoundToUpdate)
     }
-    this.responseHandler.ok(res, AnimalMessages.UPDATED, updated)
+    this.responseHandler.ok(res, AnimalMessages.updated, updated)
   }
 
   delete = async (req: Request, res: Response) => {
@@ -56,11 +53,8 @@ export class AnimalsController extends BaseController {
 
     const deleted = await this.service.delete(String(id))
     if (!deleted) {
-      return this.responseHandler.notFound(
-        res,
-        AnimalMessages.NOT_FOUND_TO_DELETE
-      )
+      return this.responseHandler.notFound(res, AnimalMessages.notFoundToDelete)
     }
-    this.responseHandler.ok(res, AnimalMessages.DELETED, deleted)
+    this.responseHandler.ok(res, AnimalMessages.deleted, deleted)
   }
 }
