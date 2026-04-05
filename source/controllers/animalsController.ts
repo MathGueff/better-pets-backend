@@ -12,12 +12,11 @@ import { AnimalMessages } from '../messages/animalsMessages'
 export class AnimalsController extends BaseController {
   public service: AnimalsService = new AnimalsService()
   public responseHandler = new ResponseHandler()
-  public messages = AnimalMessages
 
   list = async (req: Request, res: Response): Promise<void> => {
     const listed = await this.service.list()
     if (listed.length === 0) {
-      return this.responseHandler.notFound(res, this.messages.NOT_FOUND)
+      return this.responseHandler.notFound(res, AnimalMessages.NOT_FOUND)
     }
     this.responseHandler.ok(res, AnimalMessages.FOUND, listed)
   }
@@ -26,15 +25,15 @@ export class AnimalsController extends BaseController {
     const { id } = req.params
     const found = await this.service.findById(String(id))
     if (!found) {
-      return this.responseHandler.notFound(res, this.messages.NOT_FOUND)
+      return this.responseHandler.notFound(res, AnimalMessages.NOT_FOUND)
     }
-    this.responseHandler.ok(res, this.messages.FOUND_BY_ID, found)
+    this.responseHandler.ok(res, AnimalMessages.FOUND_BY_ID, found)
   }
 
   create = async (req: Request, res: Response): Promise<void> => {
     const newAnimal: CreateAnimalDTO = AnimalValidations.create.parse(req.body)
     const created = await this.service.create(newAnimal)
-    this.responseHandler.created(res, this.messages.CREATED, created)
+    this.responseHandler.created(res, AnimalMessages.CREATED, created)
   }
 
   update = async (req: Request, res: Response) => {
@@ -46,10 +45,10 @@ export class AnimalsController extends BaseController {
     if (!updated) {
       return this.responseHandler.notFound(
         res,
-        this.messages.NOT_FOUND_TO_UPDATE
+        AnimalMessages.NOT_FOUND_TO_UPDATE
       )
     }
-    this.responseHandler.ok(res, this.messages.UPDATED, updated)
+    this.responseHandler.ok(res, AnimalMessages.UPDATED, updated)
   }
 
   delete = async (req: Request, res: Response) => {
@@ -59,9 +58,9 @@ export class AnimalsController extends BaseController {
     if (!deleted) {
       return this.responseHandler.notFound(
         res,
-        this.messages.NOT_FOUND_TO_DELETE
+        AnimalMessages.NOT_FOUND_TO_DELETE
       )
     }
-    this.responseHandler.ok(res, this.messages.DELETED, deleted)
+    this.responseHandler.ok(res, AnimalMessages.DELETED, deleted)
   }
 }
