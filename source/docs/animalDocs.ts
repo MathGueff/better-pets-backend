@@ -4,6 +4,7 @@ import { Endpoints } from '../global/endpoints'
 import { z } from '../config/zod'
 import { ResponseSchema } from './responseSchema'
 import { AnimalMessages } from '../messages/animalsMessages'
+import { AnimalsValidationMessages } from '../messages/animalsValidationMessages'
 
 const messages = AnimalMessages
 
@@ -15,7 +16,7 @@ export const animalDocs: Array<RouteConfig> = [
     summary: 'Lista todos os amiguinhos',
     responses: {
       200: {
-        description: messages.FOUND,
+        description: messages.found,
         content: {
           'application/json': {
             schema: ResponseSchema.success(z.array(AnimalValidations.create))
@@ -23,10 +24,10 @@ export const animalDocs: Array<RouteConfig> = [
         }
       },
       404: {
-        description: messages.NOT_FOUND,
+        description: messages.notFound,
         content: {
           'application/json': {
-            schema: ResponseSchema.error(messages.NOT_FOUND, 404)
+            schema: ResponseSchema.error(messages.notFound, 404)
           }
         }
       }
@@ -44,7 +45,7 @@ export const animalDocs: Array<RouteConfig> = [
     },
     responses: {
       200: {
-        description: messages.FOUND_BY_ID,
+        description: messages.foundById,
         content: {
           'application/json': {
             schema: ResponseSchema.success(AnimalValidations.create)
@@ -52,10 +53,10 @@ export const animalDocs: Array<RouteConfig> = [
         }
       },
       404: {
-        description: messages.NOT_FOUND,
+        description: messages.notFound,
         content: {
           'application/json': {
-            schema: ResponseSchema.error(messages.NOT_FOUND, 404)
+            schema: ResponseSchema.error(messages.notFound, 404)
           }
         }
       }
@@ -73,7 +74,7 @@ export const animalDocs: Array<RouteConfig> = [
     },
     responses: {
       201: {
-        description: messages.CREATED,
+        description: messages.created,
         content: {
           'application/json': {
             schema: ResponseSchema.success(AnimalValidations.create)
@@ -81,11 +82,11 @@ export const animalDocs: Array<RouteConfig> = [
         }
       },
       400: {
-        description: messages.INVALID_FIELDS,
+        description: messages.invalidFields,
         content: {
           'application/json': {
-            schema: ResponseSchema.error(messages.INVALID_FIELDS, 400, [
-              { field: 'name', message: 'Nome é obrigatório' }
+            schema: ResponseSchema.error(messages.invalidFields, 400, [
+              { field: 'name', message: AnimalsValidationMessages.name.required }
             ])
           }
         }
@@ -104,7 +105,7 @@ export const animalDocs: Array<RouteConfig> = [
     },
     responses: {
       200: {
-        description: messages.DELETED,
+        description: messages.deleted,
         content: {
           'application/json': {
             schema: ResponseSchema.success(AnimalValidations.create)
@@ -112,10 +113,10 @@ export const animalDocs: Array<RouteConfig> = [
         }
       },
       404: {
-        description: messages.NOT_FOUND_TO_DELETE,
+        description: messages.notFoundToDelete,
         content: {
           'application/json': {
-            schema: ResponseSchema.error(messages.NOT_FOUND_TO_DELETE, 404)
+            schema: ResponseSchema.error(messages.notFoundToDelete, 404)
           }
         }
       }
@@ -136,7 +137,7 @@ export const animalDocs: Array<RouteConfig> = [
     },
     responses: {
       200: {
-        description: messages.UPDATED,
+        description: messages.updated,
         content: {
           'application/json': {
             schema: ResponseSchema.success(AnimalValidations.create)
@@ -144,20 +145,20 @@ export const animalDocs: Array<RouteConfig> = [
         }
       },
       400: {
-        description: messages.INVALID_FIELDS,
+        description: messages.invalidFields,
         content: {
           'application/json': {
-            schema: ResponseSchema.error(messages.INVALID_FIELDS, 400, [
-              { field: 'name', message: 'Nome é obrigatório' }
+            schema: ResponseSchema.error(messages.invalidFields, 400, [
+              { field: 'name', message: AnimalsValidationMessages.name.required }
             ])
           }
         }
       },
       404: {
-        description: messages.NOT_FOUND_TO_UPDATE,
+        description: messages.notFoundToUpdate,
         content: {
           'application/json': {
-            schema: ResponseSchema.error(messages.NOT_FOUND_TO_UPDATE, 404)
+            schema: ResponseSchema.error(messages.notFoundToUpdate, 404)
           }
         }
       }

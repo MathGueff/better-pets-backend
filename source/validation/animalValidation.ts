@@ -1,46 +1,36 @@
 import { AnimalGender, IAnimal } from '../models/animalModel'
 import { z } from '../config/zod'
 import { ValidationRules } from './validation'
+import { AnimalsValidationMessages } from '../messages/animalsValidationMessages'
+
+const M = AnimalsValidationMessages
 
 const rules = {
-  name: z
-    .string('Nome deve ser uma string')
-    .min(1, 'Nome é obrigatório')
-    .max(50, 'Nome deve ter no máximo 50 caracteres'),
-  breed: z.string('Raça deve ser uma string'),
-  gender: z.enum(AnimalGender, 'Gênero inválido'),
-  weight: z
-    .number('Peso deve ser um número')
-    .positive('Peso deve ser um número positivo'),
-  size: z
-    .number('Tamanho deve ser um número')
-    .positive('Tamanho deve ser um número positivo'),
-  bornDate: z.coerce.date('Data de nascimento deve ser uma data'),
-  adoptionDate: z.coerce.date('Data de adoção deve ser uma data'),
-  photo: z.string('Foto deve ser um arquivo válido'),
+  name: z.string(M.name.invalid).min(1, M.name.required).max(50, M.name.max),
+  breed: z.string(M.breed.invalid),
+  gender: z.enum(AnimalGender, M.gender.invalid),
+  weight: z.number(M.weight.invalid).positive(M.weight.positive),
+  size: z.number(M.size.invalid).positive(M.size.positive),
+  bornDate: z.coerce.date(M.bornDate.date),
+  adoptionDate: z.coerce.date(M.adoptionDate.date),
+  photo: z.string(M.photo.invalid),
   schedule: z
     .object(
       {
         walk: z.object(
-          {
-            timeExpected: z.coerce.date('Data de nascimento deve ser uma data')
-          },
-          'Horário de passeio inválido'
+          { timeExpected: z.coerce.date(M.schedule.time) },
+          M.schedule.walk
         ),
         feed: z.object(
-          {
-            timeExpected: z.coerce.date('Data de nascimento deve ser uma data')
-          },
-          'Horário de alimentação inválido'
+          { timeExpected: z.coerce.date(M.schedule.time) },
+          M.schedule.feed
         ),
         water: z.object(
-          {
-            timeExpected: z.coerce.date('Data de nascimento deve ser uma data')
-          },
-          'Horário de água inválido'
+          { timeExpected: z.coerce.date(M.schedule.time) },
+          M.schedule.water
         )
       },
-      'Horários inválidos'
+      M.schedule.invalid
     )
     .optional()
 } satisfies { [K in keyof ValidationRules<IAnimal, '_id'>]: z.ZodType }
