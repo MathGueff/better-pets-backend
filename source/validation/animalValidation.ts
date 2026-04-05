@@ -1,5 +1,6 @@
 import { AnimalGender, IAnimal } from '../models/animalModel'
 import { z } from '../config/zod'
+import { ValidationRules } from './validation'
 
 const rules = {
   name: z
@@ -42,7 +43,7 @@ const rules = {
       'Horários inválidos'
     )
     .optional()
-} satisfies { [K in keyof Omit<IAnimal, '_id'>]: z.ZodType }
+} satisfies { [K in keyof ValidationRules<IAnimal, '_id'>]: z.ZodType }
 
 const createAnimalSchema = z.object(rules).openapi('CreateAnimal')
 
