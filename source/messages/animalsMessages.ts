@@ -5,8 +5,8 @@ export const AnimalMessages = {
   deleted: 'Animalzinho removido com sucesso',
   notFound: 'Nenhum animalzinho encontrado',
   foundById: 'Encontramos seu animalzinho com sucesso',
-  notFoundToUpdate:
-    'Não foi possível encontrar o animalzinho para atualizar',
+  notFoundToUpdate: 'Não foi possível encontrar o animalzinho para atualizar',
   notFoundToDelete: 'Não foi possível encontrar o animalzinho para excluir',
-  invalidFields: 'Campos inválidos'
+  invalidFields: 'Campos inválidos',
+  alreadyExistsWithName: 'Animal já cadastrado com esse nome'
 }

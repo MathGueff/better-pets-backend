@@ -6,6 +6,8 @@ import {
   CreateAnimalDTO,
   UpdateAnimalDTO
 } from '../validation/animalValidation'
+import { ApiError } from '../errors/apiError'
+import { AnimalMessages } from '../messages/animalsMessages'
 
 export class AnimalsService extends BaseService {
   private animalRepository: AnimalRepository = new AnimalRepository()
@@ -23,7 +25,9 @@ export class AnimalsService extends BaseService {
   async create(newAnimal: CreateAnimalDTO) {
     const exists = await this.animalRepository.exists({ name: newAnimal.name })
     if (exists) {
-      throw new Error('Animal já cadastrado')
+      throw new ApiError(AnimalMessages.alreadyExistsWithName, 400, {
+        name: newAnimal.name
+      })
     }
 
     const created = await this.animalRepository.create(newAnimal)

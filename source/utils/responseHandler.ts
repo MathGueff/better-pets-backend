@@ -5,6 +5,14 @@ type ApiSuccess<T> = ApiResponse & { data?: T }
 type ApiError<T> = ApiResponse & { error?: T }
 
 export class ResponseHandler {
+  callByCode = <T>(res: Response, code: number, message: string, data?: T) => {
+    if (code >= 200 && code <= 299) {
+      this.sendSuccess(res, code, message, data)
+    } else {
+      this.sendError(res, code, message, data)
+    }
+  }
+
   ok = <T>(res: Response, message: string, data?: T) => {
     this.sendSuccess(res, 200, message, data)
   }
