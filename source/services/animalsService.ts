@@ -2,6 +2,10 @@ import { Types } from 'mongoose'
 import type { IAnimal } from '../models/animalModel'
 import { AnimalRepository } from '../repositories/animalRepository'
 import { BaseService } from '../core/baseService'
+import {
+  CreateAnimalDTO,
+  UpdateAnimalDTO
+} from '../validation/animalValidation'
 
 export class AnimalsService extends BaseService {
   private animalRepository: AnimalRepository = new AnimalRepository()
@@ -16,7 +20,7 @@ export class AnimalsService extends BaseService {
     return found
   }
 
-  async create(newAnimal: IAnimal) {
+  async create(newAnimal: CreateAnimalDTO) {
     const exists = await this.animalRepository.exists({ name: newAnimal.name })
     if (exists) {
       throw new Error('Animal já cadastrado')
@@ -27,7 +31,7 @@ export class AnimalsService extends BaseService {
     return created
   }
 
-  update(id: string, updateAnimal: Partial<IAnimal>) {
+  update(id: string, updateAnimal: Partial<UpdateAnimalDTO>) {
     const updated = this.animalRepository.update(
       new Types.ObjectId(String(id)),
       updateAnimal

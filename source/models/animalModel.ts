@@ -25,6 +25,7 @@ export interface IAnimal extends IEntity {
 }
 
 export class Animal implements IAnimal {
+  public _id: IAnimal['_id']
   public name: IAnimal['name']
   public breed: IAnimal['breed']
   public photo: IAnimal['photo']
@@ -36,6 +37,7 @@ export class Animal implements IAnimal {
   public schedule: IAnimal['schedule']
 
   constructor(animal: IAnimal) {
+    this._id = animal._id
     this.name = animal.name
     this.breed = animal.breed
     this.photo = animal.photo

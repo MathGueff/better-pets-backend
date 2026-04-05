@@ -1,4 +1,4 @@
-import { AnimalGender, type IAnimal } from '../models/animalModel'
+import { AnimalGender, IAnimal } from '../models/animalModel'
 import { z } from '../config/zod'
 
 const rules = {
@@ -42,7 +42,7 @@ const rules = {
       'Horários inválidos'
     )
     .optional()
-} satisfies { [K in keyof IAnimal]: z.ZodType }
+} satisfies { [K in keyof Omit<IAnimal, '_id'>]: z.ZodType }
 
 const createAnimalSchema = z.object(rules).openapi('CreateAnimal')
 
