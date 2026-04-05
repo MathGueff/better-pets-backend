@@ -1,5 +1,5 @@
 import type { Model, Types } from 'mongoose'
-import type { IEntity } from '../interfaces/entity'
+import type { IEntity } from '../models/entityModel'
 
 export class BaseRepository<T extends IEntity> {
   constructor(private model: Model<T>) {}
