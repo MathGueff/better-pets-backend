@@ -4,8 +4,10 @@ import { Endpoints } from '../global/endpoints'
 import { AnimalsController } from '../controllers/animalsController'
 
 class AnimalsRouter extends BaseRouter {
-  constructor(prefix: string) {
-    const controller = new AnimalsController()
+  constructor(
+    prefix: string = Endpoints.ANIMALS,
+    controller: AnimalsController = new AnimalsController()
+  ) {
     const routes: IRoutes = [
       { method: HttpMethod.GET, path: '/', handler: controller.list },
       { method: HttpMethod.POST, path: '/', handler: controller.create },
@@ -17,5 +19,5 @@ class AnimalsRouter extends BaseRouter {
   }
 }
 
-const animalsRouter = new AnimalsRouter(Endpoints.ANIMALS)
+const animalsRouter = new AnimalsRouter()
 export default animalsRouter

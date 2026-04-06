@@ -10,7 +10,11 @@ import { ApiError } from '../errors/apiError'
 import { AnimalMessages } from '../messages/animalsMessages'
 
 export class AnimalsService extends BaseService {
-  private animalRepository: AnimalRepository = new AnimalRepository()
+  constructor(
+    private readonly animalRepository: AnimalRepository = new AnimalRepository()
+  ) {
+    super()
+  }
 
   list() {
     const listed = this.animalRepository.list()

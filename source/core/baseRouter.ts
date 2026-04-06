@@ -25,26 +25,33 @@ export type IRoutes = Array<IRoute>
 
 export class BaseRouter {
   public readonly router: Router = Router()
-  private routes: Array<IRoute>
-  private prefix: string
+  private readonly prefix: string
 
   /**
    * @param prefix Prefixo da rota
    * @param routes Rotas
    */
-  constructor(prefix: string, routes: Array<IRoute>) {
+  constructor(
+    prefix: string,
+    private readonly routes: Array<IRoute>
+  ) {
     this.prefix = prefix.startsWith('/') ? prefix : `/${prefix}`
-    this.routes = routes
     this.handleRoutes()
   }
 
   private handleRoutes() {
     this.routes.forEach((route) => {
       const fullPath = `${this.prefix}${route.path}`.replace(/\/+/g, '/')
+
+      const asyncMiddlewares = route.middlewares?.map((middleware) =>
+        this.asyncHandler(middleware)
+      )
+      const asyncHandler = this.asyncHandler(route.handler)
+
       this.router[route.method](
         fullPath,
-        ...(route.middlewares ?? []),
-        this.asyncHandler(route.handler)
+        ...(asyncMiddlewares ?? []),
+        asyncHandler
       )
     })
   }

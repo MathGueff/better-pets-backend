@@ -3,8 +3,10 @@ import type { IRoute } from '../core/baseRouter'
 import { BaseRouter, HttpMethod } from '../core/baseRouter'
 
 class HealthRouter extends BaseRouter {
-  constructor(prefix: string) {
-    const controller: HealthController = new HealthController()
+  constructor(
+    prefix: string,
+    controller: HealthController = new HealthController()
+  ) {
     const routes: Array<IRoute> = [
       { method: HttpMethod.GET, path: '/', handler: controller.check }
     ]

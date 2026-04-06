@@ -10,8 +10,12 @@ import {
 import { AnimalMessages } from '../messages/animalsMessages'
 
 export class AnimalsController extends BaseController {
-  public service: AnimalsService = new AnimalsService()
-  public responseHandler = new ResponseHandler()
+  constructor(
+    private readonly service: AnimalsService = new AnimalsService(),
+    private readonly responseHandler: ResponseHandler = new ResponseHandler()
+  ) {
+    super()
+  }
 
   list = async (req: Request, res: Response): Promise<void> => {
     const listed = await this.service.list()
