@@ -1,11 +1,11 @@
 import type { IRoutes } from '../core/baseRouter'
 import { BaseRouter, HttpMethod } from '../core/baseRouter'
-import { Endpoints } from '../global/endpoints'
+import { Endpoint, EndpointNames } from '../global/endpoints'
 import { AnimalsController } from '../controllers/animalsController'
 
 class AnimalsRouter extends BaseRouter {
   constructor(
-    prefix: string = Endpoints.ANIMALS,
+    prefix: string = Endpoint(EndpointNames.ANIMALS),
     controller: AnimalsController = new AnimalsController()
   ) {
     const routes: IRoutes = [

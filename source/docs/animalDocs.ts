@@ -1,6 +1,6 @@
 import { AnimalValidations } from '../validation/animalValidation'
 import { RouteConfig } from '@asteasolutions/zod-to-openapi'
-import { Endpoints } from '../global/endpoints'
+import { Endpoint, EndpointNames } from '../global/endpoints'
 import { z } from '../config/zod'
 import { ResponseSchema } from './responseSchema'
 import { AnimalMessages } from '../messages/animalsMessages'
@@ -11,7 +11,7 @@ const messages = AnimalMessages
 export const animalDocs: Array<RouteConfig> = [
   {
     method: 'get',
-    path: Endpoints.ANIMALS,
+    path: Endpoint(EndpointNames.ANIMALS),
     tags: ['Animals'],
     summary: 'Lista todos os amiguinhos',
     responses: {
@@ -35,7 +35,7 @@ export const animalDocs: Array<RouteConfig> = [
   },
   {
     method: 'get',
-    path: `${Endpoints.ANIMALS}/{id}`,
+    path: `${Endpoint(EndpointNames.ANIMALS)}/{id}`,
     tags: ['Animals'],
     summary: 'Busca um amiguinho por ID',
     request: {
@@ -64,7 +64,7 @@ export const animalDocs: Array<RouteConfig> = [
   },
   {
     method: 'post',
-    path: Endpoints.ANIMALS,
+    path: Endpoint(EndpointNames.ANIMALS),
     tags: ['Animals'],
     summary: 'Cadastra um novo amiguinho',
     request: {
@@ -86,7 +86,10 @@ export const animalDocs: Array<RouteConfig> = [
         content: {
           'application/json': {
             schema: ResponseSchema.error(messages.invalidFields, 400, [
-              { field: 'name', message: AnimalsValidationMessages.name.required }
+              {
+                field: 'name',
+                message: AnimalsValidationMessages.name.required
+              }
             ])
           }
         }
@@ -95,7 +98,7 @@ export const animalDocs: Array<RouteConfig> = [
   },
   {
     method: 'delete',
-    path: `${Endpoints.ANIMALS}/{id}`,
+    path: `${Endpoint(EndpointNames.ANIMALS)}/{id}`,
     tags: ['Animals'],
     summary: 'Deleta um amiguinho por ID',
     request: {
@@ -124,7 +127,7 @@ export const animalDocs: Array<RouteConfig> = [
   },
   {
     method: 'patch',
-    path: `${Endpoints.ANIMALS}/{id}`,
+    path: `${Endpoint(EndpointNames.ANIMALS)}/{id}`,
     tags: ['Animals'],
     summary: 'Atualiza um amiguinho por ID',
     request: {
@@ -149,7 +152,10 @@ export const animalDocs: Array<RouteConfig> = [
         content: {
           'application/json': {
             schema: ResponseSchema.error(messages.invalidFields, 400, [
-              { field: 'name', message: AnimalsValidationMessages.name.required }
+              {
+                field: 'name',
+                message: AnimalsValidationMessages.name.required
+              }
             ])
           }
         }
