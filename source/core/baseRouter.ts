@@ -1,5 +1,10 @@
-import { RequestHandler } from 'express'
-import { Router } from 'express'
+import {
+  Router,
+  NextFunction,
+  Request,
+  RequestHandler,
+  Response
+} from 'express'
 
 export enum HttpMethod {
   GET = 'get',
@@ -39,13 +44,18 @@ export class BaseRouter {
       this.router[route.method](
         fullPath,
         ...(route.middlewares ?? []),
-        this.wrap(route.handler)
+        this.asyncHandler(route.handler)
       )
     })
   }
 
-  private wrap(handler: RequestHandler): RequestHandler {
-    return (req, res, next) =>
-      Promise.resolve(handler(req, res, next)).catch(next)
+  private asyncHandler(handler: RequestHandler): RequestHandler {
+    return async (req: Request, res: Response, next: NextFunction) => {
+      try {
+        await handler(req, res, next)
+      } catch (error) {
+        next(error)
+      }
+    }
   }
 }
