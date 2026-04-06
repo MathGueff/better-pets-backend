@@ -2,7 +2,6 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import { doSomethingMiddleware } from './middlewares/doSomethingMiddleware'
-import { farmLog } from './utils/farmLog'
 import morgan from 'morgan'
 import { errorMiddleware } from './middlewares/errorMiddleware'
 import animalsRouter from './routers/animalsRouter'
@@ -37,7 +36,13 @@ let server: any
 
 const start = async () => {
   try {
-    farmLog()
+    console.log(`
+            ^__^               /\\_/\\          ,~.           / \\__
+            (oo)\\_______      ( o.o )         (o o)         (    @\\___
+            (__)\\       )    \\/  > ^ <       /  V  \\        /         O
+                ||----w |     (     )       /(     )\\      /   (_____/
+                ||     ||      ^^ ^^         ^^   ^^       /_____/   U
+    `)
 
     console.log('🧠 Iniciando conexão com o banco de dados TESTAÍ')
     await database.connect()
