@@ -1,9 +1,9 @@
 import {
-  Router,
   NextFunction,
   Request,
   RequestHandler,
-  Response
+  Response,
+  Router
 } from 'express'
 
 export enum HttpMethod {

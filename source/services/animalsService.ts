@@ -1,13 +1,12 @@
 import { Types } from 'mongoose'
-import type { IAnimal } from '../models/animalModel'
-import { AnimalRepository } from '../repositories/animalRepository'
 import { BaseService } from '../core/baseService'
+import { ApiError } from '../errors/apiError'
+import { AnimalMessages } from '../messages/animalsMessages'
+import { AnimalRepository } from '../repositories/animalRepository'
 import {
   CreateAnimalDTO,
   UpdateAnimalDTO
 } from '../validation/animalValidation'
-import { ApiError } from '../errors/apiError'
-import { AnimalMessages } from '../messages/animalsMessages'
 
 export class AnimalsService extends BaseService {
   constructor(
