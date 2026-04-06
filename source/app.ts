@@ -9,7 +9,6 @@ import { doSomethingMiddleware } from './middlewares/doSomethingMiddleware'
 import { errorMiddleware } from './middlewares/errorMiddleware'
 import animalsRouter from './routers/animalsRouter'
 import healthRouter from './routers/healthRouter'
-import { farmLog } from './utils/farmLog'
 
 dotenv.config({ quiet: true })
 
@@ -37,7 +36,13 @@ let server: any
 
 const start = async () => {
   try {
-    farmLog()
+    console.log(`
+            ^__^               /\\_/\\          ,~.           / \\__
+            (oo)\\_______      ( o.o )         (o o)         (    @\\___
+            (__)\\       )    \\/  > ^ <       /  V  \\        /         O
+                ||----w |     (     )       /(     )\\      /   (_____/
+                ||     ||      ^^ ^^         ^^   ^^       /_____/   U
+    `)
 
     console.log('🧠 Iniciando conexão com o banco de dados TESTAÍ')
     await database.connect()
