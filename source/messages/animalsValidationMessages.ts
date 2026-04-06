@@ -8,10 +8,7 @@ export const AnimalsValidationMessages = {
     required: 'Raça é obrigatória',
     invalid: 'Raça deve ser uma string'
   },
-  gender: {
-    required: 'Gênero é obrigatório',
-    invalid: 'Gênero inválido'
-  },
+  gender: { required: 'Gênero é obrigatório', invalid: 'Gênero inválido' },
   weight: {
     required: 'Peso é obrigatório',
     positive: 'Peso deve ser um número positivo',
@@ -43,4 +40,3 @@ export const AnimalsValidationMessages = {
     time: 'Horário deve ser uma data'
   }
 }
-

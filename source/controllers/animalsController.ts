@@ -1,5 +1,6 @@
-import { BaseController } from '../core/baseController'
 import { Request, Response } from 'express'
+import { BaseController } from '../core/baseController'
+import { AnimalMessages } from '../messages/animalsMessages'
 import { AnimalsService } from '../services/animalsService'
 import { ResponseHandler } from '../utils/responseHandler'
 import {
@@ -7,7 +8,6 @@ import {
   type CreateAnimalDTO,
   type UpdateAnimalDTO
 } from '../validation/animalValidation'
-import { AnimalMessages } from '../messages/animalsMessages'
 
 export class AnimalsController extends BaseController {
   public service: AnimalsService = new AnimalsService()

@@ -1,4 +1,4 @@
-import type { Response, Request } from 'express'
+import type { Request, Response } from 'express'
 import { BaseController } from '../core/baseController'
 
 export class HealthController extends BaseController {

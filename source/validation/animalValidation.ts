@@ -1,7 +1,7 @@
-import { AnimalGender, IAnimal } from '../models/animalModel'
 import { z } from '../config/zod'
-import { ValidationRules } from './validation'
 import { AnimalsValidationMessages } from '../messages/animalsValidationMessages'
+import { AnimalGender, IAnimal } from '../models/animalModel'
+import { ValidationRules } from './validation'
 
 const M = AnimalsValidationMessages
 
