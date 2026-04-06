@@ -1,7 +1,7 @@
+import { AnimalsController } from '../controllers/animalsController'
 import type { IRoutes } from '../core/baseRouter'
 import { BaseRouter, HttpMethod } from '../core/baseRouter'
 import { Endpoints } from '../global/endpoints'
-import { AnimalsController } from '../controllers/animalsController'
 
 class AnimalsRouter extends BaseRouter {
   constructor(prefix: string) {

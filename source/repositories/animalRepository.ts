@@ -1,6 +1,6 @@
+import { BaseRepository } from '../core/baseRepository'
 import type { IAnimal } from '../models/animalModel'
 import animal from '../models/animalModel'
-import { BaseRepository } from '../core/baseRepository'
 import {
   CreateAnimalDTO,
   UpdateAnimalDTO

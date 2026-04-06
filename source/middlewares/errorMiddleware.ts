@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from 'express'
 import { z } from '../config/zod'
-import { ResponseHandler } from '../utils/responseHandler'
 import { ApiError } from '../errors/apiError'
+import { ResponseHandler } from '../utils/responseHandler'
 
 export const errorMiddleware = (
   error: any,

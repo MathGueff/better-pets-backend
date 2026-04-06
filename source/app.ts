@@ -1,15 +1,15 @@
-import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import { doSomethingMiddleware } from './middlewares/doSomethingMiddleware'
-import { farmLog } from './utils/farmLog'
+import express from 'express'
 import morgan from 'morgan'
+import swaggerUi from 'swagger-ui-express'
+import { database } from './config/database'
+import { generateSwaggerDocs } from './config/swagger'
+import { doSomethingMiddleware } from './middlewares/doSomethingMiddleware'
 import { errorMiddleware } from './middlewares/errorMiddleware'
 import animalsRouter from './routers/animalsRouter'
 import healthRouter from './routers/healthRouter'
-import { database } from './config/database'
-import swaggerUi from 'swagger-ui-express'
-import { generateSwaggerDocs } from './config/swagger'
+import { farmLog } from './utils/farmLog'
 
 dotenv.config({ quiet: true })
 

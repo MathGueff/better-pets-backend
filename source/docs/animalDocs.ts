@@ -1,10 +1,10 @@
-import { AnimalValidations } from '../validation/animalValidation'
 import { RouteConfig } from '@asteasolutions/zod-to-openapi'
-import { Endpoints } from '../global/endpoints'
 import { z } from '../config/zod'
-import { ResponseSchema } from './responseSchema'
+import { Endpoints } from '../global/endpoints'
 import { AnimalMessages } from '../messages/animalsMessages'
 import { AnimalsValidationMessages } from '../messages/animalsValidationMessages'
+import { AnimalValidations } from '../validation/animalValidation'
+import { ResponseSchema } from './responseSchema'
 
 const messages = AnimalMessages
 
@@ -86,7 +86,10 @@ export const animalDocs: Array<RouteConfig> = [
         content: {
           'application/json': {
             schema: ResponseSchema.error(messages.invalidFields, 400, [
-              { field: 'name', message: AnimalsValidationMessages.name.required }
+              {
+                field: 'name',
+                message: AnimalsValidationMessages.name.required
+              }
             ])
           }
         }
@@ -149,7 +152,10 @@ export const animalDocs: Array<RouteConfig> = [
         content: {
           'application/json': {
             schema: ResponseSchema.error(messages.invalidFields, 400, [
-              { field: 'name', message: AnimalsValidationMessages.name.required }
+              {
+                field: 'name',
+                message: AnimalsValidationMessages.name.required
+              }
             ])
           }
         }

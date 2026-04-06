@@ -1,6 +1,6 @@
 import type { Request, Response } from 'express'
-import { BaseController } from './baseController'
 import type { IEntity } from '../models/entityModel'
+import { BaseController } from './baseController'
 
 export class CrudController<T extends IEntity> extends BaseController {
   list = async (req: Request, res: Response): Promise<void> => {}
