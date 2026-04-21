@@ -15,43 +15,43 @@ export class AnimalsService extends BaseService {
     super()
   }
 
-  list() {
-    const listed = this.animalRepository.list()
-    return listed
+  async list() {
+    return await this.animalRepository.list()
   }
 
-  findById(id: string) {
-    const found = this.animalRepository.findById(new Types.ObjectId(String(id)))
-    return found
+  async findById(id: string) {
+    return await this.animalRepository.findById(id)
   }
 
   async create(newAnimal: CreateAnimalDTO) {
-    await this.exists(newAnimal.name)
+    if (await this.exists(newAnimal.name)) {
+      throw new ApiError(AnimalMessages.alreadyExistsWithName, 409, {
+        newAnimal
+      })
+    }
 
-    const created = await this.animalRepository.create(newAnimal)
-
-    return created
+    return this.animalRepository.create(newAnimal)
   }
 
   async update(id: string, updateAnimal: Partial<UpdateAnimalDTO>) {
-    await this.exists(updateAnimal.name)
-    const updated = await this.animalRepository.update(
-      new Types.ObjectId(String(id)),
-      updateAnimal
-    )
-    return updated
-  }
+    if (updateAnimal.name) {
+      const existing = await this.animalRepository.exists(updateAnimal)
 
-  delete(id: string) {
-    const deleted = this.animalRepository.delete(new Types.ObjectId(String(id)))
-    return deleted
-  }
-
-  private async exists(name?: string) {
-    if (!name) return
-    const exists = await this.animalRepository.exists({ name })
-    if (exists) {
-      throw new ApiError(AnimalMessages.alreadyExistsWithName, 400, { name })
+      if (existing && String(existing._id) !== id) {
+        throw new ApiError(AnimalMessages.alreadyExistsWithName, 409, {
+          updateAnimal
+        })
+      }
     }
+
+    return this.animalRepository.update(id, updateAnimal)
+  }
+
+  async delete(id: string) {
+    return await this.animalRepository.delete(id)
+  }
+
+  async exists(name: string): Promise<boolean> {
+    return Boolean(await this.animalRepository.exists({ name }))
   }
 }

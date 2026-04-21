@@ -21,11 +21,12 @@ export class BaseRepository<
     return await this.model.find()
   }
 
-  async findById(id: Types.ObjectId) {
+  async findById(id: string) {
     return await this.model.findById(id)
   }
 
-  async update(id: Types.ObjectId, updatedEntity: Partial<UpdateDTO>) {
+  async update(id: string, updatedEntity: Partial<UpdateDTO>) {
+
     const entity = await this.model.findById(id)
     if (!entity) {
       return null
@@ -34,7 +35,8 @@ export class BaseRepository<
     return await entity.save()
   }
 
-  async delete(id: Types.ObjectId) {
+  async delete(id: string) {
+
     return await this.model.findByIdAndDelete(id)
   }
 }
