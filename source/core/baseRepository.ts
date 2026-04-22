@@ -1,4 +1,5 @@
-import type { Model, Types } from 'mongoose'
+import type { Model, QueryFilter } from 'mongoose'
+import { Types } from 'mongoose'
 import type { IEntity } from '../models/entityModel'
 
 export class BaseRepository<
@@ -10,23 +11,26 @@ export class BaseRepository<
 
   async create(newEntity: CreateDTO) {
     const entity = new this.model(newEntity)
-    return await entity.save()
+    return entity.save()
   }
 
-  async exists(filter: Partial<Omit<T, '_id'>>) {
-    return await this.model.exists(filter)
+  async exists(filter: QueryFilter<T>, excludeId?: string) {
+    if (excludeId) {
+      filter._id = { $ne: new Types.ObjectId(excludeId) }
+    }
+
+    return this.model.exists(filter)
   }
 
   async list(): Promise<T[]> {
-    return await this.model.find()
+    return this.model.find()
   }
 
   async findById(id: string) {
-    return await this.model.findById(id)
+    return this.model.findById(id)
   }
 
   async update(id: string, updatedEntity: Partial<UpdateDTO>) {
-
     const entity = await this.model.findById(id)
     if (!entity) {
       return null
@@ -36,7 +40,6 @@ export class BaseRepository<
   }
 
   async delete(id: string) {
-
-    return await this.model.findByIdAndDelete(id)
+    return this.model.findByIdAndDelete(id)
   }
 }

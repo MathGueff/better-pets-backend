@@ -1,4 +1,3 @@
-import { Types } from 'mongoose'
 import { BaseService } from '../core/baseService'
 import { ApiError } from '../errors/apiError'
 import { AnimalMessages } from '../messages/animalsMessages'
@@ -16,15 +15,16 @@ export class AnimalsService extends BaseService {
   }
 
   async list() {
-    return await this.animalRepository.list()
+    return this.animalRepository.list()
   }
 
   async findById(id: string) {
-    return await this.animalRepository.findById(id)
+    return this.animalRepository.findById(id)
   }
 
   async create(newAnimal: CreateAnimalDTO) {
-    if (await this.exists(newAnimal.name)) {
+    const exists = await this.exists(newAnimal.name)
+    if (exists) {
       throw new ApiError(AnimalMessages.alreadyExistsWithName, 409, {
         newAnimal
       })
@@ -35,9 +35,9 @@ export class AnimalsService extends BaseService {
 
   async update(id: string, updateAnimal: Partial<UpdateAnimalDTO>) {
     if (updateAnimal.name) {
-      const existing = await this.animalRepository.exists(updateAnimal)
+      const exists = await this.exists(updateAnimal.name, id)
 
-      if (existing && String(existing._id) !== id) {
+      if (exists) {
         throw new ApiError(AnimalMessages.alreadyExistsWithName, 409, {
           updateAnimal
         })
@@ -48,10 +48,10 @@ export class AnimalsService extends BaseService {
   }
 
   async delete(id: string) {
-    return await this.animalRepository.delete(id)
+    return this.animalRepository.delete(id)
   }
 
-  async exists(name: string): Promise<boolean> {
-    return Boolean(await this.animalRepository.exists({ name }))
+  async exists(name: string, excludeId?: string) {
+    return this.animalRepository.exists({ name }, excludeId)
   }
 }
