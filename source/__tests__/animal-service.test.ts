@@ -4,7 +4,7 @@ import { AnimalRepository } from '../repositories/animal.repository'
 import { AnimalsService } from '../services/animal.service'
 import { UpdateAnimalDTO } from '../validation/animal.validation'
 
-jest.mock('../repositories/animalRepository')
+jest.mock('../repositories/animal.repository')
 
 describe('AnimalsService', () => {
   let service: AnimalsService
