@@ -1,6 +1,6 @@
-import { HealthController } from '../controllers/healthController'
-import type { IRoute } from '../core/baseRouter'
-import { BaseRouter, HttpMethod } from '../core/baseRouter'
+import { HealthController } from '../controllers/health.controller'
+import type { IRoute } from '../core/base.router'
+import { BaseRouter, HttpMethod } from '../core/base.router'
 import { Endpoint, EndpointNames } from '../global/endpoints'
 
 class HealthRouter extends BaseRouter {

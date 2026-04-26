@@ -1,13 +1,13 @@
 import { Request, Response } from 'express'
-import { BaseController } from '../core/baseController'
-import { AnimalMessages } from '../messages/animalsMessages'
-import { AnimalsService } from '../services/animalsService'
-import { ResponseHandler } from '../utils/responseHandler'
+import { BaseController } from '../core/base.controller'
+import { AnimalMessages } from '../messages/animal.messages'
+import { AnimalsService } from '../services/animal.service'
+import { ResponseHandler } from '../utils/response-handler'
 import {
   AnimalValidations,
   type CreateAnimalDTO,
   type UpdateAnimalDTO
-} from '../validation/animalValidation'
+} from '../validation/animal.validation'
 
 export class AnimalsController extends BaseController {
   constructor(

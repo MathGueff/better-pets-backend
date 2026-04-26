@@ -5,10 +5,10 @@ import morgan from 'morgan'
 import swaggerUi from 'swagger-ui-express'
 import { database } from './config/database'
 import { generateSwaggerDocs } from './config/swagger'
-import { doSomethingMiddleware } from './middlewares/doSomethingMiddleware'
-import { errorMiddleware } from './middlewares/errorMiddleware'
-import animalsRouter from './routers/animalsRouter'
-import healthRouter from './routers/healthRouter'
+import { doSomethingMiddleware } from './middlewares/do-something.middleware'
+import { errorMiddleware } from './middlewares/error-middleware.ts'
+import animalsRouter from './routers/animal.router'
+import healthRouter from './routers/health.router'
 
 dotenv.config({ quiet: true })
 

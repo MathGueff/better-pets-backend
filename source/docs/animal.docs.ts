@@ -1,10 +1,10 @@
 import { RouteConfig } from '@asteasolutions/zod-to-openapi'
 import { z } from '../config/zod'
 import { Endpoint, EndpointNames } from '../global/endpoints'
-import { AnimalMessages } from '../messages/animalsMessages'
-import { AnimalsValidationMessages } from '../messages/animalsValidationMessages'
-import { AnimalValidations } from '../validation/animalValidation'
-import { ResponseSchema } from './responseSchema'
+import { AnimalsValidationMessages } from '../messages/animal-validation.messages'
+import { AnimalMessages } from '../messages/animal.messages'
+import { AnimalValidations } from '../validation/animal.validation'
+import { ResponseSchema } from './response.schema'
 
 const messages = AnimalMessages
 
