@@ -8,7 +8,7 @@ import { animalDocs } from '../docs/animal.docs'
 export const registry = new OpenAPIRegistry()
 
 const registerDocs = (docs: RouteConfig[]) => {
-  docs.forEach(registry.registerPath)
+  docs.forEach((doc) => registry.registerPath(doc))
 }
 
 registerDocs(animalDocs)
