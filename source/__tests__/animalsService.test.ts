@@ -1,8 +1,8 @@
-import { AnimalsService } from '../services/animalsService'
-import { AnimalRepository } from '../repositories/animalRepository'
-import { ApiError } from '../errors/apiError'
-import { AnimalMessages } from '../messages/animalsMessages'
-import { UpdateAnimalDTO } from '../validation/animalValidation'
+import { ApiError } from "../errors/api.error"
+import { AnimalMessages } from "../messages/animal.messages"
+import { AnimalRepository } from "../repositories/animal.repository"
+import { AnimalsService } from "../services/animal.service"
+import { UpdateAnimalDTO } from "../validation/animal.validation"
 
 jest.mock('../repositories/animalRepository')
 
