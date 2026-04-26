@@ -4,7 +4,6 @@ import { AnimalGender, IAnimal } from '../models/animal.model'
 import { ValidationRules } from './validation-rules.validation'
 
 const M = AnimalsValidationMessages
-
 const rules = {
   name: z.string(M.name.invalid).min(1, M.name.required).max(50, M.name.max),
   breed: z.string(M.breed.invalid),
@@ -35,7 +34,7 @@ const rules = {
     .optional()
 } satisfies { [K in keyof ValidationRules<IAnimal, '_id'>]: z.ZodType }
 
-const createAnimalSchema = z.object(rules).openapi('CreateAnimal')
+const createAnimalSchema = z.object(rules).strict().openapi('CreateAnimal')
 
 const updateAnimalSchema = createAnimalSchema.partial().openapi('UpdateAnimal')
 

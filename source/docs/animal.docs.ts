@@ -4,7 +4,7 @@ import { Endpoint, EndpointNames } from '../global/endpoints'
 import { AnimalsValidationMessages } from '../messages/animal-validation.messages'
 import { AnimalMessages } from '../messages/animal.messages'
 import { AnimalValidations } from '../validation/animal.validation'
-import { ResponseSchema } from './response.schema'
+import { ResponseSchema } from '../validation/response.validation'
 
 const messages = AnimalMessages
 

@@ -1,8 +1,5 @@
 import type { Response } from 'express'
-
-type ApiResponse = { message: string; code: number; status: boolean }
-type ApiSuccess<T> = ApiResponse & { data?: T }
-type ApiError<T> = ApiResponse & { error?: T }
+import { TApiSuccess, TApiError } from '../global/response'
 
 export class ResponseHandler {
   callByCode = <T>(res: Response, code: number, message: string, data?: T) => {
@@ -39,7 +36,7 @@ export class ResponseHandler {
     message: string,
     data?: T
   ) => {
-    const content: ApiSuccess<T> = { message, code, status: true, data }
+    const content: TApiSuccess<T> = { message, code, success: true, data }
     res.status(content.code).json(content)
   }
 
@@ -49,7 +46,7 @@ export class ResponseHandler {
     message: string,
     error?: T
   ) => {
-    const content: ApiError<T> = { message, code, status: false, error }
+    const content: TApiError<T> = { message, code, success: false, error }
     res.status(content.code).json(content)
   }
 }

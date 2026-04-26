@@ -39,4 +39,4 @@ export const AnimalsValidationMessages = {
     water: 'Horário de água inválido',
     time: 'Horário deve ser uma data'
   }
-}
+} as const
