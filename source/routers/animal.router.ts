@@ -1,6 +1,6 @@
-import { AnimalsController } from '../controllers/animalsController'
-import type { IRoutes } from '../core/baseRouter'
-import { BaseRouter, HttpMethod } from '../core/baseRouter'
+import { AnimalsController } from '../controllers/animal.controller'
+import type { IRoutes } from '../core/base.router'
+import { BaseRouter, HttpMethod } from '../core/base.router'
 import { Endpoint, EndpointNames } from '../global/endpoints'
 
 class AnimalsRouter extends BaseRouter {

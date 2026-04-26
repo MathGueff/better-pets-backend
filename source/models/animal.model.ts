@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose'
-import type { IEntity } from './entityModel'
+import type { IEntity } from './entity.model'
 
 export enum AnimalGender {
   MALE = 'M',

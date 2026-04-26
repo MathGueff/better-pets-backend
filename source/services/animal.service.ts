@@ -1,11 +1,11 @@
-import { BaseService } from '../core/baseService'
-import { ApiError } from '../errors/apiError'
-import { AnimalMessages } from '../messages/animalsMessages'
-import { AnimalRepository } from '../repositories/animalRepository'
+import { AnimalRepository } from '../repositories/animal.repository'
+import { BaseService } from '../core/base.service'
+import { ApiError } from '../errors/api.error'
+import { AnimalMessages } from '../messages/animal.messages'
 import {
   CreateAnimalDTO,
   UpdateAnimalDTO
-} from '../validation/animalValidation'
+} from '../validation/animal.validation'
 
 export class AnimalsService extends BaseService {
   constructor(

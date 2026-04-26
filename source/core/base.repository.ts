@@ -1,6 +1,6 @@
 import type { Model, QueryFilter } from 'mongoose'
 import { Types } from 'mongoose'
-import type { IEntity } from '../models/entityModel'
+import type { IEntity } from '../models/entity.model'
 
 export class BaseRepository<
   T extends IEntity,
