@@ -1,4 +1,3 @@
-import { Types } from 'mongoose'
 import { AnimalRepository } from '../repositories/animal.repository'
 import { BaseService } from '../core/base.service'
 import { ApiError } from '../errors/api.error'
@@ -15,43 +14,44 @@ export class AnimalsService extends BaseService {
     super()
   }
 
-  list() {
-    const listed = this.animalRepository.list()
-    return listed
+  async list() {
+    return this.animalRepository.list()
   }
 
-  findById(id: string) {
-    const found = this.animalRepository.findById(new Types.ObjectId(String(id)))
-    return found
+  async findById(id: string) {
+    return this.animalRepository.findById(id)
   }
 
   async create(newAnimal: CreateAnimalDTO) {
-    await this.exists(newAnimal.name)
+    const exists = await this.exists(newAnimal.name)
+    if (exists) {
+      throw new ApiError(AnimalMessages.alreadyExistsWithName, 409, {
+        newAnimal
+      })
+    }
 
-    const created = await this.animalRepository.create(newAnimal)
-
-    return created
+    return this.animalRepository.create(newAnimal)
   }
 
   async update(id: string, updateAnimal: Partial<UpdateAnimalDTO>) {
-    await this.exists(updateAnimal.name)
-    const updated = await this.animalRepository.update(
-      new Types.ObjectId(String(id)),
-      updateAnimal
-    )
-    return updated
-  }
+    if (updateAnimal.name) {
+      const exists = await this.exists(updateAnimal.name, id)
 
-  delete(id: string) {
-    const deleted = this.animalRepository.delete(new Types.ObjectId(String(id)))
-    return deleted
-  }
-
-  private async exists(name?: string) {
-    if (!name) return
-    const exists = await this.animalRepository.exists({ name })
-    if (exists) {
-      throw new ApiError(AnimalMessages.alreadyExistsWithName, 400, { name })
+      if (exists) {
+        throw new ApiError(AnimalMessages.alreadyExistsWithName, 409, {
+          updateAnimal
+        })
+      }
     }
+
+    return this.animalRepository.update(id, updateAnimal)
+  }
+
+  async delete(id: string) {
+    return this.animalRepository.delete(id)
+  }
+
+  async exists(name: string, excludeId?: string) {
+    return this.animalRepository.exists({ name }, excludeId)
   }
 }
