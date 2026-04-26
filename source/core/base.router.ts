@@ -5,23 +5,7 @@ import {
   Response,
   Router
 } from 'express'
-
-export enum HttpMethod {
-  GET = 'get',
-  POST = 'post',
-  PATCH = 'patch',
-  PUT = 'put',
-  DELETE = 'delete'
-}
-
-export interface IRoute {
-  path: string
-  handler: RequestHandler
-  middlewares?: Array<RequestHandler>
-  method: HttpMethod
-}
-
-export type IRoutes = Array<IRoute>
+import { IRoute } from '../shared/routing/route.type'
 
 export class BaseRouter {
   public readonly router: Router = Router()
@@ -33,7 +17,7 @@ export class BaseRouter {
    */
   constructor(
     prefix: string,
-    private readonly routes: Array<IRoute>
+    private readonly routes: IRoute[]
   ) {
     this.prefix = prefix.startsWith('/') ? prefix : `/${prefix}`
     this.handleRoutes()
