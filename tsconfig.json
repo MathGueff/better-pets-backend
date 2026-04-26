@@ -7,7 +7,10 @@
     "module": "nodenext",
     "target": "es2024",
     "skipDefaultLibCheck": true,
-    "types": [],
+    "types": [
+      "jest",
+      "node"
+    ],
 
     // Other Outputs
     "sourceMap": true,
