@@ -1,8 +1,8 @@
-import { ApiError } from "../errors/api.error"
-import { AnimalMessages } from "../messages/animal.messages"
-import { AnimalRepository } from "../repositories/animal.repository"
-import { AnimalsService } from "../services/animal.service"
-import { UpdateAnimalDTO } from "../validation/animal.validation"
+import { ApiError } from '../errors/api.error'
+import { AnimalMessages } from '../messages/animal.messages'
+import { AnimalRepository } from '../repositories/animal.repository'
+import { AnimalsService } from '../services/animal.service'
+import { UpdateAnimalDTO } from '../validation/animal.validation'
 
 jest.mock('../repositories/animalRepository')
 
@@ -69,7 +69,10 @@ describe('AnimalsService', () => {
   describe('update', () => {
     it('should update an animal if name is not changed', async () => {
       const updateData: Partial<UpdateAnimalDTO> = { breed: 'Vira-lata' }
-      repository.update.mockResolvedValue({ _id: '123', breed: 'Vira-lata' } as any)
+      repository.update.mockResolvedValue({
+        _id: '123',
+        breed: 'Vira-lata'
+      } as any)
 
       const result = await service.update('123', updateData as any)
 
@@ -106,8 +109,12 @@ describe('AnimalsService', () => {
       const updateData = { name: 'Fido' }
       repository.exists.mockResolvedValue({ _id: '456', name: 'Fido' } as any)
 
-      await expect(service.update('123', updateData as any)).rejects.toThrow(ApiError)
-      await expect(service.update('123', updateData as any)).rejects.toMatchObject({
+      await expect(service.update('123', updateData as any)).rejects.toThrow(
+        ApiError
+      )
+      await expect(
+        service.update('123', updateData as any)
+      ).rejects.toMatchObject({
         code: 409,
         message: AnimalMessages.alreadyExistsWithName
       })

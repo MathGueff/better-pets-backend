@@ -1,7 +1,7 @@
-import { AnimalRepository } from '../repositories/animal.repository'
 import { BaseService } from '../core/base.service'
 import { ApiError } from '../errors/api.error'
 import { AnimalMessages } from '../messages/animal.messages'
+import { AnimalRepository } from '../repositories/animal.repository'
 import {
   CreateAnimalDTO,
   UpdateAnimalDTO
