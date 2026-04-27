@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { BaseController } from '../core/base.controller'
 import { AnimalMessages } from '../messages/animal.messages'
+import { Animal } from '../models/animal.model'
 import { AnimalsService } from '../services/animal.service'
 import { ResponseHandler } from '../utils/response-handler'
 import {
@@ -8,7 +9,6 @@ import {
   type CreateAnimalDTO,
   type UpdateAnimalDTO
 } from '../validation/animal.validation'
-import { Animal } from '../models/animal.model'
 
 export class AnimalsController extends BaseController {
   constructor(

@@ -11,7 +11,11 @@ class AnimalsRouter extends BaseRouter {
   ) {
     const routes: IRoute[] = [
       { method: HttpMethod.GET, path: '/', handler: controller.list },
-      { method: HttpMethod.GET, path: '/description/:id', handler: controller.getDescription },
+      {
+        method: HttpMethod.GET,
+        path: '/description/:id',
+        handler: controller.getDescription
+      },
       { method: HttpMethod.POST, path: '/', handler: controller.create },
       { method: HttpMethod.GET, path: '/:id', handler: controller.findById },
       { method: HttpMethod.DELETE, path: '/:id', handler: controller.delete },
