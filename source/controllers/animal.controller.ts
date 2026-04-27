@@ -8,6 +8,7 @@ import {
   type CreateAnimalDTO,
   type UpdateAnimalDTO
 } from '../validation/animal.validation'
+import { Animal } from '../models/animal.model'
 
 export class AnimalsController extends BaseController {
   constructor(
@@ -23,6 +24,17 @@ export class AnimalsController extends BaseController {
       return this.responseHandler.notFound(res, AnimalMessages.notFound)
     }
     this.responseHandler.ok(res, AnimalMessages.found, listed)
+  }
+
+  getDescription = async (req: Request, res: Response) => {
+    const { id } = req.params
+    const found = await this.service.findById(String(id))
+    if (!found) {
+      return this.responseHandler.notFound(res, AnimalMessages.notFound)
+    }
+    this.responseHandler.ok(res, AnimalMessages.foundDescription, {
+      description: new Animal(found).description
+    })
   }
 
   findById = async (req: Request, res: Response) => {

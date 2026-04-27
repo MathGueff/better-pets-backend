@@ -48,6 +48,10 @@ export class Animal implements IAnimal {
     this.adoptionDate = animal.adoptionDate
     this.schedule = animal.schedule
   }
+
+  get description(): string {
+    return `${this.name} is a ${this.breed} born on ${this.bornDate.toDateString()} and adopted on ${this.adoptionDate.toDateString()}.`
+  }
 }
 
 const animalSchema = new Schema<Animal>(

@@ -8,5 +8,6 @@ export const AnimalMessages = {
   notFoundToUpdate: 'Não foi possível encontrar o animalzinho para atualizar',
   notFoundToDelete: 'Não foi possível encontrar o animalzinho para excluir',
   invalidFields: 'Campos inválidos',
-  alreadyExistsWithName: 'Animal já cadastrado com esse nome'
+  alreadyExistsWithName: 'Animal já cadastrado com esse nome',
+  foundDescription: 'Descrição do animalzinho encontrada com sucesso'
 } as const

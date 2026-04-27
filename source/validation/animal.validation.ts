@@ -10,8 +10,8 @@ const rules = {
   gender: z.enum(AnimalGender, M.gender.invalid),
   weight: z.number(M.weight.invalid).positive(M.weight.positive),
   size: z.number(M.size.invalid).positive(M.size.positive),
-  bornDate: z.coerce.date(M.bornDate.date),
-  adoptionDate: z.coerce.date(M.adoptionDate.date),
+  bornDate: z.coerce.date(M.bornDate.date).refine(date => date < new Date(), M.bornDate.past),
+  adoptionDate: z.coerce.date(M.adoptionDate.date).refine(date => date < new Date(), M.adoptionDate.past),
   photo: z.string(M.photo.invalid),
   schedule: z
     .object(

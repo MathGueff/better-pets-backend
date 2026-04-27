@@ -21,11 +21,15 @@ export const AnimalsValidationMessages = {
   },
   bornDate: {
     required: 'Data de nascimento é obrigatória',
-    date: 'Data de nascimento deve ser uma data'
+    date: 'Data de nascimento deve ser uma data',
+    past: 'Data de nascimento deve ser uma data passada',
+    incoerent: 'Data de nascimento deve ser anterior à data de adoção'
   },
   adoptionDate: {
     required: 'Data de adoção é obrigatória',
-    date: 'Data de adoção deve ser uma data'
+    date: 'Data de adoção deve ser uma data',
+    past: 'Data de adoção deve ser uma data passada',
+    incoerent: 'Data de adoção deve ser posterior à data de nascimento'
   },
   photo: {
     required: 'Foto é obrigatória',
