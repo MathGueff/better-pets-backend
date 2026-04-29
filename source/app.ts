@@ -20,7 +20,7 @@ const port = process.env.PORT || 3000
 app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
-app.use(doSomethingMiddleware)
+// app.use(doSomethingMiddleware)
 
 /* ROTAS */
 app.use(healthRouter.router)
