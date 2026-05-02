@@ -31,7 +31,7 @@ export class AnimalsController extends BaseController {
 
   listIds = async (req: Request, res: Response) => {
     const listed = await this.service.listIds()
-    ResponseHandler.ok(res, AnimalMessages.animalsListIdFound, { listed })
+    ResponseHandler.ok(res, AnimalMessages.animalsListIdFound, listed)
   }
 
   findById = async (req: Request, res: Response) => {
