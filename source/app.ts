@@ -43,7 +43,7 @@ const start = async () => {
                 ||     ||      ^^ ^^         ^^   ^^       /_____/   U
     `)
 
-    console.log('🧠 Iniciando conexão com o banco de dados TESTAÍ')
+    console.log('🧠 Iniciando conexão com o banco de dados Better-Pets')
     await database.connect()
     console.log('✅ Conectado ao MongoDB com sucesso')
 
