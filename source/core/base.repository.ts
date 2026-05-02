@@ -30,6 +30,10 @@ export class BaseRepository<
     return this.model.findById(id)
   }
 
+  async listIds(): Promise<Pick<T, '_id'>[]> {
+    return this.model.find().select('_id')
+  }
+
   async update(id: string, updatedEntity: Partial<UpdateDTO>) {
     const entity = await this.model.findById(id)
     if (!entity) {

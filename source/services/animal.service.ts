@@ -26,6 +26,11 @@ export class AnimalsService extends BaseService {
     return found
   }
 
+  async listIds() {
+    const found = await this.animalRepository.listIds()
+    return found
+  }
+
   async create(newAnimal: CreateAnimalDTO) {
     const exists = await this.exists(newAnimal.name)
     if (exists) {

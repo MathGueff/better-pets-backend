@@ -16,6 +16,11 @@ class AnimalsRouter extends BaseRouter {
         path: '/description/:id',
         handler: controller.getDescription
       },
+      {
+        method: HttpMethod.GET,
+        path: '/list-ids',
+        handler: controller.listIds
+      },
       { method: HttpMethod.POST, path: '/', handler: controller.create },
       { method: HttpMethod.GET, path: '/:id', handler: controller.findById },
       { method: HttpMethod.DELETE, path: '/:id', handler: controller.delete },
