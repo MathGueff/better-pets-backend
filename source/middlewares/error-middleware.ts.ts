@@ -9,9 +9,8 @@ export const errorMiddleware = (
   res: Response,
   _next: NextFunction
 ) => {
-  const responseHandler = new ResponseHandler()
   if (error instanceof BadValidationError) {
-    return responseHandler.badRequest(
+    return ResponseHandler.badRequest(
       res,
       error.message ?? 'Erro de validação',
       error.issues
@@ -19,7 +18,7 @@ export const errorMiddleware = (
   }
 
   if (error instanceof ApiError) {
-    return responseHandler.callByCode(
+    return ResponseHandler.callByCode(
       res,
       error.code,
       error.message,
@@ -27,7 +26,7 @@ export const errorMiddleware = (
     )
   }
 
-  return responseHandler.internalServerError(
+  return ResponseHandler.internalServerError(
     res,
     error instanceof Error ? error.message : 'Erro interno do servidor',
     error

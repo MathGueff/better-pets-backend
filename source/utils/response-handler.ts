@@ -2,7 +2,7 @@ import type { Response } from 'express'
 import { TApiError, TApiSuccess } from '../shared/response'
 
 export class ResponseHandler {
-  callByCode = <T>(res: Response, code: number, message: string, data?: T) => {
+  static callByCode = <T>(res: Response, code: number, message: string, data?: T) => {
     if (code >= 200 && code <= 299) {
       this.sendSuccess(res, code, message, data)
     } else {
@@ -10,27 +10,27 @@ export class ResponseHandler {
     }
   }
 
-  ok = <T>(res: Response, message: string, data?: T) => {
+  static ok = <T>(res: Response, message: string, data?: T) => {
     this.sendSuccess(res, 200, message, data)
   }
 
-  created = <T>(res: Response, message: string, data?: T) => {
+  static created = <T>(res: Response, message: string, data?: T) => {
     this.sendSuccess(res, 201, message, data)
   }
 
-  notFound = <T>(res: Response, message: string, error?: T) => {
+  static notFound = <T>(res: Response, message: string, error?: T) => {
     this.sendError(res, 404, message, error)
   }
 
-  badRequest = <T>(res: Response, message: string, error?: T) => {
+  static badRequest = <T>(res: Response, message: string, error?: T) => {
     this.sendError(res, 400, message, error)
   }
 
-  internalServerError = <T>(res: Response, message: string, error?: T) => {
+  static internalServerError = <T>(res: Response, message: string, error?: T) => {
     this.sendError(res, 500, message, error)
   }
 
-  private sendSuccess = <T>(
+  private static sendSuccess = <T>(
     res: Response,
     code: number,
     message: string,
@@ -40,7 +40,7 @@ export class ResponseHandler {
     res.status(content.code).json(content)
   }
 
-  private sendError = <T>(
+  private static sendError = <T>(
     res: Response,
     code: number,
     message: string,
