@@ -5,10 +5,10 @@ import { Animal } from '../models/animal.model'
 import { AnimalsService } from '../services/animal.service'
 import { ResponseHandler } from '../utils/response-handler'
 import {
-  AnimalValidations,
-  type CreateAnimalDTO,
-  type UpdateAnimalDTO
+  AnimalValidations
 } from '../validation/animal.validation'
+import { objectIdSchema } from '../validation/objectid.validation'
+import { BadValidationError } from '../errors/bad-validation.error'
 
 export class AnimalsController extends BaseController {
   constructor(
@@ -27,50 +27,42 @@ export class AnimalsController extends BaseController {
   }
 
   getDescription = async (req: Request, res: Response) => {
-    const { id } = req.params
+    const { id } = objectIdSchema.parse(req.params)
     const found = await this.service.findById(String(id))
-    if (!found) {
-      return this.responseHandler.notFound(res, AnimalMessages.notFound)
-    }
     this.responseHandler.ok(res, AnimalMessages.foundDescription, {
       description: new Animal(found).description
     })
   }
 
   findById = async (req: Request, res: Response) => {
-    const { id } = req.params
+    const { id } = objectIdSchema.parse(req.params)
     const found = await this.service.findById(String(id))
-    if (!found) {
-      return this.responseHandler.notFound(res, AnimalMessages.notFound)
-    }
     this.responseHandler.ok(res, AnimalMessages.foundById, found)
   }
 
   create = async (req: Request, res: Response): Promise<void> => {
-    const newAnimal: CreateAnimalDTO = AnimalValidations.create.parse(req.body)
-    const created = await this.service.create(newAnimal)
+    const { data, error } = AnimalValidations.create.safeParse(req.body)
+    if (error) {
+      throw new BadValidationError({ message: AnimalMessages.invalidDataCreate, error })
+    }
+    const created = await this.service.create(data)
     this.responseHandler.created(res, AnimalMessages.created, created)
   }
 
   update = async (req: Request, res: Response) => {
-    const { id } = req.params
-    const updateAnimal: UpdateAnimalDTO = AnimalValidations.update.parse(
-      req.body
-    )
-    const updated = await this.service.update(String(id), updateAnimal)
-    if (!updated) {
-      return this.responseHandler.notFound(res, AnimalMessages.notFoundToUpdate)
+    const { id } = objectIdSchema.parse(req.params)
+    const { data, error } = AnimalValidations.update.safeParse(req.body)
+    if (error) {
+      throw new BadValidationError({ message: AnimalMessages.invalidDataUpdate, error })
     }
+    const updated = await this.service.update(String(id), data)
     this.responseHandler.ok(res, AnimalMessages.updated, updated)
   }
 
   delete = async (req: Request, res: Response) => {
-    const { id } = req.params
+    const { id } = objectIdSchema.parse(req.params)
 
     const deleted = await this.service.delete(String(id))
-    if (!deleted) {
-      return this.responseHandler.notFound(res, AnimalMessages.notFoundToDelete)
-    }
     this.responseHandler.ok(res, AnimalMessages.deleted, deleted)
   }
 }

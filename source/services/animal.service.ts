@@ -19,7 +19,11 @@ export class AnimalsService extends BaseService {
   }
 
   async findById(id: string) {
-    return this.animalRepository.findById(id)
+    const found = await this.animalRepository.findById(id)
+    if (!found) {
+      throw new ApiError(AnimalMessages.notFound, 404, { id })
+    }
+    return found
   }
 
   async create(newAnimal: CreateAnimalDTO) {
@@ -44,11 +48,19 @@ export class AnimalsService extends BaseService {
       }
     }
 
-    return this.animalRepository.update(id, updateAnimal)
+    const updated = await this.animalRepository.update(id, updateAnimal)
+    if (!updated) {
+      throw new ApiError(AnimalMessages.notFoundToUpdate, 404, { id })
+    }
+    return updated
   }
 
   async delete(id: string) {
-    return this.animalRepository.delete(id)
+    const deleted = await this.animalRepository.delete(id)
+    if (!deleted) {
+      throw new ApiError(AnimalMessages.notFoundToDelete, 404, { id })
+    }
+    return deleted
   }
 
   async exists(name: string, excludeId?: string) {
