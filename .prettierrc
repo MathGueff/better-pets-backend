@@ -8,5 +8,8 @@
     "objectWrap": "collapse",
     "bracketSpacing": true,
     "trailingComma": "none",
-    "arrowParens": "always"
+    "arrowParens": "always",
+    "plugins": [
+        "prettier-plugin-organize-imports"
+    ]
 }

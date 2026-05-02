@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose'
-import type { IEntity } from '../interfaces/entity'
+import type { IEntity } from './entity.model'
 
 export enum AnimalGender {
   MALE = 'M',
@@ -25,6 +25,7 @@ export interface IAnimal extends IEntity {
 }
 
 export class Animal implements IAnimal {
+  public _id: IAnimal['_id']
   public name: IAnimal['name']
   public breed: IAnimal['breed']
   public photo: IAnimal['photo']
@@ -36,6 +37,7 @@ export class Animal implements IAnimal {
   public schedule: IAnimal['schedule']
 
   constructor(animal: IAnimal) {
+    this._id = animal._id
     this.name = animal.name
     this.breed = animal.breed
     this.photo = animal.photo
@@ -45,6 +47,10 @@ export class Animal implements IAnimal {
     this.bornDate = animal.bornDate
     this.adoptionDate = animal.adoptionDate
     this.schedule = animal.schedule
+  }
+
+  get description(): string {
+    return `${this.name} is a ${this.breed} born on ${this.bornDate.toDateString()} and adopted on ${this.adoptionDate.toDateString()}.`
   }
 }
 

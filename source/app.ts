@@ -1,28 +1,33 @@
-import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import { doSomethingMiddleware } from './middlewares/doSomethingMiddleware'
-import { farmLog } from './uteis/farmLog'
+import express from 'express'
 import morgan from 'morgan'
-import { errorMiddleware } from './middlewares/errorMiddleware'
-import animalsRouter from './routers/animalsRouter'
-import healthRouter from './routers/healthRouter'
+import swaggerUi from 'swagger-ui-express'
 import { database } from './config/database'
+import { generateSwaggerDocs } from './config/swagger'
+import { doSomethingMiddleware } from './middlewares/do-something.middleware'
+import { errorMiddleware } from './middlewares/error-middleware.ts'
+import animalsRouter from './routers/animal.router'
+import healthRouter from './routers/health.router'
 
 dotenv.config({ quiet: true })
 
 const app = express()
+const swaggerDocument = generateSwaggerDocs()
 const port = process.env.PORT || 3000
 
 /* MIDDLEWARES */
 app.use(cors())
 app.use(express.json())
 app.use(morgan('dev'))
-app.use(doSomethingMiddleware)
+// app.use(doSomethingMiddleware)
 
 /* ROTAS */
 app.use(healthRouter.router)
 app.use(animalsRouter.router)
+
+/* DOCUMENTAÇÃO */
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 /* MIDDLEWARES DE ERRO */
 app.use(errorMiddleware)
@@ -31,7 +36,13 @@ let server: any
 
 const start = async () => {
   try {
-    farmLog()
+    console.log(`
+            ^__^               /\\_/\\          ,~.           / \\__
+            (oo)\\_______      ( o.o )         (o o)         (    @\\___
+            (__)\\       )    \\/  > ^ <       /  V  \\        /         O
+                ||----w |     (     )       /(     )\\      /   (_____/
+                ||     ||      ^^ ^^         ^^   ^^       /_____/   U
+    `)
 
     console.log('🧠 Iniciando conexão com o banco de dados TESTAÍ')
     await database.connect()
@@ -47,23 +58,5 @@ const start = async () => {
     process.exit(1)
   }
 }
-
-const shutdown = async () => {
-  console.log('🛑 Graceful shutdown iniciado')
-
-  if (server) {
-    server.close(() => {
-      console.log('🛑 Servidor HTTP fechado')
-    })
-  }
-
-  await database.disconnect()
-  console.log('🛑 Conexão com o MongoDB fechada')
-
-  process.exit(0)
-}
-
-process.on('SIGINT', shutdown)
-process.on('SIGTERM', shutdown)
 
 start()
