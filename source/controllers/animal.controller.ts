@@ -1,18 +1,17 @@
 import { Request, Response } from 'express'
 import { BaseController } from '../core/base.controller'
-import { BadValidationError } from '../errors/bad-validation.error'
-import { validateOrThrow } from '../utils/validate-or-throw'
 import { AnimalMessages } from '../messages/animal.messages'
 import { Animal } from '../models/animal.model'
 import { AnimalsService } from '../services/animal.service'
 import { PaginatedQuery } from '../shared/pagination'
 import { ResponseHandler } from '../utils/response-handler'
+import { validateOrThrow } from '../utils/validate-or-throw'
 import { AnimalValidations } from '../validation/animal.validation'
-import { objectIdSchema } from '../validation/objectid.validation'
 import {
   paginationSchema,
   PaginationSchemaType
 } from '../validation/pagination.validation'
+import { validateObjectIdOrThrow } from '../utils/validate-object-id-or-throw'
 
 export class AnimalsController extends BaseController {
   constructor(private readonly service: AnimalsService = new AnimalsService()) {
@@ -33,7 +32,7 @@ export class AnimalsController extends BaseController {
   }
 
   getDescription = async (req: Request, res: Response) => {
-    const { id } = objectIdSchema.parse(req.params)
+    const id = validateObjectIdOrThrow(req.params.id)
     const found = await this.service.findById(String(id))
     ResponseHandler.ok(res, AnimalMessages.foundDescription, {
       description: new Animal(found).description
@@ -46,38 +45,34 @@ export class AnimalsController extends BaseController {
   }
 
   findById = async (req: Request, res: Response) => {
-    const { id } = objectIdSchema.parse(req.params)
+    const id = validateObjectIdOrThrow(req.params.id)
     const found = await this.service.findById(String(id))
     ResponseHandler.ok(res, AnimalMessages.foundById, found)
   }
 
   create = async (req: Request, res: Response): Promise<void> => {
-    const { data, error } = AnimalValidations.create.safeParse(req.body)
-    if (error) {
-      throw new BadValidationError({
-        message: AnimalMessages.invalidDataCreate,
-        error
-      })
-    }
+    const data = validateOrThrow({
+      message: AnimalMessages.invalidDataCreate,
+      entry: req.body,
+      schema: AnimalValidations.create
+    })
     const created = await this.service.create(data)
     ResponseHandler.created(res, AnimalMessages.created, created)
   }
 
   update = async (req: Request, res: Response) => {
-    const { id } = objectIdSchema.parse(req.params)
-    const { data, error } = AnimalValidations.update.safeParse(req.body)
-    if (error) {
-      throw new BadValidationError({
-        message: AnimalMessages.invalidDataUpdate,
-        error
-      })
-    }
-    const updated = await this.service.update(String(id), data)
+    const id = validateObjectIdOrThrow(req.params.id)
+    const data = validateOrThrow({
+      entry: req.body,
+      schema: AnimalValidations.update,
+      message: AnimalMessages.invalidDataUpdate
+    })
+    const updated = await this.service.update(id, data)
     ResponseHandler.ok(res, AnimalMessages.updated, updated)
   }
 
   delete = async (req: Request, res: Response) => {
-    const { id } = objectIdSchema.parse(req.params)
+    const id = validateObjectIdOrThrow(req.params.id)
 
     const deleted = await this.service.delete(String(id))
     ResponseHandler.ok(res, AnimalMessages.deleted, deleted)

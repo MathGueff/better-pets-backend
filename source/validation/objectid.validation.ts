@@ -1,12 +1,14 @@
 import { Types } from 'mongoose'
 import { z } from '../config/zod'
 
-const objectId = z.custom<string>((value) => {
-  if (typeof value === 'string' && Types.ObjectId.isValid(value)) {
-    return value
-  }
-}, 'ID inválido')
-
-const objectIdSchema = z.object({ id: objectId }).strict().openapi('ObjectIdParams')
+const objectIdSchema = z
+  .object({
+    id: z
+      .string()
+      .refine((value) => Types.ObjectId.isValid(value), {
+        message: 'ID inválido'
+      })
+  })
+  .openapi('ObjectIdParams')
 
 export { objectIdSchema }
