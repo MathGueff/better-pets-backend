@@ -1,12 +1,18 @@
 import { Request, Response } from 'express'
 import { BaseController } from '../core/base.controller'
 import { BadValidationError } from '../errors/bad-validation.error'
+import { validateOrThrow } from '../utils/validate-or-throw'
 import { AnimalMessages } from '../messages/animal.messages'
 import { Animal } from '../models/animal.model'
 import { AnimalsService } from '../services/animal.service'
+import { PaginatedQuery } from '../shared/pagination'
 import { ResponseHandler } from '../utils/response-handler'
 import { AnimalValidations } from '../validation/animal.validation'
 import { objectIdSchema } from '../validation/objectid.validation'
+import {
+  paginationSchema,
+  PaginationSchemaType
+} from '../validation/pagination.validation'
 
 export class AnimalsController extends BaseController {
   constructor(private readonly service: AnimalsService = new AnimalsService()) {
@@ -14,7 +20,12 @@ export class AnimalsController extends BaseController {
   }
 
   list = async (req: Request, res: Response): Promise<void> => {
-    const listed = await this.service.list()
+    const { page, limit } = validateOrThrow<PaginationSchemaType>({
+      schema: paginationSchema,
+      entry: req.query,
+      message: 'Pesquisa inválida'
+    })
+    const listed = await this.service.list(new PaginatedQuery({ page, limit }))
     if (listed.length === 0) {
       return ResponseHandler.notFound(res, AnimalMessages.notFound)
     }
