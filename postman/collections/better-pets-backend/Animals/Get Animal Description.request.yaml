@@ -1,0 +1,9 @@
+$kind: http-request
+name: Get Animal Description
+method: GET
+url: '{{baseUrl}}/animals/description/:id'
+order: 4000
+pathVariables:
+  - key: id
+    value: '{{animalId}}'
+    description: 'MongoDB ObjectId of the animal'

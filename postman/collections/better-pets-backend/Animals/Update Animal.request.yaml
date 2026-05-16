@@ -1,0 +1,19 @@
+$kind: http-request
+name: Update Animal
+method: PATCH
+url: '{{baseUrl}}/animals/:id'
+order: 6000
+pathVariables:
+  - key: id
+    value: '{{animalId}}'
+    description: 'MongoDB ObjectId of the animal'
+headers:
+  - key: Content-Type
+    value: application/json
+body:
+  type: json
+  content: |-
+    {
+      "name": "Rex Updated",
+      "weight": 32
+    }
