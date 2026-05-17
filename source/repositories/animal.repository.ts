@@ -1,17 +1,17 @@
 import { BaseRepository } from '../core/base.repository'
-import type { IAnimal } from '../models/animal.model'
-import animal from '../models/animal.model'
+import { IAnimalEntity } from '../models/animal.model'
+import animalModel from '../schemas/animal.schema'
 import {
   CreateAnimalDTO,
   UpdateAnimalDTO
 } from '../validation/animal.validation'
 
 export class AnimalRepository extends BaseRepository<
-  IAnimal,
+  IAnimalEntity,
   CreateAnimalDTO,
   UpdateAnimalDTO
 > {
   constructor() {
-    super(animal)
+    super(animalModel)
   }
 }

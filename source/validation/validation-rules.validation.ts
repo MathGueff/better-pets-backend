@@ -1,6 +1,6 @@
 import { z } from '../config/zod'
 
-export type ValidationRules<T, OmitKeys extends keyof T> = Record<
-  keyof Omit<T, OmitKeys>,
+export type ValidationRules<T> = Record<
+  keyof T,
   z.ZodType
 >

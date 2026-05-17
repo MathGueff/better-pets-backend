@@ -1,6 +1,6 @@
 import { z } from '../config/zod'
 import { AnimalsValidationMessages } from '../messages/animal-validation.messages'
-import { AnimalGender, IAnimal } from '../models/animal.model'
+import { AnimalGender, IAnimalEntity, IAnimalInput } from '../models/animal.model'
 import { ValidationRules } from './validation-rules.validation'
 
 const M = AnimalsValidationMessages
@@ -36,7 +36,7 @@ const rules = {
       M.schedule.invalid
     )
     .optional()
-} satisfies { [K in keyof ValidationRules<IAnimal, '_id'>]: z.ZodType }
+} satisfies { [K in keyof ValidationRules<IAnimalInput>]: z.ZodType }
 
 const createAnimalSchema = z.object(rules).strict().openapi('CreateAnimal')
 

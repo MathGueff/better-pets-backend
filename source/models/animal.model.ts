@@ -1,5 +1,4 @@
-import { Schema, model } from 'mongoose'
-import type { IEntity } from './entity.model'
+import { BaseEntity } from './entity.model'
 
 export enum AnimalGender {
   MALE = 'M',
@@ -12,7 +11,7 @@ export type AnimalSchedule = {
   water: { timeExpected: Date }
 }
 
-export interface IAnimal extends IEntity {
+export interface IAnimalInput {
   name: string
   breed: string
   photo?: string
@@ -24,51 +23,12 @@ export interface IAnimal extends IEntity {
   schedule?: AnimalSchedule
 }
 
-export class Animal implements IAnimal {
-  public _id: IAnimal['_id']
-  public name: IAnimal['name']
-  public breed: IAnimal['breed']
-  public photo: IAnimal['photo']
-  public gender: IAnimal['gender']
-  public size: IAnimal['size']
-  public weight: IAnimal['weight']
-  public bornDate: IAnimal['bornDate']
-  public adoptionDate: IAnimal['adoptionDate']
-  public schedule: IAnimal['schedule']
+export type IAnimalEntity = BaseEntity & IAnimalInput
 
-  constructor(animal: IAnimal) {
-    this._id = animal._id
-    this.name = animal.name
-    this.breed = animal.breed
-    this.photo = animal.photo
-    this.gender = animal.gender
-    this.size = animal.size
-    this.weight = animal.weight
-    this.bornDate = animal.bornDate
-    this.adoptionDate = animal.adoptionDate
-    this.schedule = animal.schedule
-  }
+export class Animal {
+  constructor(private readonly data: IAnimalEntity) {}
 
   get description(): string {
-    return `${this.name} is a ${this.breed} born on ${this.bornDate.toDateString()} and adopted on ${this.adoptionDate.toDateString()}.`
+    return `${this.data.name} is a ${this.data.breed} born on ${this.data.bornDate.toDateString()} and adopted on ${this.data.adoptionDate.toDateString()}.`
   }
 }
-
-const animalSchema = new Schema<Animal>(
-  {
-    name: { type: String, required: true },
-    breed: { type: String, required: true },
-    gender: { type: String, enum: Object.values(AnimalGender), required: true },
-    size: { type: Number, required: true },
-    weight: { type: Number, required: true },
-    bornDate: { type: Date, required: true },
-    adoptionDate: { type: Date, required: true },
-    photo: { type: String, required: false },
-    schedule: { type: Object, required: false }
-  },
-  { versionKey: false }
-)
-
-const animalModel = model<Animal>('Animals', animalSchema)
-
-export default animalModel
