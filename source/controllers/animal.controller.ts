@@ -5,13 +5,13 @@ import { Animal } from '../models/animal.model'
 import { AnimalsService } from '../services/animal.service'
 import { PaginatedQuery } from '../shared/pagination'
 import { ResponseHandler } from '../utils/response-handler'
+import { validateObjectIdOrThrow } from '../utils/validate-object-id-or-throw'
 import { validateOrThrow } from '../utils/validate-or-throw'
 import { AnimalValidations } from '../validation/animal.validation'
 import {
   paginationSchema,
   PaginationSchemaType
 } from '../validation/pagination.validation'
-import { validateObjectIdOrThrow } from '../utils/validate-object-id-or-throw'
 
 export class AnimalsController extends BaseController {
   constructor(private readonly service: AnimalsService = new AnimalsService()) {

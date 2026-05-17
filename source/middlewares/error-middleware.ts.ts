@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from 'express'
 import { ApiError } from '../errors/api.error'
-import { ResponseHandler } from '../utils/response-handler'
 import { BadValidationError } from '../errors/bad-validation.error'
+import { ResponseHandler } from '../utils/response-handler'
 
 export const errorMiddleware = (
   error: unknown,

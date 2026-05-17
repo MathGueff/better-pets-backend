@@ -1,7 +1,7 @@
 import type { Model, QueryFilter } from 'mongoose'
 import { Types } from 'mongoose'
-import { PaginatedQuery } from '../shared/pagination'
 import { BaseEntity } from '../models/entity.model'
+import { PaginatedQuery } from '../shared/pagination'
 
 export class BaseRepository<
   TEntity extends BaseEntity,

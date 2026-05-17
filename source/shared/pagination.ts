@@ -25,6 +25,6 @@ export class PaginatedQuery {
   }
 
   public get skip(): PaginationOutput['skip'] {
-    return Math.max((this.page - 1), 0) * this.limit
+    return Math.max(this.page - 1, 0) * this.limit
   }
 }

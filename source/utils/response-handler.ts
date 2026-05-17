@@ -2,7 +2,12 @@ import type { Response } from 'express'
 import { TApiError, TApiSuccess } from '../shared/response'
 
 export class ResponseHandler {
-  static callByCode = <T>(res: Response, code: number, message: string, data?: T) => {
+  static callByCode = <T>(
+    res: Response,
+    code: number,
+    message: string,
+    data?: T
+  ) => {
     if (code >= 200 && code <= 299) {
       this.sendSuccess(res, code, message, data)
     } else {
@@ -26,7 +31,11 @@ export class ResponseHandler {
     this.sendError(res, 400, message, error)
   }
 
-  static internalServerError = <T>(res: Response, message: string, error?: T) => {
+  static internalServerError = <T>(
+    res: Response,
+    message: string,
+    error?: T
+  ) => {
     this.sendError(res, 500, message, error)
   }
 
