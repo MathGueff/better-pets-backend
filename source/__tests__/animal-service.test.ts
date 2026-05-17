@@ -2,6 +2,7 @@ import { ApiError } from '../errors/api.error'
 import { AnimalMessages } from '../messages/animal.messages'
 import { AnimalRepository } from '../repositories/animal.repository'
 import { AnimalsService } from '../services/animal.service'
+import { PaginatedQuery } from '../shared/pagination'
 import { UpdateAnimalDTO } from '../validation/animal.validation'
 
 jest.mock('../repositories/animal.repository')
@@ -21,10 +22,12 @@ describe('AnimalsService', () => {
       const mockAnimals = [{ name: 'Rex' }, { name: 'Fido' }]
       repository.list.mockResolvedValue(mockAnimals as any)
 
-      const result = await service.list()
+      const pagination = new PaginatedQuery({})
+      const result = await service.list(pagination)
 
       expect(result).toEqual(mockAnimals)
-      expect(repository.list).toHaveBeenCalledTimes(1)
+      expect(repository.list).toHaveBeenCalled()
+      expect(repository.list).toHaveBeenCalledWith(pagination)
     })
   })
 

@@ -24,7 +24,7 @@ export class BaseRepository<
   }
 
   async list(pagination: PaginatedQuery): Promise<TEntity[]> {
-    return this.model.find().skip(pagination.skip).limit(pagination.limit)
+    return this.model.find().skip(pagination.skip).limit(pagination?.limit)
   }
 
   async findById(id: string) {
