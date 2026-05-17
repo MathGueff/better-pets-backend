@@ -24,7 +24,8 @@ export class AnimalsController extends BaseController {
       entry: req.query,
       message: 'Pesquisa inválida'
     })
-    const listed = await this.service.list(new PaginatedQuery({ page, limit }))
+    const pagination = new PaginatedQuery({ page, limit })
+    const listed = await this.service.list(pagination)
     if (listed.length === 0) {
       return ResponseHandler.notFound(res, AnimalMessages.notFound)
     }

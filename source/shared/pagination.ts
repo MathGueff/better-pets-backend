@@ -10,18 +10,8 @@ export class PaginatedQuery {
 
   constructor(pagination: PaginationInput) {
     const { limit = FALLBACK_LIMIT, page = FALLBACK_PAGE } = pagination
-    this.limit = typeof limit === 'number' ? this.parseLimit(limit) : limit
-    this.page = typeof page === 'number' ? this.parsePage(page) : page
-  }
-
-  private parseLimit(limit: number) {
-    const numberLimit = Number(limit)
-    return !isNaN(numberLimit) ? numberLimit : FALLBACK_LIMIT
-  }
-
-  private parsePage(page: number) {
-    const numberPage = Number(page)
-    return !isNaN(numberPage) ? numberPage : FALLBACK_PAGE
+    this.limit = limit
+    this.page = page
   }
 
   public get skip(): PaginationOutput['skip'] {

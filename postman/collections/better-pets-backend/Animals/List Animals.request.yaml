@@ -1,14 +1,14 @@
 $kind: http-request
 name: List Animals
 method: GET
-url: '{{baseUrl}}/animals'
+url: "{{baseUrl}}/animals"
 order: 1000
 queryParams:
   - key: page
-    value: '1'
-    description: 'Page number (starts at 0)'
+    value: "1"
     disabled: true
+    description: Page number (starts at 0)
   - key: limit
-    value: '10'
-    description: 'Items per page (max 50)'
+    value: "2"
     disabled: true
+    description: Items per page (max 50)

@@ -15,7 +15,7 @@ export class AnimalsService extends BaseService {
     super()
   }
 
-  async list(pagination?: PaginatedQuery) {
+  async list(pagination: PaginatedQuery) {
     return this.animalRepository.list(pagination)
   }
 

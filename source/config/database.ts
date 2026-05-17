@@ -1,17 +1,30 @@
 import type { Mongoose } from 'mongoose'
 // eslint-disable-next-line no-duplicate-imports
+import dotenv from 'dotenv'
 import mongoose from 'mongoose'
+
+dotenv.config()
+
+enum Environment {
+  Development = 'development',
+  Production = 'production'
+}
+
+const environmentToUri: Record<Environment, string | undefined> = {
+  [Environment.Development]: process.env.MONGODB_URI_LOCAL,
+  [Environment.Production]: process.env.MONGODB_URI_PROD
+}
 
 class Database {
   private connection?: Mongoose
 
   async connect() {
-    const URI = process.env.MONGODB_URI || ''
+    const URI = environmentToUri[process.env.NODE_ENV as Environment] || ''
     if (!URI) {
       throw new Error('URI inválida para conexão com o banco')
     }
 
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === Environment.Development) {
       let cached = (global as any).mongoose as
         | { conn: Mongoose | null; promise: Promise<Mongoose> | null }
         | undefined
@@ -40,7 +53,7 @@ class Database {
   }
 
   async disconnect() {
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === Environment.Development) {
       let cached = (global as any).mongoose as
         | { conn: Mongoose | null; promise: Promise<Mongoose> | null }
         | undefined
