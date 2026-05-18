@@ -1,6 +1,6 @@
 <mxfile host="app.diagrams.net">
   <diagram name="Página-1" id="UP7k713X2tn1_7i-ycOS">
-    <mxGraphModel dx="3201" dy="2389" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="2264" dy="3064" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -22,7 +22,7 @@
           <mxGeometry height="105" width="160" y="50" as="geometry" />
         </mxCell>
         <mxCell id="do_SDq9r3reZLMD3S4qi-6" parent="1" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" value="BaseEntity" vertex="1">
-          <mxGeometry height="120" width="160" x="-270" y="-160" as="geometry" />
+          <mxGeometry height="120" width="160" x="180" y="-570" as="geometry" />
         </mxCell>
         <mxCell id="do_SDq9r3reZLMD3S4qi-7" parent="do_SDq9r3reZLMD3S4qi-6" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" value="+_id&lt;br&gt;+createdAt&lt;br&gt;+updatedAt" vertex="1">
           <mxGeometry height="70" width="160" y="50" as="geometry" />
@@ -37,10 +37,10 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="S2RuwkD74a4t5puW_1cQ-4" parent="1" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" value="Schedule" vertex="1">
-          <mxGeometry height="330" width="350" x="630" y="30" as="geometry" />
+          <mxGeometry height="150" width="350" x="630" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="S2RuwkD74a4t5puW_1cQ-5" parent="S2RuwkD74a4t5puW_1cQ-4" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" value="+name: string&lt;br&gt;+activityType: &#39;food&#39; | &#39;water&#39; | &#39;exercises&#39; | &#39;custom&#39;&lt;div&gt;&lt;div&gt;+description: string&lt;/div&gt;&lt;div&gt;recurrence: {&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;t&lt;/span&gt;ype: &#39;daily&#39; | &#39;weekly&#39; | &#39;interval&#39; | &#39;targeted&#39;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;times?: string[]&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;endDate: Date&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;//Weekly&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;daysOfWeek: number[]&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;//Interval&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;intervalDays: number&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;//targeted&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;targetDates: Date[]&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;}&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;familyId: ObjectId&lt;/span&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="280" width="350" y="50" as="geometry" />
+        <mxCell id="S2RuwkD74a4t5puW_1cQ-5" parent="S2RuwkD74a4t5puW_1cQ-4" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" value="+name: string&lt;br&gt;+activityType: &#39;food&#39; | &#39;water&#39; | &#39;exercises&#39; | &#39;custom&#39;&lt;div&gt;&lt;div&gt;+description: string&lt;/div&gt;&lt;div&gt;recurrence: Recurrence&lt;/div&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;familyId: ObjectId&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="100" width="350" y="50" as="geometry" />
         </mxCell>
         <mxCell id="EbsYtE66DpvvCqaPX_h0-18" edge="1" parent="1" source="S2RuwkD74a4t5puW_1cQ-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="do_SDq9r3reZLMD3S4qi-5">
           <mxGeometry relative="1" as="geometry" />
@@ -66,11 +66,11 @@
         <mxCell id="S2RuwkD74a4t5puW_1cQ-19" parent="S2RuwkD74a4t5puW_1cQ-18" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" value="+name: string&lt;br&gt;+vaccinationDate: Date&lt;div&gt;+vaccinated: boolean&lt;/div&gt;&lt;div&gt;+animalId: ObjectId&lt;/div&gt;" vertex="1">
           <mxGeometry height="70" width="220" y="50" as="geometry" />
         </mxCell>
-        <mxCell id="S2RuwkD74a4t5puW_1cQ-20" parent="1" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" value="MedicalInformations" vertex="1">
-          <mxGeometry height="120" width="220" x="500" y="-130" as="geometry" />
+        <mxCell id="S2RuwkD74a4t5puW_1cQ-20" parent="1" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" value="AnimalTreatments&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;" vertex="1">
+          <mxGeometry height="170" width="220" x="520" y="-330" as="geometry" />
         </mxCell>
-        <mxCell id="S2RuwkD74a4t5puW_1cQ-21" parent="S2RuwkD74a4t5puW_1cQ-20" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" value="+treatments: {}[]&lt;div&gt;+medications: {}[]&lt;/div&gt;&lt;div&gt;+animalId: ObjectId&lt;/div&gt;" vertex="1">
-          <mxGeometry height="70" width="220" y="50" as="geometry" />
+        <mxCell id="S2RuwkD74a4t5puW_1cQ-21" parent="S2RuwkD74a4t5puW_1cQ-20" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" value="&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;+title: string&lt;/span&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;+description: string&lt;/span&gt;&lt;/div&gt;&lt;div&gt;+disease: string&lt;/div&gt;&lt;div&gt;+dosage: string&lt;/div&gt;&lt;div&gt;+vetName: string&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;+recurrence: Recurrence&lt;/span&gt;&lt;/div&gt;&lt;div&gt;animalId: ObjectId&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="120" width="220" y="50" as="geometry" />
         </mxCell>
         <mxCell id="S2RuwkD74a4t5puW_1cQ-22" parent="1" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" value="AnimalDailyTasks" vertex="1">
           <mxGeometry height="240" width="400" x="750" y="380" as="geometry" />
@@ -107,6 +107,18 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="EbsYtE66DpvvCqaPX_h0-23" edge="1" parent="1" source="S2RuwkD74a4t5puW_1cQ-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" target="do_SDq9r3reZLMD3S4qi-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="EbsYtE66DpvvCqaPX_h0-24" parent="1" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" value="Recurrence" vertex="1">
+          <mxGeometry height="280" width="380" x="940" y="-360" as="geometry" />
+        </mxCell>
+        <mxCell id="EbsYtE66DpvvCqaPX_h0-25" parent="EbsYtE66DpvvCqaPX_h0-24" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" value="&lt;div&gt;{&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;t&lt;/span&gt;ype: &#39;daily&#39; | &#39;weekly&#39; | &#39;interval&#39; | &#39;targeted&#39;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;times?: string[]&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;startDate: Date&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;endDate: Date&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;//Weekly&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;daysOfWeek: number[]&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;//Interval&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;intervalDays: number&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;//targeted&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;white-space: pre;&quot;&gt;&#x9;&lt;/span&gt;targetDates: Date[]&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;}&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="230" width="380" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="EbsYtE66DpvvCqaPX_h0-26" edge="1" parent="1" source="EbsYtE66DpvvCqaPX_h0-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;endArrow=none;endFill=0;" target="S2RuwkD74a4t5puW_1cQ-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="EbsYtE66DpvvCqaPX_h0-27" edge="1" parent="1" source="EbsYtE66DpvvCqaPX_h0-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;endArrow=none;endFill=0;" target="S2RuwkD74a4t5puW_1cQ-5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
