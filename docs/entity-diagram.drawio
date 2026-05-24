@@ -16,10 +16,10 @@
           <mxGeometry height="70" width="160" y="50" as="geometry" />
         </mxCell>
         <mxCell id="do_SDq9r3reZLMD3S4qi-4" parent="1" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" value="Animal" vertex="1">
-          <mxGeometry height="190" width="160" x="340" y="400" as="geometry" />
+          <mxGeometry height="210" width="160" x="334" y="380" as="geometry" />
         </mxCell>
-        <mxCell id="do_SDq9r3reZLMD3S4qi-5" parent="do_SDq9r3reZLMD3S4qi-4" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" value="+name: string&lt;br&gt;+breed: string&lt;div&gt;+gender: &#39;M&#39; | &#39;F&#39;&lt;br&gt;+birthdate: Date&lt;div&gt;+adoptionDate?: Date&lt;/div&gt;&lt;div&gt;+photo: string&lt;/div&gt;&lt;div&gt;+familyId: ObjectId&lt;/div&gt;&lt;div&gt;+schedules?: ObjectId[]&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
-          <mxGeometry height="140" width="160" y="50" as="geometry" />
+        <mxCell id="do_SDq9r3reZLMD3S4qi-5" parent="do_SDq9r3reZLMD3S4qi-4" style="align=left;strokeColor=none;fillColor=none;spacingLeft=4;spacingRight=4;fontSize=12;verticalAlign=top;resizable=0;rotatable=0;part=1;html=1;whiteSpace=wrap;" value="+name: string&lt;br&gt;+breed: string&lt;div&gt;+gender: &#39;M&#39; | &#39;F&#39;&lt;br&gt;+birthdate: Date&lt;div&gt;+adoptionDate?: Date&lt;/div&gt;&lt;div&gt;+photo: string&lt;/div&gt;&lt;div&gt;+weight: number&lt;/div&gt;&lt;div&gt;+height: number&lt;/div&gt;&lt;div&gt;+familyId: ObjectId&lt;/div&gt;&lt;div&gt;+schedules?: ObjectId[]&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="160" width="160" y="50" as="geometry" />
         </mxCell>
         <mxCell id="do_SDq9r3reZLMD3S4qi-6" parent="1" style="swimlane;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;rounded=1;fontSize=14;fontStyle=0;strokeWidth=2;resizeParent=0;resizeLast=1;shadow=0;dashed=0;align=center;arcSize=4;whiteSpace=wrap;html=1;" value="BaseEntity" vertex="1">
           <mxGeometry height="120" width="160" x="180" y="-570" as="geometry" />
@@ -81,12 +81,14 @@
         <mxCell id="EbsYtE66DpvvCqaPX_h0-10" edge="1" parent="1" source="S2RuwkD74a4t5puW_1cQ-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0.952;entryDx=0;entryDy=0;entryPerimeter=0;" target="do_SDq9r3reZLMD3S4qi-5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="EbsYtE66DpvvCqaPX_h0-13" edge="1" parent="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="S2RuwkD74a4t5puW_1cQ-5">
+        <mxCell id="EbsYtE66DpvvCqaPX_h0-13" edge="1" parent="1" source="do_SDq9r3reZLMD3S4qi-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.704;exitY=0.003;exitDx=0;exitDy=0;exitPerimeter=0;" target="S2RuwkD74a4t5puW_1cQ-5">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
+              <mxPoint x="453" y="290" />
               <mxPoint x="440" y="290" />
+              <mxPoint x="440" y="130" />
             </Array>
-            <mxPoint x="440" y="400" as="sourcePoint" />
+            <mxPoint x="440" y="380" as="sourcePoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="EbsYtE66DpvvCqaPX_h0-16" edge="1" parent="1" source="do_SDq9r3reZLMD3S4qi-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.424;entryY=1.01;entryDx=0;entryDy=0;entryPerimeter=0;" target="S2RuwkD74a4t5puW_1cQ-3">
