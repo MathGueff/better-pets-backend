@@ -1,9 +1,0 @@
-$kind: http-request
-name: Delete Animal
-method: DELETE
-url: '{{baseUrl}}/animals/:id'
-order: 7000
-pathVariables:
-  - key: id
-    value: '{{animalId}}'
-    description: 'MongoDB ObjectId of the animal'
