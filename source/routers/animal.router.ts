@@ -13,11 +13,6 @@ class AnimalsRouter extends BaseRouter {
       { method: HttpMethod.GET, path: '/', handler: controller.list },
       {
         method: HttpMethod.GET,
-        path: '/description/:id',
-        handler: controller.getDescription
-      },
-      {
-        method: HttpMethod.GET,
         path: '/list-ids',
         handler: controller.listIds
       },

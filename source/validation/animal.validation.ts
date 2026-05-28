@@ -1,3 +1,4 @@
+import { Types } from 'mongoose'
 import { z } from '../config/zod'
 import { AnimalsValidationMessages } from '../messages/animal-validation.messages'
 import { AnimalGender, IAnimalInput } from '../models/animal.model'
@@ -9,33 +10,25 @@ const rules = {
   breed: z.string(M.breed.invalid),
   gender: z.enum(AnimalGender, M.gender.invalid),
   weight: z.number(M.weight.invalid).positive(M.weight.positive),
-  size: z.number(M.size.invalid).positive(M.size.positive),
-  bornDate: z.coerce
+  height: z.number(M.size.invalid).positive(M.size.positive),
+  birthdate: z.coerce
     .date(M.bornDate.date)
     .refine((date) => date < new Date(), M.bornDate.past),
   adoptionDate: z.coerce
     .date(M.adoptionDate.date)
-    .refine((date) => date < new Date(), M.adoptionDate.past),
-  photo: z.string(M.photo.invalid),
-  schedule: z
-    .object(
-      {
-        walk: z.object(
-          { timeExpected: z.coerce.date(M.schedule.time) },
-          M.schedule.walk
-        ),
-        feed: z.object(
-          { timeExpected: z.coerce.date(M.schedule.time) },
-          M.schedule.feed
-        ),
-        water: z.object(
-          { timeExpected: z.coerce.date(M.schedule.time) },
-          M.schedule.water
-        )
-      },
-      M.schedule.invalid
+    .refine((date) => date < new Date(), M.adoptionDate.past)
+    .optional(),
+  photo: z.string(M.photo.invalid).optional(),
+  schedules: z
+    .array(
+      z
+        .string('ID de agendamento incorreto')
+        .refine((value) => Types.ObjectId.isValid(value), {
+          message: 'ID de agendamento incorreto'
+        })
     )
-    .optional()
+    .optional(),
+  familyId: z.string('ID da família incorreto').optional()
 } satisfies { [K in keyof ValidationRules<IAnimalInput>]: z.ZodType }
 
 const createAnimalSchema = z.object(rules).strict().openapi('CreateAnimal')
