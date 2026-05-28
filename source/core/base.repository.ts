@@ -30,11 +30,7 @@ export class BaseRepository<
   async findById(id: string) {
     return this.model.findById(id)
   }
-
-  async listIds(): Promise<Pick<TEntity, '_id'>[]> {
-    return this.model.find().select('_id')
-  }
-
+  
   async update(id: string, updatedEntity: TUpdateDTO) {
     const updateQuery: UpdateQuery<TEntity> = { $set: updatedEntity }
     const entity = await this.model.updateOne({ _id: id }, updateQuery)
