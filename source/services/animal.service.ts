@@ -14,8 +14,12 @@ export class AnimalsService extends BaseService {
     super()
   }
 
-  async list(pagination: PaginatedQuery) {
-    return this.animalRepository.list(pagination)
+  async list(pagination: PaginatedQuery, filters: Record<string, any> = {}) {
+    const result = await this.animalRepository.list(pagination, filters)
+    if (!result.length) {
+      throw new ApiError('Nenhum animalzinho encontrado', 404, { filters })
+    }
+    return result
   }
 
   async findById(id: string) {
