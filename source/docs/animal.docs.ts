@@ -1,12 +1,8 @@
 import { RouteConfig } from '@asteasolutions/zod-to-openapi'
 import { z } from '../config/zod'
-import { AnimalsValidationMessages } from '../messages/animal-validation.messages'
-import { AnimalMessages } from '../messages/animal.messages'
 import { Endpoint, EndpointNames } from '../shared/endpoints'
 import { AnimalValidations } from '../validation/animal.validation'
 import { ResponseSchema } from '../validation/response.validation'
-
-const messages = AnimalMessages
 
 export const animalDocs: RouteConfig[] = [
   {
@@ -16,7 +12,7 @@ export const animalDocs: RouteConfig[] = [
     summary: 'Lista todos os amiguinhos',
     responses: {
       200: {
-        description: messages.found,
+        description: 'Animaizinhos encontrados com sucesso',
         content: {
           'application/json': {
             schema: ResponseSchema.success(z.array(AnimalValidations.create))
@@ -24,10 +20,10 @@ export const animalDocs: RouteConfig[] = [
         }
       },
       404: {
-        description: messages.notFound,
+        description: 'Nenhum animalzinho encontrado',
         content: {
           'application/json': {
-            schema: ResponseSchema.error(messages.notFound, 404)
+            schema: ResponseSchema.error('Nenhum animalzinho encontrado', 404)
           }
         }
       }
@@ -45,7 +41,7 @@ export const animalDocs: RouteConfig[] = [
     },
     responses: {
       200: {
-        description: messages.foundById,
+        description: 'Encontramos seu animalzinho com sucesso',
         content: {
           'application/json': {
             schema: ResponseSchema.success(AnimalValidations.create)
@@ -53,10 +49,10 @@ export const animalDocs: RouteConfig[] = [
         }
       },
       404: {
-        description: messages.notFound,
+        description: 'Nenhum animalzinho encontrado',
         content: {
           'application/json': {
-            schema: ResponseSchema.error(messages.notFound, 404)
+            schema: ResponseSchema.error('Nenhum animalzinho encontrado', 404)
           }
         }
       }
@@ -74,7 +70,7 @@ export const animalDocs: RouteConfig[] = [
     },
     responses: {
       201: {
-        description: messages.created,
+        description: 'Animalzinho criado com sucesso',
         content: {
           'application/json': {
             schema: ResponseSchema.success(AnimalValidations.create)
@@ -82,14 +78,11 @@ export const animalDocs: RouteConfig[] = [
         }
       },
       400: {
-        description: messages.invalidFields,
+        description: 'Campos inválidos',
         content: {
           'application/json': {
-            schema: ResponseSchema.error(messages.invalidFields, 400, [
-              {
-                field: 'name',
-                message: AnimalsValidationMessages.name.required
-              }
+            schema: ResponseSchema.error('Campos inválidos', 400, [
+              { field: 'name', message: 'Nome é obrigatório' }
             ])
           }
         }
@@ -108,7 +101,7 @@ export const animalDocs: RouteConfig[] = [
     },
     responses: {
       200: {
-        description: messages.deleted,
+        description: 'Animalzinho removido com sucesso',
         content: {
           'application/json': {
             schema: ResponseSchema.success(AnimalValidations.create)
@@ -116,10 +109,13 @@ export const animalDocs: RouteConfig[] = [
         }
       },
       404: {
-        description: messages.notFoundToDelete,
+        description: 'Não foi possível encontrar o animalzinho para excluir',
         content: {
           'application/json': {
-            schema: ResponseSchema.error(messages.notFoundToDelete, 404)
+            schema: ResponseSchema.error(
+              'Não foi possível encontrar o animalzinho para excluir',
+              404
+            )
           }
         }
       }
@@ -140,7 +136,7 @@ export const animalDocs: RouteConfig[] = [
     },
     responses: {
       200: {
-        description: messages.updated,
+        description: 'Animalzinho atualizado com sucesso',
         content: {
           'application/json': {
             schema: ResponseSchema.success(AnimalValidations.create)
@@ -148,23 +144,23 @@ export const animalDocs: RouteConfig[] = [
         }
       },
       400: {
-        description: messages.invalidFields,
+        description: 'Campos inválidos',
         content: {
           'application/json': {
-            schema: ResponseSchema.error(messages.invalidFields, 400, [
-              {
-                field: 'name',
-                message: AnimalsValidationMessages.name.required
-              }
+            schema: ResponseSchema.error('Campos inválidos', 400, [
+              { field: 'name', message: 'Nome é obrigatório' }
             ])
           }
         }
       },
       404: {
-        description: messages.notFoundToUpdate,
+        description: 'Não foi possível encontrar o animalzinho para atualizar',
         content: {
           'application/json': {
-            schema: ResponseSchema.error(messages.notFoundToUpdate, 404)
+            schema: ResponseSchema.error(
+              'Não foi possível encontrar o animalzinho para atualizar',
+              404
+            )
           }
         }
       }

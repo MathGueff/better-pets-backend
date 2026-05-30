@@ -1,24 +1,35 @@
 import { Types } from 'mongoose'
 import { z } from '../config/zod'
-import { AnimalsValidationMessages } from '../messages/animal-validation.messages'
 import { AnimalGender, IAnimalInput } from '../models/animal.model'
 import { ValidationRules } from './validation-rules.validation'
 
-const M = AnimalsValidationMessages
 const rules = {
-  name: z.string(M.name.invalid).min(1, M.name.required).max(50, M.name.max),
-  breed: z.string(M.breed.invalid),
-  gender: z.enum(AnimalGender, M.gender.invalid),
-  weight: z.number(M.weight.invalid).positive(M.weight.positive),
-  height: z.number(M.size.invalid).positive(M.size.positive),
+  name: z
+    .string('Nome deve ser uma string')
+    .min(1, 'Nome é obrigatório')
+    .max(50, 'Nome deve ter no máximo 50 caracteres'),
+  breed: z.string('Raça deve ser uma string'),
+  gender: z.enum(AnimalGender, 'Gênero inválido'),
+  weight: z
+    .number('Peso deve ser um número')
+    .positive('Peso deve ser um número positivo'),
+  height: z
+    .number('Tamanho deve ser um número')
+    .positive('Tamanho deve ser um número positivo'),
   birthdate: z.coerce
-    .date(M.bornDate.date)
-    .refine((date) => date < new Date(), M.bornDate.past),
+    .date('Data de nascimento deve ser uma data')
+    .refine(
+      (date) => date < new Date(),
+      'Data de nascimento deve ser uma data passada'
+    ),
   adoptionDate: z.coerce
-    .date(M.adoptionDate.date)
-    .refine((date) => date < new Date(), M.adoptionDate.past)
+    .date('Data de adoção deve ser uma data')
+    .refine(
+      (date) => date < new Date(),
+      'Data de adoção deve ser uma data passada'
+    )
     .optional(),
-  photo: z.string(M.photo.invalid).optional(),
+  photo: z.string('Foto deve ser um arquivo válido').optional(),
   schedules: z
     .array(
       z

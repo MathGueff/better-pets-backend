@@ -1,5 +1,4 @@
 import { ApiError } from '../errors/api.error'
-import { AnimalMessages } from '../messages/animal.messages'
 import { AnimalRepository } from '../repositories/animal.repository'
 import { AnimalsService } from '../services/animal.service'
 import { PaginatedQuery } from '../shared/pagination'
@@ -64,7 +63,7 @@ describe('AnimalsService', () => {
       await expect(create).rejects.toThrow(ApiError)
       await expect(create).rejects.toMatchObject({
         code: 409,
-        message: AnimalMessages.alreadyExistsWithName
+        message: 'Animal já cadastrado com esse nome'
       })
     })
   })
@@ -119,7 +118,7 @@ describe('AnimalsService', () => {
         service.update('123', updateData as any)
       ).rejects.toMatchObject({
         code: 409,
-        message: AnimalMessages.alreadyExistsWithName
+        message: 'Animal já cadastrado com esse nome'
       })
     })
   })

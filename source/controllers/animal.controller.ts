@@ -1,7 +1,5 @@
 import { Request, Response } from 'express'
 import { BaseController } from '../core/base.controller'
-import { AnimalMessages } from '../messages/animal.messages'
-import { Animal } from '../models/animal.model'
 import { AnimalsService } from '../services/animal.service'
 import { PaginatedQuery } from '../shared/pagination'
 import { ResponseHandler } from '../utils/response-handler'
@@ -27,25 +25,25 @@ export class AnimalsController extends BaseController {
     const pagination = new PaginatedQuery({ page, limit })
     const listed = await this.service.list(pagination)
     if (listed.length === 0) {
-      return ResponseHandler.notFound(res, AnimalMessages.notFound)
+      return ResponseHandler.notFound(res, 'Nenhum animalzinho encontrado')
     }
-    ResponseHandler.ok(res, AnimalMessages.found, listed)
+    ResponseHandler.ok(res, 'Animaizinhos encontrados com sucesso', listed)
   }
 
   findById = async (req: Request, res: Response) => {
     const id = validateObjectIdOrThrow(req.params.id)
     const found = await this.service.findById(String(id))
-    ResponseHandler.ok(res, AnimalMessages.foundById, found)
+    ResponseHandler.ok(res, 'Encontramos seu animalzinho com sucesso', found)
   }
 
   create = async (req: Request, res: Response): Promise<void> => {
     const data = validateOrThrow({
-      message: AnimalMessages.invalidDataCreate,
+      message: 'Não foi possível criar o animalzinho com os dados fornecidos',
       entry: req.body,
       schema: AnimalValidations.create
     })
     const created = await this.service.create(data)
-    ResponseHandler.created(res, AnimalMessages.created, created)
+    ResponseHandler.created(res, 'Animalzinho criado com sucesso', created)
   }
 
   update = async (req: Request, res: Response) => {
@@ -53,16 +51,17 @@ export class AnimalsController extends BaseController {
     const data = validateOrThrow({
       entry: req.body,
       schema: AnimalValidations.update,
-      message: AnimalMessages.invalidDataUpdate
+      message:
+        'Não foi possível atualizar o animalzinho com os dados fornecidos'
     })
     const updated = await this.service.update(id, data)
-    ResponseHandler.ok(res, AnimalMessages.updated, updated)
+    ResponseHandler.ok(res, 'Animalzinho atualizado com sucesso', updated)
   }
 
   delete = async (req: Request, res: Response) => {
     const id = validateObjectIdOrThrow(req.params.id)
 
     const deleted = await this.service.delete(String(id))
-    ResponseHandler.ok(res, AnimalMessages.deleted, deleted)
+    ResponseHandler.ok(res, 'Animalzinho removido com sucesso', deleted)
   }
 }

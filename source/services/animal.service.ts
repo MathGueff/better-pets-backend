@@ -1,6 +1,5 @@
 import { BaseService } from '../core/base.service'
 import { ApiError } from '../errors/api.error'
-import { AnimalMessages } from '../messages/animal.messages'
 import { AnimalRepository } from '../repositories/animal.repository'
 import { PaginatedQuery } from '../shared/pagination'
 import {
@@ -22,7 +21,7 @@ export class AnimalsService extends BaseService {
   async findById(id: string) {
     const found = await this.animalRepository.findById(id)
     if (!found) {
-      throw new ApiError(AnimalMessages.notFound, 404, { id })
+      throw new ApiError('Nenhum animalzinho encontrado', 404, { id })
     }
     return found
   }
@@ -30,7 +29,7 @@ export class AnimalsService extends BaseService {
   async create(newAnimal: CreateAnimalDTO) {
     const exists = await this.exists(newAnimal.name)
     if (exists) {
-      throw new ApiError(AnimalMessages.alreadyExistsWithName, 409, {
+      throw new ApiError('Animal já cadastrado com esse nome', 409, {
         newAnimal
       })
     }
@@ -43,7 +42,7 @@ export class AnimalsService extends BaseService {
       const exists = await this.exists(updateAnimal.name, id)
 
       if (exists) {
-        throw new ApiError(AnimalMessages.alreadyExistsWithName, 409, {
+        throw new ApiError('Animal já cadastrado com esse nome', 409, {
           updateAnimal
         })
       }
@@ -51,7 +50,11 @@ export class AnimalsService extends BaseService {
 
     const updated = await this.animalRepository.update(id, updateAnimal)
     if (!updated) {
-      throw new ApiError(AnimalMessages.notFoundToUpdate, 404, { id })
+      throw new ApiError(
+        'Não foi possível encontrar o animalzinho para atualizar',
+        404,
+        { id }
+      )
     }
     return updated
   }
@@ -59,7 +62,11 @@ export class AnimalsService extends BaseService {
   async delete(id: string) {
     const deleted = await this.animalRepository.delete(id)
     if (!deleted) {
-      throw new ApiError(AnimalMessages.notFoundToDelete, 404, { id })
+      throw new ApiError(
+        'Não foi possível encontrar o animalzinho para excluir',
+        404,
+        { id }
+      )
     }
     return deleted
   }
