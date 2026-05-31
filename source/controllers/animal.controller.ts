@@ -5,7 +5,7 @@ import { PaginatedQuery } from '../shared/pagination'
 import { ResponseHandler } from '../utils/response-handler'
 import { validateObjectIdOrThrow } from '../utils/validate-object-id-or-throw'
 import { validateOrThrow } from '../utils/validate-or-throw'
-import { AnimalValidations } from '../validation/animal.validation'
+import { AnimalValidations } from '../validation/animal/animal.validation'
 
 export class AnimalsController extends BaseController {
   constructor(private readonly service: AnimalsService = new AnimalsService()) {
@@ -13,10 +13,7 @@ export class AnimalsController extends BaseController {
   }
 
   list = async (req: Request, res: Response): Promise<void> => {
-    const { page, limit, filters } = this.getQueryParams(
-      req,
-      AnimalValidations.filter
-    )
+    const { page, limit, filters } = this.getQueryParams(req.params, AnimalValidations.filter)
     const pagination = new PaginatedQuery({ page, limit })
     const listed = await this.service.list(pagination, filters)
     ResponseHandler.ok(res, 'Animaizinhos encontrados com sucesso', listed)

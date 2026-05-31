@@ -1,4 +1,4 @@
-import { objectIdSchema } from '../validation/objectid.validation'
+import { objectIdSchema } from '../validation/global/objectid.validation'
 import { validateOrThrow } from './validate-or-throw'
 
 export const validateObjectIdOrThrow = (

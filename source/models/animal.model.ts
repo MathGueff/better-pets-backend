@@ -1,5 +1,7 @@
 import { Types } from 'mongoose'
 import { BaseEntity } from './entity.model'
+import { PaginationInput } from '../shared/pagination'
+import { SortInput } from '../shared/sorting'
 
 export enum AnimalGender {
   MALE = 'M',
@@ -20,6 +22,12 @@ export interface IAnimalInput {
 }
 
 export type IAnimalEntity = BaseEntity & IAnimalInput
+
+export type IAnimalFilter = PaginationInput & SortInput & {
+  name: IAnimalEntity['name']
+  breed: IAnimalEntity['breed']
+  gender: IAnimalEntity['gender']
+}
 
 export class Animal {
   constructor(private readonly data: IAnimalEntity) {}

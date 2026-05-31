@@ -2,7 +2,7 @@ import { ApiError } from '../errors/api.error'
 import { AnimalRepository } from '../repositories/animal.repository'
 import { AnimalsService } from '../services/animal.service'
 import { PaginatedQuery } from '../shared/pagination'
-import { UpdateAnimalDTO } from '../validation/animal.validation'
+import { UpdateAnimalDTO } from '../validation/animal/animal.validation'
 
 jest.mock('../repositories/animal.repository')
 

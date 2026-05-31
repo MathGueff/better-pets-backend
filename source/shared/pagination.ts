@@ -1,4 +1,4 @@
-type PaginationInput = { limit?: number; page?: number }
+export type PaginationInput = { limit?: number; page?: number }
 type PaginationOutput = { limit: number; page: number; skip: number }
 
 const FALLBACK_LIMIT = 10

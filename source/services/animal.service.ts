@@ -5,7 +5,7 @@ import { PaginatedQuery } from '../shared/pagination'
 import {
   CreateAnimalDTO,
   UpdateAnimalDTO
-} from '../validation/animal.validation'
+} from '../validation/animal/animal.validation'
 
 export class AnimalsService extends BaseService {
   constructor(

@@ -1,13 +1,11 @@
-import { Request } from 'express'
 import { ZodType } from 'zod'
 import { validateOrThrow } from '../utils/validate-or-throw'
-import { paginationSchema } from '../validation/pagination.validation'
-import { sortSchema } from '../validation/sorting.validation'
+import { paginationSchema } from '../validation/global/pagination.validation'
+import { sortSchema } from '../validation/global/sorting.validation'
 
 type GetQueryParamsResult = {
   page?: number
   limit?: number
-  search?: string
   sortBy?: string
   sortOrder?: '1' | '-1'
   filters: Record<string, any>
@@ -15,10 +13,10 @@ type GetQueryParamsResult = {
 
 export abstract class BaseController {
   protected getQueryParams(
-    req: Request,
-    schema?: ZodType
+    values: Record<string, any>,
+    schema: ZodType
   ): GetQueryParamsResult {
-    const { page, limit, search, sortBy, sortOrder, ...filters } = req.query
+    const { page, limit, sortBy, sortOrder, ...filters } = values
     const result: GetQueryParamsResult = { filters: {} }
 
     const pagination = validateOrThrow({
