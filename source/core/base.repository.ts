@@ -1,7 +1,7 @@
 import type { Model, QueryFilter, UpdateQuery } from 'mongoose'
 import { Types } from 'mongoose'
 import { BaseEntity } from '../models/entity.model'
-import { PaginatedQuery } from '../utils/pagination'
+import { QueryOptions } from '../types/query-options'
 
 export class BaseRepository<
   TEntity extends BaseEntity,
@@ -27,13 +27,14 @@ export class BaseRepository<
   }
 
   async list(
-    pagination: PaginatedQuery,
-    filters: Record<string, any> = {}
+    filters: Record<string, any> = {},
+    options: QueryOptions
   ): Promise<TEntity[]> {
     return this.model
       .find(filters)
-      .skip(pagination.skip)
-      .limit(pagination?.limit)
+      .skip(options.pagination.skip)
+      .limit(options.pagination.limit)
+      .sort(options.sort.getObjectSort())
   }
 
   async findById(id: string) {
