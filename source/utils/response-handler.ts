@@ -1,5 +1,5 @@
 import type { Response } from 'express'
-import { TApiError, TApiSuccess } from '../shared/response'
+import { TApiError, TApiSuccess } from '../types/response'
 
 export class ResponseHandler {
   static callByCode = <T>(

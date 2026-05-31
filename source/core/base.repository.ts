@@ -1,11 +1,14 @@
 import type { Model, QueryFilter, UpdateQuery } from 'mongoose'
 import { Types } from 'mongoose'
 import { BaseEntity } from '../models/entity.model'
-import { PaginatedQuery } from '../shared/pagination'
+import { QueryOptions } from '../types/query-options'
 
 export class BaseRepository<
   TEntity extends BaseEntity,
-  TCreateDTO extends Omit<TEntity, keyof BaseEntity> = Omit<TEntity, keyof BaseEntity>,
+  TCreateDTO extends Omit<TEntity, keyof BaseEntity> = Omit<
+    TEntity,
+    keyof BaseEntity
+  >,
   TUpdateDTO extends Partial<TEntity> = Partial<TEntity>
 > {
   constructor(private model: Model<TEntity>) {}
@@ -23,14 +26,21 @@ export class BaseRepository<
     return this.model.exists(filter)
   }
 
-  async list(pagination: PaginatedQuery, filters: Record<string, any> = {}): Promise<TEntity[]> {
-    return this.model.find(filters).skip(pagination.skip).limit(pagination?.limit)
+  async list(
+    filters: Record<string, any> = {},
+    options: QueryOptions
+  ): Promise<TEntity[]> {
+    return this.model
+      .find(filters)
+      .skip(options.pagination.skip)
+      .limit(options.pagination.limit)
+      .sort(options.sort.getObjectSort())
   }
 
   async findById(id: string) {
     return this.model.findById(id)
   }
-  
+
   async update(id: string, updatedEntity: TUpdateDTO) {
     const updateQuery: UpdateQuery<TEntity> = { $set: updatedEntity }
     const entity = await this.model.updateOne({ _id: id }, updateQuery)

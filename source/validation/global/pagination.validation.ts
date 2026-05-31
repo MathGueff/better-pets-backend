@@ -1,6 +1,6 @@
-import { z } from '../config/zod'
+import { z } from '../../config/zod'
 
-export const paginationSchema = z.object({
+const paginationRules = {
   limit: z.coerce
     .number('Limite deve ser um número')
     .min(0, 'Limite deve ser maior do que 0')
@@ -10,6 +10,8 @@ export const paginationSchema = z.object({
     .number('Pagina deve ser um número')
     .min(0, 'Página deve ser maior do que 0')
     .optional()
-})
+}
+
+export const paginationSchema = z.object(paginationRules)
 
 export type PaginationSchemaType = z.infer<typeof paginationSchema>

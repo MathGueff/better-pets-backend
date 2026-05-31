@@ -1,8 +1,8 @@
 import { AnimalsController } from '../controllers/animal.controller'
 import { BaseRouter } from '../core/base.router'
-import { Endpoint, EndpointNames } from '../shared/endpoints'
-import { HttpMethod } from '../shared/http-method'
-import { IRoute } from '../shared/routing/route.type'
+import { Endpoint, EndpointNames } from '../types/endpoints'
+import { HttpMethod } from '../types/http-method'
+import { IRoute } from '../types/route.type'
 
 class AnimalsRouter extends BaseRouter {
   constructor(

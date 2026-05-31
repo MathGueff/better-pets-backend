@@ -4,7 +4,7 @@ import animalModel from '../schemas/animal.schema'
 import {
   CreateAnimalDTO,
   UpdateAnimalDTO
-} from '../validation/animal.validation'
+} from '../validation/animal/animal.validation'
 
 export class AnimalRepository extends BaseRepository<
   IAnimalEntity,

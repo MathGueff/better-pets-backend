@@ -1,5 +1,5 @@
 import { Types } from 'mongoose'
-import { z } from '../config/zod'
+import { z } from '../../config/zod'
 
 const objectIdSchema = z
   .object({

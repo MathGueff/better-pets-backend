@@ -1,9 +1,13 @@
 import { Types } from 'mongoose'
-import { z } from '../config/zod'
-import { AnimalGender, IAnimalInput } from '../models/animal.model'
-import { ValidationRules } from './validation-rules.validation'
+import { z } from '../../config/zod'
+import {
+  AnimalGender,
+  IAnimalFilter,
+  IAnimalInput
+} from '../../models/animal.model'
+import { ZodEntityRules, ZodFilterRules } from '../../utils/zod-types'
 
-const rules = {
+export const animalRules = {
   name: z
     .string('Nome deve ser uma string')
     .min(1, 'Nome é obrigatório')
@@ -40,31 +44,10 @@ const rules = {
     )
     .optional(),
   familyId: z.string('ID da família incorreto').optional()
-} satisfies { [K in keyof ValidationRules<IAnimalInput>]: z.ZodType }
+} satisfies { [K in keyof ZodEntityRules<IAnimalInput>]: z.ZodType }
 
-const createAnimalSchema = z.object(rules).strict().openapi('CreateAnimal')
-
-const updateAnimalSchema = createAnimalSchema.partial().openapi('UpdateAnimal')
-
-const filterAnimalSchema = z.object({
-  name: rules.name.optional(),
-  breed: rules.breed.optional(),
-  gender: rules.gender.optional(),
-  weight: rules.weight.optional(),
-  height: rules.height.optional(),
-  birthdate: rules.birthdate.optional(),
-  adoptionDate: rules.adoptionDate.optional(),
-  photo: rules.photo.optional(),
-  schedules: rules.schedules.optional(),
-  familyId: rules.familyId.optional()
-}).strict().openapi('FilterAnimal')
-
-export const AnimalValidations = {
-  create: createAnimalSchema,
-  update: updateAnimalSchema,
-  filter: filterAnimalSchema
-}
-
-export type CreateAnimalDTO = z.infer<typeof createAnimalSchema>
-export type UpdateAnimalDTO = z.infer<typeof updateAnimalSchema>
-export type FilterAnimalDTO = z.infer<typeof filterAnimalSchema>
+export const animalFilterRules = {
+  name: animalRules.name.optional(),
+  breed: animalRules.breed.optional(),
+  gender: animalRules.gender.optional()
+} satisfies { [K in keyof ZodFilterRules<IAnimalFilter>]: z.ZodType }

@@ -1,8 +1,9 @@
 import { ApiError } from '../errors/api.error'
 import { AnimalRepository } from '../repositories/animal.repository'
 import { AnimalsService } from '../services/animal.service'
-import { PaginatedQuery } from '../shared/pagination'
-import { UpdateAnimalDTO } from '../validation/animal.validation'
+import { PaginatedQuery } from '../utils/pagination'
+import { SortedQuery } from '../utils/sorting'
+import { UpdateAnimalDTO } from '../validation/animal/animal.validation'
 
 jest.mock('../repositories/animal.repository')
 
@@ -22,11 +23,12 @@ describe('AnimalsService', () => {
       repository.list.mockResolvedValue(mockAnimals as any)
 
       const pagination = new PaginatedQuery({})
-      const result = await service.list(pagination)
+      const sort = new SortedQuery({})
+      const result = await service.list({}, { pagination, sort })
 
       expect(result).toEqual(mockAnimals)
       expect(repository.list).toHaveBeenCalled()
-      expect(repository.list).toHaveBeenCalledWith(pagination)
+      expect(repository.list).toHaveBeenCalledWith({}, { pagination, sort })
     })
   })
 

@@ -1,11 +1,12 @@
 import { BaseService } from '../core/base.service'
 import { ApiError } from '../errors/api.error'
 import { AnimalRepository } from '../repositories/animal.repository'
-import { PaginatedQuery } from '../shared/pagination'
+import { QueryOptions } from '../types/query-options'
+import { PaginatedQuery } from '../utils/pagination'
 import {
   CreateAnimalDTO,
   UpdateAnimalDTO
-} from '../validation/animal.validation'
+} from '../validation/animal/animal.validation'
 
 export class AnimalsService extends BaseService {
   constructor(
@@ -14,8 +15,8 @@ export class AnimalsService extends BaseService {
     super()
   }
 
-  async list(pagination: PaginatedQuery, filters: Record<string, any> = {}) {
-    const result = await this.animalRepository.list(pagination, filters)
+  async list(filters: Record<string, any> = {}, options: QueryOptions) {
+    const result = await this.animalRepository.list(filters, options)
     if (!result.length) {
       throw new ApiError('Nenhum animalzinho encontrado', 404, { filters })
     }

@@ -1,47 +1,56 @@
-import { Request } from 'express'
 import { ZodType } from 'zod'
+import { PaginatedQuery } from '../utils/pagination'
+import { SortedQuery } from '../utils/sorting'
 import { validateOrThrow } from '../utils/validate-or-throw'
-import { paginationSchema } from '../validation/pagination.validation'
-import { sortSchema } from '../validation/sorting.validation'
+import { paginationSchema } from '../validation/global/pagination.validation'
+import { sortSchema } from '../validation/global/sorting.validation'
 
 type GetQueryParamsResult = {
-  page?: number
-  limit?: number
-  search?: string
-  sortBy?: string
-  sortOrder?: '1' | '-1'
+  pagination: PaginatedQuery
+  sort: SortedQuery
   filters: Record<string, any>
 }
 
 export abstract class BaseController {
+  /**
+   * Extrai e valida parâmetros de query (paginação, ordenação e filtros)
+   *
+   * @param queryParams - Valores brutos da query (req.query)
+   * @param filterSchema - Schema Zod opcional para validar filtros específicos
+   * @returns Objeto com paginação, ordenação e filtros validados
+   */
   protected getQueryParams(
-    req: Request,
-    schema?: ZodType
+    queryParams: Record<string, any>,
+    schema: ZodType
   ): GetQueryParamsResult {
-    const { page, limit, search, sortBy, sortOrder, ...filters } = req.query
-    const result: GetQueryParamsResult = { filters: {} }
+    const { page, limit, sortBy, sortOrder, ...others } = queryParams
 
+    const filters: Record<string, any> = {}
     const pagination = validateOrThrow({
       schema: paginationSchema,
       entry: { page, limit },
       message: 'Pesquisa inválida'
     })
-    Object.assign(result, pagination)
 
     const sorting = validateOrThrow({
       schema: sortSchema,
       entry: { sortBy, sortOrder },
       message: 'Parâmetros de ordenação inválidos'
     })
-    Object.assign(result, sorting)
 
     if (schema) {
       const filtersValidated = validateOrThrow({
         schema: schema,
-        entry: filters,
-        message: 'Filtros inválidos'
+        entry: others,
+        message: 'Busca inválida'
       })
-      Object.assign(result.filters, filtersValidated)
+      Object.assign(filters, filtersValidated)
+    }
+
+    const result: GetQueryParamsResult = {
+      pagination: new PaginatedQuery(pagination),
+      sort: new SortedQuery(sorting),
+      filters
     }
 
     console.log('Query params validados:', result)
