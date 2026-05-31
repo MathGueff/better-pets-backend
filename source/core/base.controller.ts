@@ -15,15 +15,15 @@ export abstract class BaseController {
   /**
    * Extrai e valida parâmetros de query (paginação, ordenação e filtros)
    *
-   * @param values - Valores brutos da query (req.query)
+   * @param queryParams - Valores brutos da query (req.query)
    * @param filterSchema - Schema Zod opcional para validar filtros específicos
    * @returns Objeto com paginação, ordenação e filtros validados
    */
   protected getQueryParams(
-    values: Record<string, any>,
+    queryParams: Record<string, any>,
     schema: ZodType
   ): GetQueryParamsResult {
-    const { page, limit, sortBy, sortOrder, ...others } = values
+    const { page, limit, sortBy, sortOrder, ...others } = queryParams
 
     const filters: Record<string, any> = {}
     const pagination = validateOrThrow({
