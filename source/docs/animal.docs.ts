@@ -1,6 +1,6 @@
 import { RouteConfig } from '@asteasolutions/zod-to-openapi'
 import { z } from '../config/zod'
-import { Endpoint, EndpointNames } from '../shared/endpoints'
+import { Endpoint, EndpointNames } from '../types/endpoints'
 import { AnimalValidations } from '../validation/animal/animal.validation'
 import { ResponseSchema } from '../validation/response.validation'
 

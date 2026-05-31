@@ -1,7 +1,7 @@
 import { BaseService } from '../core/base.service'
 import { ApiError } from '../errors/api.error'
 import { AnimalRepository } from '../repositories/animal.repository'
-import { PaginatedQuery } from '../shared/pagination'
+import { PaginatedQuery } from '../utils/pagination'
 import {
   CreateAnimalDTO,
   UpdateAnimalDTO

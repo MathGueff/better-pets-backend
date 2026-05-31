@@ -1,6 +1,6 @@
 import { z } from '../config/zod'
-import { PaginationInput } from '../shared/pagination'
-import { SortInput } from '../shared/sorting'
+import { PaginationInput } from './pagination'
+import { SortInput } from './sorting'
 
 export type ZodEntityRules<T> = Record<keyof T, z.ZodType>
 

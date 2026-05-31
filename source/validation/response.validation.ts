@@ -1,5 +1,5 @@
 import { z } from '../config/zod'
-import { TApiError, TApiSuccess } from '../shared/response'
+import { TApiError, TApiSuccess } from '../types/response'
 
 export const ResponseSchema = {
   success: (dataSchema: z.ZodType<unknown>) =>

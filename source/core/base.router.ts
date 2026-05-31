@@ -5,7 +5,7 @@ import {
   Response,
   Router
 } from 'express'
-import { IRoute } from '../shared/routing/route.type'
+import { IRoute } from '../types/route.type'
 
 export class BaseRouter {
   public readonly router: Router = Router()
