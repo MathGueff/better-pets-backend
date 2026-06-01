@@ -1,12 +1,12 @@
 import { HealthController } from '../controllers/health.controller'
 import { BaseRouter } from '../core/base.router'
-import { Endpoint, EndpointNames } from '../types/endpoints'
+import { EndpointNames } from '../types/endpoints'
 import { HttpMethod } from '../types/http-method'
 import { IRoute } from '../types/route.type'
 
 class HealthRouter extends BaseRouter {
   constructor(
-    prefix: string = Endpoint(EndpointNames.HEALTH),
+    prefix = EndpointNames.HEALTH,
     controller: HealthController = new HealthController()
   ) {
     const routes: IRoute[] = [
