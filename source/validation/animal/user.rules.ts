@@ -6,5 +6,6 @@ export const userRules = {
   name: z
     .string('O nome deve ser uma string')
     .max(50, 'Nome muito grande')
-    .min(2, 'Nome muito pequeno')
+    .min(2, 'Nome muito pequeno'),
+  email: z.email('Email informado é inválido')
 } satisfies ZodEntityRules<IUserInput>
