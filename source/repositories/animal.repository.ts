@@ -1,6 +1,6 @@
 import { BaseRepository } from '../core/base.repository'
 import { IAnimalEntity } from '../models/animal.model'
-import animalModel from '../schemas/animal.schema'
+import AnimalModel from '../schemas/animal.schema'
 import {
   CreateAnimalDTO,
   UpdateAnimalDTO
@@ -12,6 +12,6 @@ export class AnimalRepository extends BaseRepository<
   UpdateAnimalDTO
 > {
   constructor() {
-    super(animalModel)
+    super(AnimalModel)
   }
 }

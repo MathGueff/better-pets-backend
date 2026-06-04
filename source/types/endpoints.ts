@@ -1,7 +1,7 @@
 export enum EndpointNames {
   ANIMALS = 'animals',
   HEALTH = 'health',
-  USER = 'user'
+  USER = 'users'
 }
 
 export const Endpoint = (endpoint: EndpointNames): string => {
