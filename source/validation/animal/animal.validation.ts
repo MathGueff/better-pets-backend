@@ -22,6 +22,6 @@ export class AnimalValidations {
   static filter = filterAnimalSchema
 }
 
-export type CreateAnimalDTO = z.infer<typeof createAnimalSchema>
-export type UpdateAnimalDTO = z.infer<typeof updateAnimalSchema>
-export type FilterAnimalDTO = z.infer<typeof filterAnimalSchema>
+export type CreateAnimalDTO = z.infer<typeof AnimalValidations.create>
+export type UpdateAnimalDTO = z.infer<typeof AnimalValidations.update>
+export type FilterAnimalDTO = z.infer<typeof AnimalValidations.filter>

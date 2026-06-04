@@ -18,7 +18,10 @@ export class BaseRepository<
     return entity.save()
   }
 
-  async exists(filter: QueryFilter<TEntity>, excludeId?: string) {
+  async exists(
+    filter: QueryFilter<TEntity>,
+    excludeId?: string
+  ): Promise<{ _id: Types.ObjectId } | null> {
     if (excludeId) {
       filter._id = { $ne: new Types.ObjectId(excludeId) }
     }
@@ -28,13 +31,18 @@ export class BaseRepository<
 
   async list(
     filters: Record<string, any> = {},
-    options: QueryOptions
+    options?: QueryOptions
   ): Promise<TEntity[]> {
-    return this.model
-      .find(filters)
-      .skip(options.pagination.skip)
-      .limit(options.pagination.limit)
-      .sort(options.sort.getObjectSort())
+    const query = this.model.find(filters)
+
+    if (options) {
+      query
+        .skip(options.pagination.skip)
+        .limit(options.pagination.limit)
+        .sort(options.sort.getObjectSort())
+    }
+
+    return query.exec()
   }
 
   async findById(id: string) {

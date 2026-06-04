@@ -1,6 +1,6 @@
 import z from 'zod'
 import { IUserInput } from '../../models/user.model'
-import { ZodEntityRules } from '../../utils/zod-types'
+import { ZodEntityRules, ZodFilterRules } from '../../utils/zod-types'
 
 export const userRules = {
   name: z
@@ -9,3 +9,8 @@ export const userRules = {
     .min(2, 'Nome muito pequeno'),
   email: z.email('Email informado é inválido')
 } satisfies ZodEntityRules<IUserInput>
+
+export const userFilterRules = {
+  email: userRules.email.optional(),
+  name: userRules.name.optional()
+} satisfies ZodFilterRules<IUserInput>

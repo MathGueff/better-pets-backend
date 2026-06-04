@@ -31,6 +31,10 @@ export class ResponseHandler {
     this.sendError(res, 400, message, error)
   }
 
+  static conflict = <T>(res: Response, message: string, error?: T) => {
+    this.sendError(res, 409, message, error)
+  }
+
   static internalServerError = <T>(
     res: Response,
     message: string,
