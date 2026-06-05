@@ -4,7 +4,9 @@ import { IUserEntity } from '../models/user.model'
 const userSchema = new Schema<IUserEntity>(
   {
     name: { type: String, required: true, unique: true },
-    email: { type: String, required: true, unique: true }
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    photo: { type: String, required: true }
   },
   { versionKey: false, timestamps: true }
 )

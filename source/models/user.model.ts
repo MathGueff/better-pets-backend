@@ -3,6 +3,8 @@ import { BaseEntity } from './entity.model'
 export interface IUserInput {
   name: string
   email: string
+  password: string
+  photo: string
 }
 
 export interface IUserEntity extends BaseEntity, IUserInput {}
