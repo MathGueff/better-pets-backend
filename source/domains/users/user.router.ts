@@ -1,8 +1,8 @@
-import { UserController } from '../controllers/user.controller'
-import { BaseRouter } from '../core/base.router'
-import { EndpointNames } from '../types/endpoints'
-import { HttpMethod } from '../types/http-method'
-import { IRoute } from '../types/route.type'
+import { UserController } from './user.controller'
+import { BaseRouter } from '../../core/base.router'
+import { EndpointNames } from '../../types/endpoints'
+import { HttpMethod } from '../../types/http-method'
+import { IRoute } from '../../types/route.type'
 
 export class UserRouter extends BaseRouter {
   constructor(

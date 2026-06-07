@@ -1,4 +1,4 @@
-import { BaseEntity } from './entity.model'
+import { BaseEntity } from '../../core/base.entity'
 
 export interface IUserInput {
   name: string

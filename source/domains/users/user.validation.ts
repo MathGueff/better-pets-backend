@@ -1,4 +1,4 @@
-import z from 'zod'
+import { z } from '../../config/zod'
 import { userFilterRules, userRules } from './user.rules'
 
 const createUserSchema = z.object(userRules).strict().openapi('CreateUser')

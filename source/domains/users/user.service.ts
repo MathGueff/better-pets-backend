@@ -1,8 +1,8 @@
-import { BaseService } from '../core/base.service'
-import { IUserInput } from '../models/user.model'
-import { UserRepository } from '../repositories/user.repository'
-import { QueryOptions } from '../types/query-options'
-import { UnsplashContextQuery, UnsplashService } from './unsplash.service'
+import { BaseService } from '../../core/base.service'
+import { IUserInput } from './user.model'
+import { UserRepository } from './user.repository'
+import { QueryOptions } from '../../types/query-options'
+import { UnsplashContextQuery, UnsplashService } from '../../services/unsplash.service'
 
 export class UserService extends BaseService {
   constructor(

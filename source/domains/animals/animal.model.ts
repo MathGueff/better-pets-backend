@@ -1,7 +1,7 @@
 import { Types } from 'mongoose'
-import { PaginationInput } from '../utils/pagination'
-import { SortInput } from '../utils/sorting'
-import { BaseEntity } from './entity.model'
+import { PaginationInput } from '../../utils/pagination'
+import { SortInput } from '../../utils/sorting'
+import { BaseEntity } from '../../core/base.entity'
 
 export enum AnimalGender {
   MALE = 'M',

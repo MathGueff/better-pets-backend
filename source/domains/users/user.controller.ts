@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express'
-import { BaseController } from '../core/base.controller'
-import { UserService } from '../services/user.service'
-import { ResponseHandler } from '../utils/response-handler'
-import { validateOrThrow } from '../utils/validate-or-throw'
-import { UserValidations } from '../validation/animal/user.validation'
+import { BaseController } from '../../core/base.controller'
+import { UserService } from './user.service'
+import { ResponseHandler } from '../../utils/response-handler'
+import { validateOrThrow } from '../../utils/validate-or-throw'
+import { UserValidations } from './user.validation'
 
 export class UserController extends BaseController {
   constructor(private readonly userService: UserService = new UserService()) {

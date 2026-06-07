@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose'
-import { AnimalGender, IAnimalEntity } from '../models/animal.model'
+import { AnimalGender, IAnimalEntity } from './animal.model'
 
 const animalSchema = new Schema<IAnimalEntity>(
   {

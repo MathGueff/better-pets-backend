@@ -1,5 +1,5 @@
 import type { Request, Response } from 'express'
-import { BaseController } from '../core/base.controller'
+import { BaseController } from '../../core/base.controller'
 
 export class HealthController extends BaseController {
   check = (req: Request, res: Response) => {
