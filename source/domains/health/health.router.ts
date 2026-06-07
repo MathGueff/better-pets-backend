@@ -4,7 +4,7 @@ import { EndpointNames } from '../../types/endpoints'
 import { HttpMethod } from '../../types/http-method'
 import { IRoute } from '../../types/route.type'
 
-class HealthRouter extends BaseRouter {
+export class HealthRouter extends BaseRouter {
   constructor(
     prefix = EndpointNames.HEALTH,
     controller: HealthController = new HealthController()
@@ -15,6 +15,3 @@ class HealthRouter extends BaseRouter {
     super(prefix, routes)
   }
 }
-
-const healthRouter = new HealthRouter()
-export default healthRouter

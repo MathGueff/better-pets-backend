@@ -5,11 +5,10 @@ import morgan from 'morgan'
 import swaggerUi from 'swagger-ui-express'
 import { database } from './config/database'
 import { generateSwaggerDocs } from './config/swagger'
-import { errorMiddleware } from './middlewares/error-middleware.ts'
 import { AnimalsRouter } from './domains/animals/animal.router'
-import healthRouter from './domains/health/health.router'
+import { HealthRouter } from './domains/health/health.router'
 import { UserRouter } from './domains/users/user.router'
-
+import { errorMiddleware } from './middlewares/error-middleware.ts'
 
 dotenv.config({ quiet: true })
 
@@ -24,7 +23,7 @@ app.use(morgan('dev'))
 // app.use(doSomethingMiddleware)
 
 /* ROTAS */
-app.use(healthRouter.router)
+app.use(new HealthRouter().router)
 app.use(new AnimalsRouter().router)
 app.use(new UserRouter().router)
 
