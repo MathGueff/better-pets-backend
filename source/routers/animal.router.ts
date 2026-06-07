@@ -1,12 +1,12 @@
 import { AnimalsController } from '../controllers/animal.controller'
 import { BaseRouter } from '../core/base.router'
-import { Endpoint, EndpointNames } from '../types/endpoints'
+import { EndpointNames } from '../types/endpoints'
 import { HttpMethod } from '../types/http-method'
 import { IRoute } from '../types/route.type'
 
-class AnimalsRouter extends BaseRouter {
+export class AnimalsRouter extends BaseRouter {
   constructor(
-    prefix: string = Endpoint(EndpointNames.ANIMALS),
+    prefix = EndpointNames.ANIMALS,
     controller: AnimalsController = new AnimalsController()
   ) {
     const routes: IRoute[] = [
@@ -19,6 +19,3 @@ class AnimalsRouter extends BaseRouter {
     super(prefix, routes)
   }
 }
-
-const animalsRouter = new AnimalsRouter()
-export default animalsRouter

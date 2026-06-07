@@ -1,7 +1,5 @@
-import { HydratedDocument, Schema, model } from 'mongoose'
+import { Schema, model } from 'mongoose'
 import { AnimalGender, IAnimalEntity } from '../models/animal.model'
-
-export type IAnimalDocument = HydratedDocument<IAnimalEntity>
 
 const animalSchema = new Schema<IAnimalEntity>(
   {
@@ -22,6 +20,6 @@ const animalSchema = new Schema<IAnimalEntity>(
   { versionKey: false, timestamps: true }
 )
 
-export const animalModel = model<IAnimalEntity>('Animals', animalSchema)
+export const AnimalModel = model<IAnimalEntity>('Animals', animalSchema)
 
-export default animalModel
+export default AnimalModel

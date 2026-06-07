@@ -40,7 +40,7 @@ export abstract class BaseController {
 
     if (schema) {
       const filtersValidated = validateOrThrow({
-        schema: schema,
+        schema,
         entry: others,
         message: 'Busca inválida'
       })

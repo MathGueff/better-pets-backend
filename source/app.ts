@@ -6,8 +6,9 @@ import swaggerUi from 'swagger-ui-express'
 import { database } from './config/database'
 import { generateSwaggerDocs } from './config/swagger'
 import { errorMiddleware } from './middlewares/error-middleware.ts'
-import animalsRouter from './routers/animal.router'
+import { AnimalsRouter } from './routers/animal.router'
 import healthRouter from './routers/health.router'
+import { UserRouter } from './routers/user.router'
 
 dotenv.config({ quiet: true })
 
@@ -23,7 +24,8 @@ app.use(morgan('dev'))
 
 /* ROTAS */
 app.use(healthRouter.router)
-app.use(animalsRouter.router)
+app.use(new AnimalsRouter().router)
+app.use(new UserRouter().router)
 
 /* DOCUMENTAÇÃO */
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))

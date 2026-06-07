@@ -5,27 +5,27 @@ import {
   Response,
   Router
 } from 'express'
+import { EndpointNames } from '../types/endpoints'
 import { IRoute } from '../types/route.type'
 
 export class BaseRouter {
   public readonly router: Router = Router()
-  private readonly prefix: string
 
   /**
    * @param prefix Prefixo da rota
    * @param routes Rotas
    */
   constructor(
-    prefix: string,
+    private readonly prefix: EndpointNames,
     private readonly routes: IRoute[]
   ) {
-    this.prefix = prefix.startsWith('/') ? prefix : `/${prefix}`
     this.handleRoutes()
   }
 
   private handleRoutes() {
+    console.log(`INICIANDO PATHS para ${this.prefix}`)
     this.routes.forEach((route) => {
-      const fullPath = `${this.prefix}${route.path}`.replace(/\/+/g, '/')
+      const fullPath = `/${this.prefix}${route.path}`.replace(/\/+/g, '/')
 
       const asyncMiddlewares = route.middlewares?.map((middleware) =>
         this.asyncHandler(middleware)
@@ -37,6 +37,8 @@ export class BaseRouter {
         ...(asyncMiddlewares ?? []),
         asyncHandler
       )
+
+      console.info('Path inicializado: ', { path: fullPath, route })
     })
   }
 

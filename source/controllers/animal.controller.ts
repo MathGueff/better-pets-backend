@@ -1,6 +1,10 @@
 import { Request, Response } from 'express'
 import { BaseController } from '../core/base.controller'
 import { AnimalsService } from '../services/animal.service'
+import {
+  UnsplashContextQuery,
+  UnsplashService
+} from '../services/unsplash.service'
 import { ResponseHandler } from '../utils/response-handler'
 import { validateObjectIdOrThrow } from '../utils/validate-object-id-or-throw'
 import { validateOrThrow } from '../utils/validate-or-throw'
@@ -32,6 +36,9 @@ export class AnimalsController extends BaseController {
       entry: req.body,
       schema: AnimalValidations.create
     })
+    data.photo = await new UnsplashService().takeAPhoto(
+      UnsplashContextQuery.ANIMALPHOTO
+    )
     const created = await this.service.create(data)
     ResponseHandler.created(res, 'Animalzinho criado com sucesso', created)
   }

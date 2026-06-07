@@ -44,10 +44,10 @@ export const animalRules = {
     )
     .optional(),
   familyId: z.string('ID da família incorreto').optional()
-} satisfies { [K in keyof ZodEntityRules<IAnimalInput>]: z.ZodType }
+} satisfies ZodEntityRules<IAnimalInput>
 
 export const animalFilterRules = {
   name: animalRules.name.optional(),
   breed: animalRules.breed.optional(),
   gender: animalRules.gender.optional()
-} satisfies { [K in keyof ZodFilterRules<IAnimalFilter>]: z.ZodType }
+} satisfies ZodFilterRules<IAnimalFilter>
