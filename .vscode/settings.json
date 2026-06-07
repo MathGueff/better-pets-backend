@@ -1,10 +1,8 @@
 {
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+  "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
   // Garante que o ESLint valide arquivos TypeScript também
-  "eslint.validate": [
-    "javascript",
-    "typescript"
-  ]
+  "eslint.validate": ["javascript", "typescript"]
 }

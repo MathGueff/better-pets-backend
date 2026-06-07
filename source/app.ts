@@ -5,10 +5,10 @@ import morgan from 'morgan'
 import swaggerUi from 'swagger-ui-express'
 import { database } from './config/database'
 import { generateSwaggerDocs } from './config/swagger'
-import { doSomethingMiddleware } from './middlewares/do-something.middleware'
+import { AnimalsRouter } from './domains/animals/animal.router'
+import { HealthRouter } from './domains/health/health.router'
+import { UserRouter } from './domains/users/user.router'
 import { errorMiddleware } from './middlewares/error-middleware.ts'
-import animalsRouter from './routers/animal.router'
-import healthRouter from './routers/health.router'
 
 dotenv.config({ quiet: true })
 
@@ -23,8 +23,9 @@ app.use(morgan('dev'))
 // app.use(doSomethingMiddleware)
 
 /* ROTAS */
-app.use(healthRouter.router)
-app.use(animalsRouter.router)
+app.use(new HealthRouter().router)
+app.use(new AnimalsRouter().router)
+app.use(new UserRouter().router)
 
 /* DOCUMENTAÇÃO */
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
@@ -44,7 +45,7 @@ const start = async () => {
                 ||     ||      ^^ ^^         ^^   ^^       /_____/   U
     `)
 
-    console.log('🧠 Iniciando conexão com o banco de dados TESTAÍ')
+    console.log('🧠 Iniciando conexão com o banco de dados Better-Pets')
     await database.connect()
     console.log('✅ Conectado ao MongoDB com sucesso')
 

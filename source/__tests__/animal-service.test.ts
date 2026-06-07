@@ -1,10 +1,11 @@
 import { ApiError } from '../errors/api.error'
-import { AnimalMessages } from '../messages/animal.messages'
-import { AnimalRepository } from '../repositories/animal.repository'
-import { AnimalsService } from '../services/animal.service'
-import { UpdateAnimalDTO } from '../validation/animal.validation'
+import { AnimalRepository } from '../domains/animals/animal.repository'
+import { AnimalsService } from '../domains/animals/animal.service'
+import { PaginatedQuery } from '../utils/pagination'
+import { SortedQuery } from '../utils/sorting'
+import { UpdateAnimalDTO } from '../domains/animals/animal.validation'
 
-jest.mock('../repositories/animal.repository')
+jest.mock('../domains/animals/animal.repository')
 
 describe('AnimalsService', () => {
   let service: AnimalsService
@@ -21,10 +22,13 @@ describe('AnimalsService', () => {
       const mockAnimals = [{ name: 'Rex' }, { name: 'Fido' }]
       repository.list.mockResolvedValue(mockAnimals as any)
 
-      const result = await service.list()
+      const pagination = new PaginatedQuery({})
+      const sort = new SortedQuery({})
+      const result = await service.list({}, { pagination, sort })
 
       expect(result).toEqual(mockAnimals)
-      expect(repository.list).toHaveBeenCalledTimes(1)
+      expect(repository.list).toHaveBeenCalled()
+      expect(repository.list).toHaveBeenCalledWith({}, { pagination, sort })
     })
   })
 
@@ -61,7 +65,7 @@ describe('AnimalsService', () => {
       await expect(create).rejects.toThrow(ApiError)
       await expect(create).rejects.toMatchObject({
         code: 409,
-        message: AnimalMessages.alreadyExistsWithName
+        message: 'Animal já cadastrado com esse nome'
       })
     })
   })
@@ -116,7 +120,7 @@ describe('AnimalsService', () => {
         service.update('123', updateData as any)
       ).rejects.toMatchObject({
         code: 409,
-        message: AnimalMessages.alreadyExistsWithName
+        message: 'Animal já cadastrado com esse nome'
       })
     })
   })
