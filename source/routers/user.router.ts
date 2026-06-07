@@ -11,8 +11,12 @@ export class UserRouter extends BaseRouter {
   ) {
     const routes: IRoute[] = [
       { path: '/', method: HttpMethod.GET, handler: controller.list },
-      { path: '/', method: HttpMethod.POST, handler: controller.register },
-      { path: '/', method: HttpMethod.POST, handler: controller.login }
+      {
+        path: '/register',
+        method: HttpMethod.POST,
+        handler: controller.register
+      },
+      { path: '/login', method: HttpMethod.POST, handler: controller.login }
     ]
     super(prefix, routes)
   }

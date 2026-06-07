@@ -1,19 +1,12 @@
 import { NextFunction, Request, Response } from 'express'
 import { BaseController } from '../core/base.controller'
-import { UserRepository } from '../repositories/user.repository'
-import { UserModel } from '../schemas/user.schema'
-import {
-  UnsplashContextQuery,
-  UnsplashService
-} from '../services/unsplash.service'
+import { UserService } from '../services/user.service'
 import { ResponseHandler } from '../utils/response-handler'
 import { validateOrThrow } from '../utils/validate-or-throw'
 import { UserValidations } from '../validation/animal/user.validation'
 
 export class UserController extends BaseController {
-  constructor(
-    private readonly userRepository: UserRepository = new UserRepository()
-  ) {
+  constructor(private readonly userService: UserService = new UserService()) {
     super()
   }
   list = async (req: Request, res: Response, next: NextFunction) => {
@@ -21,26 +14,26 @@ export class UserController extends BaseController {
       req.query,
       UserValidations.filter
     )
-    const users = await this.userRepository.list(filters, { pagination, sort })
+    const users = await this.userService.list(filters, { pagination, sort })
     ResponseHandler.ok(res, 'Usuários encontrados com sucesso', users)
   }
 
   register = async (req: Request, res: Response, next: NextFunction) => {
-    const newUser = validateOrThrow({
+    const newUserEntry = validateOrThrow({
       entry: req.body,
       schema: UserValidations.create,
       message: 'Usuário inválido'
     })
-    newUser.photo = await new UnsplashService().takeAPhoto(
-      UnsplashContextQuery.USERPROFILE
-    )
-    const userPersisted = await this.userRepository.create(newUser)
-    ResponseHandler.created(res, 'Usuário criado com sucesso', userPersisted)
+    const newUser = await this.userService.register(newUserEntry)
+    ResponseHandler.created(res, 'Usuário criado com sucesso', newUser)
   }
 
   login = async (req: Request, res: Response, next: NextFunction) => {
-    const { name } = req.body
-    const user = await UserModel.findOne({ name })
+    const { email } = validateOrThrow({
+      entry: req.body,
+      schema: UserValidations.login
+    })
+    const user = await this.userService.login(email)
     if (!user) {
       return ResponseHandler.notFound(res, 'Usuário não encontrado')
     }
