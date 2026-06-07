@@ -6,9 +6,10 @@ import swaggerUi from 'swagger-ui-express'
 import { database } from './config/database'
 import { generateSwaggerDocs } from './config/swagger'
 import { errorMiddleware } from './middlewares/error-middleware.ts'
-import { AnimalsRouter } from './routers/animal.router'
-import healthRouter from './routers/health.router'
-import { UserRouter } from './routers/user.router'
+import { AnimalsRouter } from './domains/animals/animal.router'
+import healthRouter from './domains/health/health.router'
+import { UserRouter } from './domains/users/user.router'
+
 
 dotenv.config({ quiet: true })
 

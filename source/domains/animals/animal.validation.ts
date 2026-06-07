@@ -12,9 +12,9 @@ const updateAnimalSchema = z
   .openapi('UpdateAnimal')
 
 const filterAnimalSchema = z
-    .object(animalFilterRules)
-    .strict()
-    .openapi('AnimalFilterSchema')
+  .object(animalFilterRules)
+  .strict()
+  .openapi('AnimalFilterSchema')
 
 export class AnimalValidations {
   static create = createAnimalSchema

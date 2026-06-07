@@ -1,14 +1,14 @@
 import { Request, Response } from 'express'
-import { BaseController } from '../core/base.controller'
-import { AnimalsService } from '../services/animal.service'
+import { BaseController } from '../../core/base.controller'
+import { AnimalsService } from './animal.service'
 import {
   UnsplashContextQuery,
   UnsplashService
-} from '../services/unsplash.service'
-import { ResponseHandler } from '../utils/response-handler'
-import { validateObjectIdOrThrow } from '../utils/validate-object-id-or-throw'
-import { validateOrThrow } from '../utils/validate-or-throw'
-import { AnimalValidations } from '../validation/animal/animal.validation'
+} from '../../services/unsplash.service'
+import { ResponseHandler } from '../../utils/response-handler'
+import { validateObjectIdOrThrow } from '../../utils/validate-object-id-or-throw'
+import { validateOrThrow } from '../../utils/validate-or-throw'
+import { AnimalValidations } from './animal.validation'
 
 export class AnimalsController extends BaseController {
   constructor(private readonly service: AnimalsService = new AnimalsService()) {

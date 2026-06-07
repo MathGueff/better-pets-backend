@@ -3,7 +3,7 @@ import {
   OpenAPIRegistry,
   RouteConfig
 } from '@asteasolutions/zod-to-openapi'
-import { animalDocs } from '../docs/animal.docs'
+import { animalDocs } from '../domains/animals/animal.docs'
 
 export const registry = new OpenAPIRegistry()
 

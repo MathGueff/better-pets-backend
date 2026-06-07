@@ -1,5 +1,5 @@
-import z from 'zod'
-import { IUserInput } from '../../models/user.model'
+import { z } from '../../config/zod'
+import { IUserInput } from './user.model'
 import { ZodEntityRules, ZodFilterRules } from '../../utils/zod-types'
 
 export const userRules = {

@@ -1,11 +1,11 @@
 import { ApiError } from '../errors/api.error'
-import { AnimalRepository } from '../repositories/animal.repository'
-import { AnimalsService } from '../services/animal.service'
+import { AnimalRepository } from '../domains/animals/animal.repository'
+import { AnimalsService } from '../domains/animals/animal.service'
 import { PaginatedQuery } from '../utils/pagination'
 import { SortedQuery } from '../utils/sorting'
-import { UpdateAnimalDTO } from '../validation/animal/animal.validation'
+import { UpdateAnimalDTO } from '../domains/animals/animal.validation'
 
-jest.mock('../repositories/animal.repository')
+jest.mock('../domains/animals/animal.repository')
 
 describe('AnimalsService', () => {
   let service: AnimalsService

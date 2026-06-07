@@ -1,8 +1,8 @@
-import { HealthController } from '../controllers/health.controller'
-import { BaseRouter } from '../core/base.router'
-import { EndpointNames } from '../types/endpoints'
-import { HttpMethod } from '../types/http-method'
-import { IRoute } from '../types/route.type'
+import { HealthController } from './health.controller'
+import { BaseRouter } from '../../core/base.router'
+import { EndpointNames } from '../../types/endpoints'
+import { HttpMethod } from '../../types/http-method'
+import { IRoute } from '../../types/route.type'
 
 class HealthRouter extends BaseRouter {
   constructor(

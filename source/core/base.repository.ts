@@ -1,6 +1,6 @@
 import type { Model, QueryFilter, UpdateQuery } from 'mongoose'
 import { Types } from 'mongoose'
-import { BaseEntity } from '../models/entity.model'
+import { BaseEntity } from './base.entity'
 import { QueryOptions } from '../types/query-options'
 
 export class BaseRepository<
@@ -23,7 +23,7 @@ export class BaseRepository<
     excludeId?: string
   ): Promise<{ _id: Types.ObjectId } | null> {
     if (excludeId) {
-      filter._id = { $ne: new Types.ObjectId(excludeId) }
+      ;(filter as any)._id = { $ne: new Types.ObjectId(excludeId) }
     }
 
     return this.model.exists(filter)

@@ -4,7 +4,7 @@ import {
   AnimalGender,
   IAnimalFilter,
   IAnimalInput
-} from '../../models/animal.model'
+} from './animal.model'
 import { ZodEntityRules, ZodFilterRules } from '../../utils/zod-types'
 
 export const animalRules = {
